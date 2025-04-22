@@ -1,0 +1,17 @@
+{
+  "name": "minecraft-asset-downloader",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.14.1",
+    "zod": "^3.24.3"
+  },
+  "bin": "src/index.ts",
+  "module": "src/main.ts",
+  "scripts": {
+    "start": "bun src/index.ts"
+  }
+}
