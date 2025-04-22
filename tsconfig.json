@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    //
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    //
+    "strict": true,
+    "alwaysStrict": true,
+    //
+    "allowUnreachableCode": null,
+    "allowUnusedLabels": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    //
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    //
+    "noUncheckedSideEffectImports": true,
+    "allowSyntheticDefaultImports": false
+  }
+}
