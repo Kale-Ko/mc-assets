@@ -16,6 +16,7 @@ fs.mkdirSync(ASSETS_CACHE_DIRECTORY, { recursive: true });
 
 interface CachedResponse<T> {
     cached: boolean
+    cachedTime: number
     value: T
 }
 
@@ -131,12 +132,24 @@ interface AssetIndex {
     }
 }
 
+let versionListCache: CachedResponse<VersionList> | undefined = undefined;
+let versionCache: {
+    [key: string]: CachedResponse<Version>
+} = {};
+let assetIndexCache: {
+    [key: string]: CachedResponse<AssetIndex>
+} = {};
+
 async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
+    if (versionListCache != undefined && Date.now() - versionListCache.cachedTime < 1000 * 60 * 1) {
+        return versionListCache;
+    }
+
     let filePath = path.join(PISTON_CACHE_DIRECTORY, "version_manifest_v2.json");
     if (fs.existsSync(filePath) && Date.now() - fs.statSync(filePath).mtime.getTime() < 1000 * 60 * 30) {
         let data = fs.readFileSync(filePath, { encoding: "utf8" });
 
-        return { cached: true, value: JSON.parse(data) as VersionList };
+        return versionListCache = { cached: true, cachedTime: Date.now(), value: JSON.parse(data) as VersionList };
     } else {
         let response = await Bun.fetch(HOME_URL, {
             headers: {
@@ -151,7 +164,7 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
 
-            return { cached: false, value: JSON.parse(data) as VersionList };
+            return versionListCache = { cached: false, cachedTime: Date.now(), value: JSON.parse(data) as VersionList };
         } else {
             throw Error(`Response from "${HOME_URL}" was "${response.status} ${response.statusText}"!`);
         }
@@ -159,6 +172,10 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
 }
 
 async function downloadVersion(versionId: string): Promise<CachedResponse<Version>> {
+    if (versionCache[versionId] != undefined && Date.now() - versionCache[versionId].cachedTime < 1000 * 60 * 1) {
+        return versionCache[versionId];
+    }
+
     let versionList = (await downloadVersionList()).value;
 
     let versionInfo = versionList.versions.find(version => version.id == versionId);
@@ -170,7 +187,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
     if (fs.existsSync(filePath)) {
         let data = fs.readFileSync(filePath, { encoding: "utf8" });
 
-        return { cached: true, value: JSON.parse(data) as Version };
+        return versionCache[versionId] = { cached: true, cachedTime: Date.now(), value: JSON.parse(data) as Version };
     } else {
         let response = await Bun.fetch(versionInfo.url, {
             headers: {
@@ -185,7 +202,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
 
-            return { cached: false, value: JSON.parse(data) as Version };
+            return versionCache[versionId] = { cached: false, cachedTime: Date.now(), value: JSON.parse(data) as Version };
         } else {
             throw Error(`Response from "${versionInfo.url}" was "${response.status} ${response.statusText}"!`);
         }
@@ -193,6 +210,10 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
 }
 
 async function downloadAssetIndex(versionId: string): Promise<CachedResponse<AssetIndex>> {
+    if (assetIndexCache[versionId] != undefined && Date.now() - assetIndexCache[versionId].cachedTime < 1000 * 60 * 1) {
+        return assetIndexCache[versionId];
+    }
+
     let versionList = (await downloadVersionList()).value;
 
     let versionInfo = versionList.versions.find(version => version.id == versionId);
@@ -208,7 +229,7 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
     if (fs.existsSync(filePath)) {
         let data = fs.readFileSync(filePath, { encoding: "utf8" });
 
-        return { cached: true, value: JSON.parse(data) as AssetIndex };
+        return assetIndexCache[versionId] = { cached: true, cachedTime: Date.now(), value: JSON.parse(data) as AssetIndex };
     } else {
         let response = await Bun.fetch(assetIndex.url, {
             headers: {
@@ -223,7 +244,7 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
 
-            return { cached: false, value: JSON.parse(data) as AssetIndex };
+            return assetIndexCache[versionId] = { cached: false, cachedTime: Date.now(), value: JSON.parse(data) as AssetIndex };
         } else {
             throw Error(`Response from "${assetIndex.url}" was "${response.status} ${response.statusText}"!`);
         }
@@ -250,7 +271,7 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
     if (fs.existsSync(filePath)) {
         let data = fs.readFileSync(filePath);
 
-        return { cached: true, value: data };
+        return { cached: true, cachedTime: Date.now(), value: data };
     } else {
         let response = await Bun.fetch(assetUrl, {
             headers: {
@@ -264,7 +285,7 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data);
 
-            return { cached: false, value: data };
+            return { cached: false, cachedTime: Date.now(), value: data };
         } else {
             throw Error(`Response from "${assetUrl}" was "${response.status} ${response.statusText}"!`);
         }
