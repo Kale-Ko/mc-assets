@@ -15,7 +15,7 @@ fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
     let versionList = (await main.downloadVersionList()).value;
 
     for (let versionInfo of versionList.versions) {
-        let completionPath = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.id);
+        let completionPath = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
         if (fs.existsSync(completionPath)) {
             continue;
         }
@@ -37,6 +37,9 @@ fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
             let asset = (await main.downloadAsset(versionInfo.id, assetPath));
 
             fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+            if (fs.existsSync(outputPath)) {
+                fs.unlinkSync(outputPath);
+            }
             fs.linkSync(asset.cachedPath, outputPath);
 
             done++;
