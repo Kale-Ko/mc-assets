@@ -34,10 +34,10 @@ fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
         for (let assetPath in assetIndex.objects) {
             let outputPath = path.join(OUTPUT_DIRECTORY, versionInfo.id, assetPath);
 
-            let asset = (await main.downloadAsset(versionInfo.id, assetPath)).value;
+            let asset = (await main.downloadAsset(versionInfo.id, assetPath));
 
             fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-            fs.writeFileSync(outputPath, asset);
+            fs.linkSync(asset.cachedPath, outputPath);
 
             done++;
         }
@@ -46,6 +46,7 @@ fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
 
         clearInterval(interval);
 
+        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${done}/${total} (${Math.round((done / total) * 10000) / 100}%)`)
         process.stdout.write(`\n\n`);
     }
 })();
