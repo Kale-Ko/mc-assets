@@ -125,17 +125,17 @@ function tryValidate(object: any, schema: z.ZodObject<any>, info: any) {
 }
 
 (async () => {
-    let versionList = await main.downloadVersionList();
+    let versionList = (await main.downloadVersionList()).value;
 
     tryValidate(versionList, VersionListSchema, { "_file": "version_manifest_v2.json" });
 
     for (let versionInfo of versionList.versions) {
-        let version = await main.downloadVersion(versionInfo.id);
+        let version = (await main.downloadVersion(versionInfo.id)).value;
 
         tryValidate(version, VersionSchema, { "_version": versionInfo.id, "_file": versionInfo.sha1 });
 
         {
-            let assetIndex = await main.downloadAssetIndex(versionInfo.id);
+            let assetIndex = (await main.downloadAssetIndex(versionInfo.id)).value;
 
             tryValidate(assetIndex, AssetIndexSchema, { "_version": versionInfo.id, "_assetIndex": version.assetIndex.id, "_file": version.assetIndex.sha1 });
         }
