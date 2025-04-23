@@ -9,9 +9,10 @@
     "@types/node": "^22.14.1",
     "zod": "^3.24.3"
   },
-  "bin": "src/index.ts",
   "module": "src/main.ts",
   "scripts": {
-    "start": "bun src/index.ts"
+    "output": "bun src/output.ts",
+    "git": "bun src/git.ts",
+    "test": "bun src/test.ts"
   }
 }
