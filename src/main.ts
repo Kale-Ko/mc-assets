@@ -4,7 +4,7 @@ import * as path from "path";
 const VERSION = "1.0.0";
 const USER_AGENT: string = `Bun/${Bun.version} ms-asset-downloader/${VERSION}`;
 const HOME_URL: string = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
-const ASSET_URL: string = "https://resources.download.minecraft.net"
+const ASSET_URL: string = "https://resources.download.minecraft.net";
 
 const CACHE_DIRECTORY = path.resolve("cache/");
 const PISTON_CACHE_DIRECTORY = path.join(CACHE_DIRECTORY, "piston/");

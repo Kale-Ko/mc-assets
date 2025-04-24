@@ -4,7 +4,7 @@ import { z } from "zod";
 const VersionListSchema = z.strictObject({
     latest: z.object({
         release: z.string(),
-        snapshot: z.string(),
+        snapshot: z.string()
     }),
     versions: z.array(z.object({
         id: z.string(),
@@ -13,8 +13,8 @@ const VersionListSchema = z.strictObject({
         time: z.string(),
         releaseTime: z.string(),
         sha1: z.string(),
-        complianceLevel: z.optional(z.union([z.literal(0), z.literal(1)])),
-    })),
+        complianceLevel: z.optional(z.union([z.literal(0), z.literal(1)]))
+    }))
 });
 
 const VersionSchema = z.strictObject({
@@ -27,14 +27,14 @@ const VersionSchema = z.strictObject({
     minimumLauncherVersion: z.number().int().positive(),
     javaVersion: z.optional(z.object({
         component: z.string(),
-        majorVersion: z.number().int().positive(),
+        majorVersion: z.number().int().positive()
     })),
     arguments: z.optional(z.record(
         z.array(z.union([
             z.string(),
             z.object({
                 value: z.union([z.string(), z.array(z.string())]),
-                rules: z.optional(z.array(z.any())),
+                rules: z.optional(z.array(z.any()))
             })
         ]))
     )),
@@ -42,7 +42,7 @@ const VersionSchema = z.strictObject({
     downloads: z.record(z.object({
         sha1: z.string(),
         size: z.number().int().positive(),
-        url: z.string().url(),
+        url: z.string().url()
     })),
     libraries: z.array(z.object({
         name: z.string(),
@@ -50,18 +50,18 @@ const VersionSchema = z.strictObject({
             path: z.string(),
             sha1: z.string(),
             size: z.number().int().positive(),
-            url: z.string().url(),
+            url: z.string().url()
         })).or(z.object({
             classifiers: z.optional(z.record(z.object({
                 path: z.string(),
                 sha1: z.string(),
                 size: z.number().int().positive(),
-                url: z.string().url(),
+                url: z.string().url()
             })))
         })),
         extract: z.optional(z.any()),
         natives: z.optional(z.record(z.string())),
-        rules: z.optional(z.array(z.any())),
+        rules: z.optional(z.array(z.any()))
     })),
     logging: z.optional(z.record(z.object({
         type: z.string(),
@@ -70,8 +70,8 @@ const VersionSchema = z.strictObject({
             id: z.string(),
             sha1: z.string(),
             size: z.number().int().positive(),
-            url: z.string().url(),
-        }),
+            url: z.string().url()
+        })
     }))),
     assets: z.string(),
     assetIndex: z.object({
@@ -79,8 +79,8 @@ const VersionSchema = z.strictObject({
         sha1: z.string(),
         size: z.number().int().positive(),
         totalSize: z.number().int().positive(),
-        url: z.string().url(),
-    }),
+        url: z.string().url()
+    })
 });
 
 const AssetIndexSchema = z.strictObject({
@@ -89,10 +89,10 @@ const AssetIndexSchema = z.strictObject({
     objects: z.record(z.object({
         hash: z.string(),
         size: z.number().int().positive()
-    })),
+    }))
 });
 
-function tryValidate(object: any, schema: z.ZodObject<any>, info: any) {
+function tryValidate(object: any, schema: z.ZodObject<any>, info: any): void {
     try {
         schema.parse(object);
     } catch (e: any) {

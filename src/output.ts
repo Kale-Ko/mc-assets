@@ -28,7 +28,7 @@ fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
         let total = Object.keys(assetIndex.objects).length;
 
         let interval = setInterval(() => {
-            process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${done}/${total} (${Math.round((done / total) * 10000) / 100}%)`)
+            process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${done}/${total} (${Math.round((done / total) * 10000) / 100}%)`);
         }, 1000);
 
         for (let assetPath in assetIndex.objects) {
@@ -49,7 +49,7 @@ fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
 
         clearInterval(interval);
 
-        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${done}/${total} (${Math.round((done / total) * 10000) / 100}%)`)
+        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${done}/${total} (${Math.round((done / total) * 10000) / 100}%)`);
         process.stdout.write(`\n\n`);
     }
 })();
