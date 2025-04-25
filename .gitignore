@@ -6,3 +6,5 @@ bun.lockb
 cache/
 out/
 git/
+
+.vscode/

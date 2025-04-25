@@ -63,7 +63,10 @@ function versionToGitTag(version: string): string {
         if (fs.existsSync(repoPath)) {
             let mounted = await Bun.$`mount | grep '${repoPath}' | awk '{ print $3 }'`.text();
             for (let mount of mounted.trim().split("\n")) {
-                await Bun.$`fusermount -u '${mount}'`;
+                if (mount.trim() == "") {
+                    continue;
+                }
+                await Bun.$`fusermount -u '${mount.trim()}'`;
             }
 
             fs.rmSync(repoPath, { recursive: true });
@@ -81,7 +84,7 @@ function versionToGitTag(version: string): string {
                     let fromStat = fs.statSync(fromPath);
                     let toPath = path.join(repoPath, dir, file);
                     if (fromStat.isDirectory()) {
-                        fs.mkdirSync(path.dirname(toPath), { recursive: true });
+                        fs.mkdirSync(toPath, { recursive: true });
                         // await Bun.$`mount --bind '${fromPath}' '${toPath}'`;
                         await Bun.$`bindfs -o nonempty --no-allow-other '${fromPath}' '${toPath}'`;
                     } else if (fromStat.isFile()) {
