@@ -31,5 +31,13 @@
     //
     "noUncheckedSideEffectImports": true,
     "allowSyntheticDefaultImports": false
-  }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "out/**",
+    "cache/**",
+    "git/**"
+  ]
 }
