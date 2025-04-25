@@ -6,9 +6,17 @@ const GIT_URL = "https://github.com/Kale-Ko/mc-assets.git";
 const GIT_MESSAGE = "Initial upload of asset index: {assetIndexSha}";
 // const GIT_MESSAGE = "Upload of version: {versionSha}\nAsset index: {assetIndexSha}";
 
+const CACHE_DIRECTORY = path.resolve("cache/");
+const COMPLETION_CACHE_DIRECTORY = path.join(CACHE_DIRECTORY, "completion/");
+const GIT_COMPLETION_CACHE_DIRECTORY = path.join(CACHE_DIRECTORY, "git-completion/");
+
 const OUTPUT_DIRECTORY = path.resolve("out/");
+
 const GIT_DIRECTORY = path.resolve("git/");
 
+fs.mkdirSync(CACHE_DIRECTORY, { recursive: true });
+fs.mkdirSync(COMPLETION_CACHE_DIRECTORY, { recursive: true });
+fs.mkdirSync(GIT_COMPLETION_CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
 fs.mkdirSync(GIT_DIRECTORY, { recursive: true });
 
@@ -27,6 +35,15 @@ function versionToGitTag(version: string): string {
     let versionList = (await main.downloadVersionList()).value;
 
     for (let versionInfo of versionList.versions) {
+        let completionPath = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
+        let gitCompletionPath = path.join(GIT_COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
+        if (!fs.existsSync(completionPath)) {
+            throw Error(`${versionInfo.id} has not been output!`);
+        }
+        if (fs.existsSync(gitCompletionPath) && fs.statSync(completionPath).mtime.getTime() <= fs.statSync(gitCompletionPath).mtime.getTime()) {
+            continue;
+        }
+
         process.stdout.write(`Starting ${versionInfo.id} \n`);
 
         let task: string | null = null;
@@ -43,7 +60,7 @@ function versionToGitTag(version: string): string {
 
         let output = await Bun.$`git ls-remote --branches --quiet | awk '{print $2}'`.cwd(mainPath).text();
         let branches = output.toLowerCase().trim().split("\n");
-        if (!(branches.includes(tag.toLowerCase()) || branches.includes("refs/heads/" + tag.toLowerCase()))) {
+        if (!branches.includes("refs/heads/" + tag.toLowerCase())) {
             // Create completely empty new branch
             await Bun.$`git switch --orphan '${tag}'`.cwd(mainPath).quiet();
             await Bun.$`git commit --allow-empty --message 'Init'`.cwd(mainPath).quiet();
@@ -167,6 +184,8 @@ function versionToGitTag(version: string): string {
         fs.rmSync(repoPath, { recursive: true });
 
         done += 0.5;
+
+        fs.writeFileSync(gitCompletionPath, "100\n", { encoding: "utf8" });
 
         clearInterval(interval);
 
