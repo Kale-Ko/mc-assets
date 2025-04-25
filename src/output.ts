@@ -16,7 +16,7 @@ fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
 
     for (let versionInfo of versionList.versions) {
         let completionPath = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
-        if (fs.existsSync(completionPath)) {
+        if (fs.existsSync(completionPath) && Date.now() - fs.statSync(completionPath).mtime.getTime() < 1000 * 60 * 30) {
             continue;
         }
 
