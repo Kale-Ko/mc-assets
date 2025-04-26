@@ -315,4 +315,4 @@ async function downloadDownloadable(versionId: string, downloadableId: string): 
     }
 }
 
-export { VERSION, downloadVersionList, downloadVersion, downloadAssetIndex, downloadAsset, downloadDownloadable };
+export { VERSION, CachedResponse, VersionList, Version, AssetIndex, downloadVersionList, downloadVersion, downloadAssetIndex, downloadAsset, downloadDownloadable };
