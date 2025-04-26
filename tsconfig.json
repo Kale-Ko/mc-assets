@@ -30,7 +30,7 @@
     "noFallthroughCasesInSwitch": true,
     //
     "noUncheckedSideEffectImports": true,
-    "allowSyntheticDefaultImports": false
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*"
