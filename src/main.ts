@@ -122,7 +122,7 @@ interface AssetIndex {
      */
     map_to_resources?: boolean
     /**
-     * Only present on 13w24a-13w48b and below. I have no idea what this means.
+     * Only present on 13w24a-13w48b. I have no idea what this means.
      */
     virtual?: boolean
     objects: {
@@ -145,7 +145,7 @@ let downloadableCache: {
 } = {};
 
 async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
-    if (versionListCache != undefined && Date.now() - versionListCache.cachedTime < 1000 * 60 * 1) {
+    if (versionListCache !== undefined && Date.now() - versionListCache.cachedTime < 1000 * 60 * 1) {
         return versionListCache;
     }
 
@@ -176,14 +176,14 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
 }
 
 async function downloadVersion(versionId: string): Promise<CachedResponse<Version>> {
-    if (versionCache[versionId] != undefined && Date.now() - versionCache[versionId].cachedTime < 1000 * 60 * 1) {
+    if (versionCache[versionId] !== undefined && Date.now() - versionCache[versionId].cachedTime < 1000 * 60 * 1) {
         return versionCache[versionId];
     }
 
     let versionList = (await downloadVersionList()).value;
 
-    let versionInfo = versionList.versions.find(version => version.id == versionId);
-    if (versionInfo == undefined) {
+    let versionInfo = versionList.versions.find(version => version.id === versionId);
+    if (versionInfo === undefined) {
         throw Error(`Could not find version "${versionId}"!`);
     }
 
@@ -203,6 +203,11 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
         if (response.ok) {
             let data = await response.text();
 
+            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            if (hash !== versionInfo.sha1) {
+                throw Error(`Hash of version "${versionInfo.url}" does not match! Expected "${versionInfo.sha1}" but got "${hash}".`);
+            }
+
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
 
@@ -214,7 +219,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
 }
 
 async function downloadAssetIndex(versionId: string): Promise<CachedResponse<AssetIndex>> {
-    if (assetIndexCache[versionId] != undefined && Date.now() - assetIndexCache[versionId].cachedTime < 1000 * 60 * 1) {
+    if (assetIndexCache[versionId] !== undefined && Date.now() - assetIndexCache[versionId].cachedTime < 1000 * 60 * 1) {
         return assetIndexCache[versionId];
     }
 
@@ -238,6 +243,11 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
         if (response.ok) {
             let data = await response.text();
 
+            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            if (hash !== assetIndex.sha1) {
+                throw Error(`Hash of asset index "${assetIndex.url}" does not match! Expected "${assetIndex.sha1}" but got "${hash}".`);
+            }
+
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
 
@@ -251,7 +261,7 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
 async function downloadAsset(versionId: string, assetPath: string): Promise<CachedResponse<Uint8Array>> {
     let assetIndex = (await downloadAssetIndex(versionId)).value;
     let asset = assetIndex.objects[assetPath];
-    if (asset == undefined) {
+    if (asset === undefined) {
         throw Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
     }
 
@@ -272,10 +282,52 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
         if (response.ok) {
             let data = await response.bytes();
 
+            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            if (hash !== asset.hash) {
+                throw Error(`Hash of asset "${assetPath}" does not match! Expected "${asset.hash}" but got "${hash}".`);
+            }
+
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data);
 
             return { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: data };
+        } else {
+            throw Error(`Response from "${assetUrl}" was "${response.status} ${response.statusText}"!`);
+        }
+    }
+}
+
+async function getAsset(versionId: string, assetPath: string): Promise<CachedResponse<undefined>> {
+    let assetIndex = (await downloadAssetIndex(versionId)).value;
+    let asset = assetIndex.objects[assetPath];
+    if (asset === undefined) {
+        throw Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
+    }
+
+    let assetUrl = `${ASSET_URL}/${asset.hash.substring(0, 2)}/${asset.hash}`
+
+    let filePath = path.join(ASSETS_CACHE_DIRECTORY, asset.hash.substring(0, 2), asset.hash.substring(2));
+    if (fs.existsSync(filePath)) {
+        return { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: undefined };
+    } else {
+        let response = await Bun.fetch(assetUrl, {
+            headers: {
+                "User-Agent": USER_AGENT
+            }
+        });
+
+        if (response.ok) {
+            let data = await response.bytes();
+
+            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            if (hash !== asset.hash) {
+                throw Error(`Hash of asset "${assetPath}" does not match! Expected "${asset.hash}" but got "${hash}".`);
+            }
+
+            fs.mkdirSync(path.dirname(filePath), { recursive: true });
+            fs.writeFileSync(filePath, data);
+
+            return { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: undefined };
         } else {
             throw Error(`Response from "${assetUrl}" was "${response.status} ${response.statusText}"!`);
         }
