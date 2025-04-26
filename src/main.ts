@@ -140,6 +140,9 @@ let versionCache: {
 let assetIndexCache: {
     [key: string]: CachedResponse<AssetIndex>
 } = {};
+let downloadableCache: {
+    [key: string]: CachedResponse<Uint8Array>
+} = {};
 
 async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
     if (versionListCache != undefined && Date.now() - versionListCache.cachedTime < 1000 * 60 * 1) {
@@ -215,14 +218,7 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
         return assetIndexCache[versionId];
     }
 
-    let versionList = (await downloadVersionList()).value;
-
-    let versionInfo = versionList.versions.find(version => version.id == versionId);
-    if (versionInfo == undefined) {
-        throw Error(`Could not find version "${versionId}"!`);
-    }
-
-    let version = (await downloadVersion(versionInfo.id)).value;
+    let version = (await downloadVersion(versionId)).value;
 
     let assetIndex = version.assetIndex;
 
@@ -253,14 +249,7 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
 }
 
 async function downloadAsset(versionId: string, assetPath: string): Promise<CachedResponse<Uint8Array>> {
-    let versionList = (await downloadVersionList()).value;
-
-    let versionInfo = versionList.versions.find(version => version.id == versionId);
-    if (versionInfo == undefined) {
-        throw Error(`Could not find version "${versionId}"!`);
-    }
-
-    let assetIndex = (await downloadAssetIndex(versionInfo.id)).value;
+    let assetIndex = (await downloadAssetIndex(versionId)).value;
     let asset = assetIndex.objects[assetPath];
     if (asset == undefined) {
         throw Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
@@ -293,4 +282,37 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
     }
 }
 
-export { VERSION, downloadVersionList, downloadVersion, downloadAssetIndex, downloadAsset };
+async function downloadDownloadable(versionId: string, downloadableId: string): Promise<CachedResponse<Uint8Array>> {
+    let version = (await downloadVersion(versionId)).value;
+
+    let downloadable = version.downloads[downloadableId];
+    if (downloadable == undefined) {
+        throw Error(`Downloadable "${downloadableId}" does not exist on version ${versionId}!`)
+    }
+
+    let filePath = path.join(PISTON_CACHE_DIRECTORY, downloadable.sha1.substring(0, 2), downloadable.sha1.substring(2));
+    if (fs.existsSync(filePath)) {
+        let data = fs.readFileSync(filePath);
+
+        return downloadableCache[versionId] = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: data };
+    } else {
+        let response = await Bun.fetch(downloadable.url, {
+            headers: {
+                "User-Agent": USER_AGENT
+            }
+        });
+
+        if (response.ok) {
+            let data = await response.bytes();
+
+            fs.mkdirSync(path.dirname(filePath), { recursive: true });
+            fs.writeFileSync(filePath, data);
+
+            return downloadableCache[versionId] = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: data };
+        } else {
+            throw Error(`Response from "${downloadable.url}" was "${response.status} ${response.statusText}"!`);
+        }
+    }
+}
+
+export { VERSION, downloadVersionList, downloadVersion, downloadAssetIndex, downloadAsset, downloadDownloadable };
