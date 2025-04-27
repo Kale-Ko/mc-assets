@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import AdmZip from "adm-zip";
 
 const VERSION = "1.0.0";
 const USER_AGENT: string = `Bun/${Bun.version} ms-asset-downloader/${VERSION}`;
@@ -139,9 +140,6 @@ let versionCache: {
 } = {};
 let assetIndexCache: {
     [key: string]: CachedResponse<AssetIndex>
-} = {};
-let downloadableCache: {
-    [key: string]: CachedResponse<Uint8Array>
 } = {};
 
 async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
@@ -425,6 +423,54 @@ async function getJar(versionId: string, jarId: string, jarCallback: (entry: Cac
             throw Error(`Response from "${jar.url}" was "${response.status} ${response.statusText}"!`);
         }
     }
+}
+
+function extractJarAndData(data: Uint8Array, response: CachedResponse<Jar>, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry & JarDataEntry>) => void): void {
+    let zip = new AdmZip(Buffer.from(data));
+
+    jarCallback({ ...response, value: { ...response.value, entryCount: zip.getEntries().length } });
+
+    zip.forEach(entry => {
+        if (!(entry.entryName.startsWith("assets/") || entry.entryName.startsWith("data/") || (!entry.entryName.startsWith("META-INF/") && !entry.entryName.endsWith(".class")))) {
+            return;
+        }
+
+        let hash = new Bun.CryptoHasher("sha1").update(entry.getData()).digest("hex");
+
+        let filePath = path.join(ASSETS_CACHE_DIRECTORY, hash.substring(0, 2), hash.substring(2));
+        if (!fs.existsSync(filePath)) {
+            fs.mkdirSync(path.dirname(filePath), { recursive: true });
+            fs.writeFileSync(filePath, entry.getData());
+
+            entryCallback({ cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { path: entry.entryName, isDirectory: entry.isDirectory, size: entry.header.size, sha1: hash, data: entry.getData() } });
+        } else {
+            entryCallback({ cached: true, cachedTime: Date.now(), cachedPath: filePath, value: { path: entry.entryName, isDirectory: entry.isDirectory, size: entry.header.size, sha1: hash, data: entry.getData() } });
+        }
+    });
+}
+
+function extractJar(data: Uint8Array, response: CachedResponse<Jar>, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry>) => void): void {
+    let zip = new AdmZip(Buffer.from(data));
+
+    jarCallback({ ...response, value: { ...response.value, entryCount: zip.getEntries().length } });
+
+    zip.forEach(entry => {
+        if (!(entry.entryName.startsWith("assets/") || entry.entryName.startsWith("data/") || (!entry.entryName.startsWith("META-INF/") && !entry.entryName.endsWith(".class")))) {
+            return;
+        }
+
+        let hash = new Bun.CryptoHasher("sha1").update(entry.getData()).digest("hex");
+
+        let filePath = path.join(ASSETS_CACHE_DIRECTORY, hash.substring(0, 2), hash.substring(2));
+        if (!fs.existsSync(filePath)) {
+            fs.mkdirSync(path.dirname(filePath), { recursive: true });
+            fs.writeFileSync(filePath, entry.getData());
+
+            entryCallback({ cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { path: entry.entryName, isDirectory: entry.isDirectory, size: entry.header.size, sha1: hash } });
+        } else {
+            entryCallback({ cached: true, cachedTime: Date.now(), cachedPath: filePath, value: { path: entry.entryName, isDirectory: entry.isDirectory, size: entry.header.size, sha1: hash } });
+        }
+    });
 }
 
 export { VERSION, CachedResponse, VersionList, Version, AssetIndex, downloadVersionList, downloadVersion, downloadAssetIndex, downloadAsset, getAsset, Jar, JarEntry, JarDataEntry, downloadJar, getJar };
