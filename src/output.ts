@@ -114,7 +114,7 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
             for (let assetPath in assetIndex.objects) {
                 let outputPath = path.join(OUTPUT_DIRECTORY, versionInfo.id, "assets", assetPath);
 
-                let asset = (await main.downloadAsset(versionInfo.id, assetPath));
+                let asset = (await main.getAsset(versionInfo.id, assetPath));
 
                 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
                 if (fs.existsSync(outputPath)) {
