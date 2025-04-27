@@ -21,7 +21,7 @@ interface TaskInfo {
 }
 
 function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo) {
-    if (taskInfo.subTaskTotal != -1) {
+    if (taskInfo.subTaskTotal !== -1) {
         process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)`);
     } else {
         process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask}`);
@@ -54,35 +54,31 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
         taskInfo.currentTask = "downloading client jar";
         print(versionInfo, taskInfo);
 
-        let clientJar = (await main.downloadDownloadable(versionInfo.id, "client")).value;
-
-        taskInfo.taskDone++;
-        taskInfo.currentTask = "extracting client jar";
-        print(versionInfo, taskInfo);
-
         {
-            let zip = new AdmZip(Buffer.from(clientJar));
+            await main.downloadJar(versionInfo.id, "client", (jar) => {
+                taskInfo.taskDone++;
+                taskInfo.currentTask = "extracting client jar";
+                print(versionInfo, taskInfo);
 
-            taskInfo.subTaskDone = 0;
-            taskInfo.subTaskTotal = zip.getEntryCount();
-            print(versionInfo, taskInfo);
-
-            zip.forEach(entry => {
-                let entryPath = entry.entryName;
-                if (!entryPath.startsWith("assets/") && !entryPath.startsWith("data/")) {
+                taskInfo.subTaskDone = 0;
+                taskInfo.subTaskTotal = jar.value.entryCount;
+                print(versionInfo, taskInfo);
+            }, (entry) => {
+                let entryPath = entry.value.path;
+                if (!(entryPath.startsWith("assets/") || entryPath.startsWith("data/") || (!entryPath.startsWith("META-INF/") && !entryPath.endsWith(".class")))) {
                     return;
                 }
 
                 let outputPath = path.join(OUTPUT_DIRECTORY, versionInfo.id, entryPath);
 
                 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-                if (entry.isDirectory) {
+                if (entry.value.isDirectory) {
                     fs.mkdirSync(outputPath, { recursive: true });
                 } else {
                     if (fs.existsSync(outputPath)) {
                         fs.unlinkSync(outputPath);
                     }
-                    fs.writeFileSync(outputPath, entry.getData());
+                    fs.linkSync(entry.cachedPath, outputPath);
                 }
 
                 taskInfo.subTaskDone++;
