@@ -1,12 +1,11 @@
 import * as main from "./main.ts"
 import * as fs from "fs";
 import * as path from "path";
-import AdmZip from "adm-zip";
 
-const CACHE_DIRECTORY = path.resolve("cache/");
-const COMPLETION_CACHE_DIRECTORY = path.join(CACHE_DIRECTORY, "completion/");
+const CACHE_DIRECTORY: string = path.resolve("cache/");
+const COMPLETION_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "completion/");
 
-const OUTPUT_DIRECTORY = path.resolve("out/");
+const OUTPUT_DIRECTORY: string = path.resolve("out/");
 
 fs.mkdirSync(CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(COMPLETION_CACHE_DIRECTORY, { recursive: true });
@@ -20,7 +19,7 @@ interface TaskInfo {
     currentTask: string | null
 }
 
-function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo) {
+function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo): void {
     if (taskInfo.subTaskTotal !== -1) {
         process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)`);
     } else {
@@ -28,11 +27,11 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
     }
 }
 
-(async () => {
-    let versionList = (await main.downloadVersionList()).value;
+(async (): Promise<void> => {
+    let versionList: main.VersionList = (await main.downloadVersionList()).value;
 
     for (let versionInfo of versionList.versions) {
-        let completionPath = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
+        let completionPath: string = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
         if (fs.existsSync(completionPath) && Date.now() - fs.statSync(completionPath).mtime.getTime() < 1000 * 60 * 30) {
             continue;
         }
@@ -47,7 +46,7 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
             currentTask: null
         };
 
-        let interval = setInterval(() => {
+        let interval: NodeJS.Timeout = setInterval((): void => {
             print(versionInfo, taskInfo);
         }, 500);
 
@@ -55,7 +54,7 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
         print(versionInfo, taskInfo);
 
         {
-            await main.downloadJar(versionInfo.id, "client", (jar) => {
+            await main.downloadJar(versionInfo.id, "client", (jar: main.CachedResponse<main.Jar>): void => {
                 taskInfo.taskDone++;
                 taskInfo.currentTask = "extracting client jar";
                 print(versionInfo, taskInfo);
@@ -63,13 +62,13 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
                 taskInfo.subTaskDone = 0;
                 taskInfo.subTaskTotal = jar.value.entryCount;
                 print(versionInfo, taskInfo);
-            }, (entry) => {
-                let entryPath = entry.value.path;
+            }, (entry: main.CachedResponse<main.JarEntry>): void => {
+                let entryPath: string = entry.value.path;
                 if (!(entryPath.startsWith("assets/") || entryPath.startsWith("data/") || (!entryPath.startsWith("META-INF/") && !entryPath.endsWith(".class")))) {
                     return;
                 }
 
-                let outputPath = path.join(OUTPUT_DIRECTORY, versionInfo.id, entryPath);
+                let outputPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id, entryPath);
 
                 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
                 if (entry.value.isDirectory) {
@@ -96,7 +95,7 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
         taskInfo.currentTask = "downloading asset index";
         print(versionInfo, taskInfo);
 
-        let assetIndex = (await main.downloadAssetIndex(versionInfo.id)).value;
+        let assetIndex: main.AssetIndex = (await main.downloadAssetIndex(versionInfo.id)).value;
 
         taskInfo.taskDone++;
         taskInfo.currentTask = "downloading assets";
@@ -108,9 +107,9 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
             print(versionInfo, taskInfo);
 
             for (let assetPath in assetIndex.objects) {
-                let outputPath = path.join(OUTPUT_DIRECTORY, versionInfo.id, "assets", assetPath);
+                let outputPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id, "assets", assetPath);
 
-                let asset = (await main.getAsset(versionInfo.id, assetPath));
+                let asset: main.CachedResponse<undefined> = (await main.getAsset(versionInfo.id, assetPath));
 
                 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
                 if (fs.existsSync(outputPath)) {

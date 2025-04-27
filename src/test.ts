@@ -95,12 +95,12 @@ const AssetIndexSchema = z.strictObject({
 function tryValidate(object: any, schema: z.ZodObject<any>, info: any): void {
     try {
         schema.parse(object);
-    } catch (e: any) {
-        if (e instanceof z.ZodError) {
-            for (let issue of e.issues) {
+    } catch (err: unknown) {
+        if (err instanceof z.ZodError) {
+            for (let issue of err.issues) {
                 if ("unionErrors" in issue) {
-                    for (let e2 of issue.unionErrors) {
-                        for (let subIssue of e2.issues) {
+                    for (let subErr of issue.unionErrors) {
+                        for (let subIssue of subErr.issues) {
                             console.warn({ ...info, ...subIssue });
 
                             let p: any = object;
@@ -124,18 +124,18 @@ function tryValidate(object: any, schema: z.ZodObject<any>, info: any): void {
     }
 }
 
-(async () => {
-    let versionList = (await main.downloadVersionList()).value;
+(async (): Promise<void> => {
+    let versionList: main.VersionList = (await main.downloadVersionList()).value;
 
     tryValidate(versionList, VersionListSchema, { "_file": "version_manifest_v2.json" });
 
     for (let versionInfo of versionList.versions) {
-        let version = (await main.downloadVersion(versionInfo.id)).value;
+        let version: main.Version = (await main.downloadVersion(versionInfo.id)).value;
 
         tryValidate(version, VersionSchema, { "_version": versionInfo.id, "_file": versionInfo.sha1 });
 
         {
-            let assetIndex = (await main.downloadAssetIndex(versionInfo.id)).value;
+            let assetIndex: main.AssetIndex = (await main.downloadAssetIndex(versionInfo.id)).value;
 
             tryValidate(assetIndex, AssetIndexSchema, { "_version": versionInfo.id, "_assetIndex": version.assetIndex.id, "_file": version.assetIndex.sha1 });
         }
