@@ -334,21 +334,38 @@ async function getAsset(versionId: string, assetPath: string): Promise<CachedRes
     }
 }
 
-async function downloadDownloadable(versionId: string, downloadableId: string): Promise<CachedResponse<Uint8Array>> {
+interface Jar {
+    size: number
+    sha1: string
+    entryCount: number
+}
+
+interface JarEntry {
+    path: string
+    isDirectory: boolean
+    size: number
+    sha1: string
+}
+
+interface JarDataEntry {
+    data: Uint8Array
+}
+
+async function downloadJar(versionId: string, jarId: string, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry & JarDataEntry>) => void): Promise<void> {
     let version = (await downloadVersion(versionId)).value;
 
-    let downloadable = version.downloads[downloadableId];
-    if (downloadable == undefined) {
-        throw Error(`Downloadable "${downloadableId}" does not exist on version ${versionId}!`)
+    let jar = version.downloads[jarId];
+    if (jar === undefined) {
+        throw Error(`Jar "${jarId}" does not exist on version ${versionId}!`)
     }
 
-    let filePath = path.join(PISTON_CACHE_DIRECTORY, downloadable.sha1.substring(0, 2), downloadable.sha1.substring(2));
+    let filePath = path.join(PISTON_CACHE_DIRECTORY, jar.sha1.substring(0, 2), jar.sha1.substring(2));
     if (fs.existsSync(filePath)) {
         let data = fs.readFileSync(filePath);
 
-        return downloadableCache[versionId] = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: data };
+        extractJarAndData(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
     } else {
-        let response = await Bun.fetch(downloadable.url, {
+        let response = await Bun.fetch(jar.url, {
             headers: {
                 "User-Agent": USER_AGENT
             }
@@ -357,14 +374,57 @@ async function downloadDownloadable(versionId: string, downloadableId: string): 
         if (response.ok) {
             let data = await response.bytes();
 
+            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            if (hash !== jar.sha1) {
+                throw Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
+            }
+
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data);
 
-            return downloadableCache[versionId] = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: data };
+            extractJarAndData(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
         } else {
-            throw Error(`Response from "${downloadable.url}" was "${response.status} ${response.statusText}"!`);
+            throw Error(`Response from "${jar.url}" was "${response.status} ${response.statusText}"!`);
         }
     }
 }
 
-export { VERSION, CachedResponse, VersionList, Version, AssetIndex, downloadVersionList, downloadVersion, downloadAssetIndex, downloadAsset, downloadDownloadable };
+async function getJar(versionId: string, jarId: string, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry>) => void): Promise<void> {
+    let version = (await downloadVersion(versionId)).value;
+
+    let jar = version.downloads[jarId];
+    if (jar === undefined) {
+        throw Error(`Jar "${jarId}" does not exist on version ${versionId}!`)
+    }
+
+    let filePath = path.join(PISTON_CACHE_DIRECTORY, jar.sha1.substring(0, 2), jar.sha1.substring(2));
+    if (fs.existsSync(filePath)) {
+        let data = fs.readFileSync(filePath);
+
+        extractJar(data, { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
+    } else {
+        let response = await Bun.fetch(jar.url, {
+            headers: {
+                "User-Agent": USER_AGENT
+            }
+        });
+
+        if (response.ok) {
+            let data = await response.bytes();
+
+            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            if (hash !== jar.sha1) {
+                throw Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
+            }
+
+            fs.mkdirSync(path.dirname(filePath), { recursive: true });
+            fs.writeFileSync(filePath, data);
+
+            extractJar(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
+        } else {
+            throw Error(`Response from "${jar.url}" was "${response.status} ${response.statusText}"!`);
+        }
+    }
+}
+
+export { VERSION, CachedResponse, VersionList, Version, AssetIndex, downloadVersionList, downloadVersion, downloadAssetIndex, downloadAsset, getAsset, Jar, JarEntry, JarDataEntry, downloadJar, getJar };
