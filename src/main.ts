@@ -2,14 +2,14 @@ import * as fs from "fs";
 import * as path from "path";
 import AdmZip from "adm-zip";
 
-const VERSION = "1.0.0";
+const VERSION: string = "1.0.0";
 const USER_AGENT: string = `Bun/${Bun.version} ms-asset-downloader/${VERSION}`;
 const HOME_URL: string = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
 const ASSET_URL: string = "https://resources.download.minecraft.net";
 
-const CACHE_DIRECTORY = path.resolve("cache/");
-const PISTON_CACHE_DIRECTORY = path.join(CACHE_DIRECTORY, "piston/");
-const ASSETS_CACHE_DIRECTORY = path.join(CACHE_DIRECTORY, "assets/");
+const CACHE_DIRECTORY: string = path.resolve("cache/");
+const PISTON_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "piston/");
+const ASSETS_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "assets/");
 
 fs.mkdirSync(CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(PISTON_CACHE_DIRECTORY, { recursive: true });
@@ -147,13 +147,13 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
         return versionListCache;
     }
 
-    let filePath = path.join(PISTON_CACHE_DIRECTORY, "version_manifest_v2.json");
+    let filePath: string = path.join(PISTON_CACHE_DIRECTORY, "version_manifest_v2.json");
     if (fs.existsSync(filePath) && Date.now() - fs.statSync(filePath).mtime.getTime() < 1000 * 60 * 30) {
-        let data = fs.readFileSync(filePath, { encoding: "utf8" });
+        let data: string = fs.readFileSync(filePath, { encoding: "utf8" });
 
         return versionListCache = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as VersionList };
     } else {
-        let response = await Bun.fetch(HOME_URL, {
+        let response: Response = await Bun.fetch(HOME_URL, {
             headers: {
                 "Accept": "application/json",
                 "User-Agent": USER_AGENT
@@ -161,7 +161,7 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
         });
 
         if (response.ok) {
-            let data = await response.text();
+            let data: string = await response.text();
 
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
@@ -178,20 +178,20 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
         return versionCache[versionId];
     }
 
-    let versionList = (await downloadVersionList()).value;
+    let versionList: VersionList = (await downloadVersionList()).value;
 
-    let versionInfo = versionList.versions.find(version => version.id === versionId);
+    let versionInfo: VersionList["versions"][0] | undefined = versionList.versions.find((version: VersionList["versions"][0]): boolean => version.id === versionId);
     if (versionInfo === undefined) {
         throw Error(`Could not find version "${versionId}"!`);
     }
 
-    let filePath = path.join(PISTON_CACHE_DIRECTORY, versionInfo.sha1.substring(0, 2), versionInfo.sha1.substring(2));
+    let filePath: string = path.join(PISTON_CACHE_DIRECTORY, versionInfo.sha1.substring(0, 2), versionInfo.sha1.substring(2));
     if (fs.existsSync(filePath)) {
-        let data = fs.readFileSync(filePath, { encoding: "utf8" });
+        let data: string = fs.readFileSync(filePath, { encoding: "utf8" });
 
         return versionCache[versionId] = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as Version };
     } else {
-        let response = await Bun.fetch(versionInfo.url, {
+        let response: Response = await Bun.fetch(versionInfo.url, {
             headers: {
                 "Accept": "application/json",
                 "User-Agent": USER_AGENT
@@ -199,9 +199,9 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
         });
 
         if (response.ok) {
-            let data = await response.text();
+            let data: string = await response.text();
 
-            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== versionInfo.sha1) {
                 throw Error(`Hash of version "${versionInfo.url}" does not match! Expected "${versionInfo.sha1}" but got "${hash}".`);
             }
@@ -221,17 +221,17 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
         return assetIndexCache[versionId];
     }
 
-    let version = (await downloadVersion(versionId)).value;
+    let version: Version = (await downloadVersion(versionId)).value;
 
-    let assetIndex = version.assetIndex;
+    let assetIndex: Version["assetIndex"] = version.assetIndex;
 
-    let filePath = path.join(PISTON_CACHE_DIRECTORY, assetIndex.sha1.substring(0, 2), assetIndex.sha1.substring(2));
+    let filePath: string = path.join(PISTON_CACHE_DIRECTORY, assetIndex.sha1.substring(0, 2), assetIndex.sha1.substring(2));
     if (fs.existsSync(filePath)) {
-        let data = fs.readFileSync(filePath, { encoding: "utf8" });
+        let data: string = fs.readFileSync(filePath, { encoding: "utf8" });
 
         return assetIndexCache[versionId] = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as AssetIndex };
     } else {
-        let response = await Bun.fetch(assetIndex.url, {
+        let response: Response = await Bun.fetch(assetIndex.url, {
             headers: {
                 "Accept": "application/json",
                 "User-Agent": USER_AGENT
@@ -239,9 +239,9 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
         });
 
         if (response.ok) {
-            let data = await response.text();
+            let data: string = await response.text();
 
-            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== assetIndex.sha1) {
                 throw Error(`Hash of asset index "${assetIndex.url}" does not match! Expected "${assetIndex.sha1}" but got "${hash}".`);
             }
@@ -257,30 +257,30 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
 }
 
 async function downloadAsset(versionId: string, assetPath: string): Promise<CachedResponse<Uint8Array>> {
-    let assetIndex = (await downloadAssetIndex(versionId)).value;
-    let asset = assetIndex.objects[assetPath];
+    let assetIndex: AssetIndex = (await downloadAssetIndex(versionId)).value;
+    let asset: AssetIndex["objects"][0] | undefined = assetIndex.objects[assetPath];
     if (asset === undefined) {
         throw Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
     }
 
-    let assetUrl = `${ASSET_URL}/${asset.hash.substring(0, 2)}/${asset.hash}`
+    let assetUrl: string = `${ASSET_URL}/${asset.hash.substring(0, 2)}/${asset.hash}`
 
-    let filePath = path.join(ASSETS_CACHE_DIRECTORY, asset.hash.substring(0, 2), asset.hash.substring(2));
+    let filePath: string = path.join(ASSETS_CACHE_DIRECTORY, asset.hash.substring(0, 2), asset.hash.substring(2));
     if (fs.existsSync(filePath)) {
-        let data = fs.readFileSync(filePath);
+        let data: Uint8Array = fs.readFileSync(filePath);
 
         return { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: data };
     } else {
-        let response = await Bun.fetch(assetUrl, {
+        let response: Response = await Bun.fetch(assetUrl, {
             headers: {
                 "User-Agent": USER_AGENT
             }
         });
 
         if (response.ok) {
-            let data = await response.bytes();
+            let data: Uint8Array = await response.bytes();
 
-            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== asset.hash) {
                 throw Error(`Hash of asset "${assetPath}" does not match! Expected "${asset.hash}" but got "${hash}".`);
             }
@@ -296,28 +296,28 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
 }
 
 async function getAsset(versionId: string, assetPath: string): Promise<CachedResponse<undefined>> {
-    let assetIndex = (await downloadAssetIndex(versionId)).value;
-    let asset = assetIndex.objects[assetPath];
+    let assetIndex: AssetIndex = (await downloadAssetIndex(versionId)).value;
+    let asset: AssetIndex["objects"][0] | undefined = assetIndex.objects[assetPath];
     if (asset === undefined) {
         throw Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
     }
 
-    let assetUrl = `${ASSET_URL}/${asset.hash.substring(0, 2)}/${asset.hash}`
+    let assetUrl: string = `${ASSET_URL}/${asset.hash.substring(0, 2)}/${asset.hash}`
 
-    let filePath = path.join(ASSETS_CACHE_DIRECTORY, asset.hash.substring(0, 2), asset.hash.substring(2));
+    let filePath: string = path.join(ASSETS_CACHE_DIRECTORY, asset.hash.substring(0, 2), asset.hash.substring(2));
     if (fs.existsSync(filePath)) {
         return { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: undefined };
     } else {
-        let response = await Bun.fetch(assetUrl, {
+        let response: Response = await Bun.fetch(assetUrl, {
             headers: {
                 "User-Agent": USER_AGENT
             }
         });
 
         if (response.ok) {
-            let data = await response.bytes();
+            let data: Uint8Array = await response.bytes();
 
-            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== asset.hash) {
                 throw Error(`Hash of asset "${assetPath}" does not match! Expected "${asset.hash}" but got "${hash}".`);
             }
@@ -350,29 +350,29 @@ interface JarDataEntry {
 }
 
 async function downloadJar(versionId: string, jarId: string, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry & JarDataEntry>) => void): Promise<void> {
-    let version = (await downloadVersion(versionId)).value;
+    let version: Version = (await downloadVersion(versionId)).value;
 
-    let jar = version.downloads[jarId];
+    let jar: Version["downloads"][0] | undefined = version.downloads[jarId];
     if (jar === undefined) {
         throw Error(`Jar "${jarId}" does not exist on version ${versionId}!`)
     }
 
-    let filePath = path.join(PISTON_CACHE_DIRECTORY, jar.sha1.substring(0, 2), jar.sha1.substring(2));
+    let filePath: string = path.join(PISTON_CACHE_DIRECTORY, jar.sha1.substring(0, 2), jar.sha1.substring(2));
     if (fs.existsSync(filePath)) {
-        let data = fs.readFileSync(filePath);
+        let data: Uint8Array = fs.readFileSync(filePath);
 
         extractJarAndData(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
     } else {
-        let response = await Bun.fetch(jar.url, {
+        let response: Response = await Bun.fetch(jar.url, {
             headers: {
                 "User-Agent": USER_AGENT
             }
         });
 
         if (response.ok) {
-            let data = await response.bytes();
+            let data: Uint8Array = await response.bytes();
 
-            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== jar.sha1) {
                 throw Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
             }
@@ -388,29 +388,29 @@ async function downloadJar(versionId: string, jarId: string, jarCallback: (entry
 }
 
 async function getJar(versionId: string, jarId: string, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry>) => void): Promise<void> {
-    let version = (await downloadVersion(versionId)).value;
+    let version: Version = (await downloadVersion(versionId)).value;
 
-    let jar = version.downloads[jarId];
+    let jar: Version["downloads"][0] | undefined = version.downloads[jarId];
     if (jar === undefined) {
         throw Error(`Jar "${jarId}" does not exist on version ${versionId}!`)
     }
 
-    let filePath = path.join(PISTON_CACHE_DIRECTORY, jar.sha1.substring(0, 2), jar.sha1.substring(2));
+    let filePath: string = path.join(PISTON_CACHE_DIRECTORY, jar.sha1.substring(0, 2), jar.sha1.substring(2));
     if (fs.existsSync(filePath)) {
-        let data = fs.readFileSync(filePath);
+        let data: Uint8Array = fs.readFileSync(filePath);
 
         extractJar(data, { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
     } else {
-        let response = await Bun.fetch(jar.url, {
+        let response: Response = await Bun.fetch(jar.url, {
             headers: {
                 "User-Agent": USER_AGENT
             }
         });
 
         if (response.ok) {
-            let data = await response.bytes();
+            let data: Uint8Array = await response.bytes();
 
-            let hash = new Bun.CryptoHasher("sha1").update(data).digest("hex");
+            let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== jar.sha1) {
                 throw Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
             }
@@ -426,18 +426,18 @@ async function getJar(versionId: string, jarId: string, jarCallback: (entry: Cac
 }
 
 function extractJarAndData(data: Uint8Array, response: CachedResponse<Jar>, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry & JarDataEntry>) => void): void {
-    let zip = new AdmZip(Buffer.from(data));
+    let zip: AdmZip = new AdmZip(Buffer.from(data));
 
     jarCallback({ ...response, value: { ...response.value, entryCount: zip.getEntries().length } });
 
-    zip.forEach(entry => {
+    zip.forEach((entry: AdmZip.IZipEntry): void => {
         if (!(entry.entryName.startsWith("assets/") || entry.entryName.startsWith("data/") || (!entry.entryName.startsWith("META-INF/") && !entry.entryName.endsWith(".class")))) {
             return;
         }
 
-        let hash = new Bun.CryptoHasher("sha1").update(entry.getData()).digest("hex");
+        let hash: string = new Bun.CryptoHasher("sha1").update(entry.getData()).digest("hex");
 
-        let filePath = path.join(ASSETS_CACHE_DIRECTORY, hash.substring(0, 2), hash.substring(2));
+        let filePath: string = path.join(ASSETS_CACHE_DIRECTORY, hash.substring(0, 2), hash.substring(2));
         if (!fs.existsSync(filePath)) {
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, entry.getData());
@@ -450,18 +450,18 @@ function extractJarAndData(data: Uint8Array, response: CachedResponse<Jar>, jarC
 }
 
 function extractJar(data: Uint8Array, response: CachedResponse<Jar>, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry>) => void): void {
-    let zip = new AdmZip(Buffer.from(data));
+    let zip: AdmZip = new AdmZip(Buffer.from(data));
 
     jarCallback({ ...response, value: { ...response.value, entryCount: zip.getEntries().length } });
 
-    zip.forEach(entry => {
+    zip.forEach((entry: AdmZip.IZipEntry): void => {
         if (!(entry.entryName.startsWith("assets/") || entry.entryName.startsWith("data/") || (!entry.entryName.startsWith("META-INF/") && !entry.entryName.endsWith(".class")))) {
             return;
         }
 
-        let hash = new Bun.CryptoHasher("sha1").update(entry.getData()).digest("hex");
+        let hash: string = new Bun.CryptoHasher("sha1").update(entry.getData()).digest("hex");
 
-        let filePath = path.join(ASSETS_CACHE_DIRECTORY, hash.substring(0, 2), hash.substring(2));
+        let filePath: string = path.join(ASSETS_CACHE_DIRECTORY, hash.substring(0, 2), hash.substring(2));
         if (!fs.existsSync(filePath)) {
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, entry.getData());
