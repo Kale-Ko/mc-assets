@@ -2,17 +2,16 @@ import * as main from "./main.ts"
 import * as fs from "fs";
 import * as path from "path";
 
-const GIT_URL = "https://github.com/Kale-Ko/mc-assets.git";
-const GIT_MESSAGE = "Initial upload of asset index: {assetIndexSha}";
-// const GIT_MESSAGE = "Upload of version: {versionSha}\nAsset index: {assetIndexSha}";
+const GIT_URL: string = "https://github.com/Kale-Ko/mc-assets.git";
+const GIT_MESSAGE: string = "Initial upload of version: {versionSha}\nAsset index: {assetIndexSha}";
 
-const CACHE_DIRECTORY = path.resolve("cache/");
-const COMPLETION_CACHE_DIRECTORY = path.join(CACHE_DIRECTORY, "completion/");
-const GIT_COMPLETION_CACHE_DIRECTORY = path.join(CACHE_DIRECTORY, "git-completion/");
+const CACHE_DIRECTORY: string = path.resolve("cache/");
+const COMPLETION_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "completion/");
+const GIT_COMPLETION_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "git-completion/");
 
-const OUTPUT_DIRECTORY = path.resolve("out/");
+const OUTPUT_DIRECTORY: string = path.resolve("out/");
 
-const GIT_DIRECTORY = path.resolve("git/");
+const GIT_DIRECTORY: string = path.resolve("git/");
 
 fs.mkdirSync(CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(COMPLETION_CACHE_DIRECTORY, { recursive: true });
@@ -20,23 +19,39 @@ fs.mkdirSync(GIT_COMPLETION_CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
 fs.mkdirSync(GIT_DIRECTORY, { recursive: true });
 
+interface TaskInfo {
+    taskDone: number,
+    taskTotal: number,
+    subTaskDone: number,
+    subTaskTotal: number,
+    currentTask: string | null
+}
+
+function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo): void {
+    if (taskInfo.subTaskTotal !== -1) {
+        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)`);
+    } else {
+        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask}`);
+    }
+}
+
 function versionToGitTag(version: string): string {
     return version.replaceAll(/[^a-zA-Z0-9-_]/g, "_");
 }
 
-(async () => {
-    const mainPath = path.join(GIT_DIRECTORY, "main");
+(async (): Promise<void> => {
+    const mainPath: string = path.join(GIT_DIRECTORY, "main");
     if (!fs.existsSync(mainPath)) {
         await Bun.$`git clone --origin origin --branch main --single-branch '${GIT_URL}' '${mainPath}'`.cwd(GIT_DIRECTORY).quiet();
     } else {
         await Bun.$`git fetch origin`.cwd(mainPath).quiet();
     }
 
-    let versionList = (await main.downloadVersionList()).value;
+    let versionList: main.VersionList = (await main.downloadVersionList()).value;
 
     for (let versionInfo of versionList.versions) {
-        let completionPath = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
-        let gitCompletionPath = path.join(GIT_COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
+        let completionPath: string = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
+        let gitCompletionPath: string = path.join(GIT_COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
         if (!fs.existsSync(completionPath)) {
             throw Error(`${versionInfo.id} has not been output!`);
         }
@@ -46,20 +61,25 @@ function versionToGitTag(version: string): string {
 
         process.stdout.write(`Starting ${versionInfo.id} \n`);
 
-        let task: string | null = null;
-        let done = 0;
-        let total = 6;
+        let taskInfo: TaskInfo = {
+            taskDone: 0,
+            taskTotal: 7,
+            subTaskDone: 0,
+            subTaskTotal: -1,
+            currentTask: null
+        };
 
-        let interval = setInterval(() => {
-            process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${task} - ${Math.round((done / total) * 10000) / 100}%`);
+        let interval = setInterval((): void => {
+            print(versionInfo, taskInfo);
         }, 500);
 
-        task = "creating branch";
+        taskInfo.currentTask = "creating branch";
+        print(versionInfo, taskInfo);
 
-        let tag = versionToGitTag(versionInfo.id);
+        let tag: string = versionToGitTag(versionInfo.id);
 
-        let output = await Bun.$`git ls-remote --branches --quiet | awk '{print $2}'`.cwd(mainPath).text();
-        let branches = output.toLowerCase().trim().split("\n");
+        let output: string = await Bun.$`git ls-remote --branches --quiet | awk '{print $2}'`.cwd(mainPath).text();
+        let branches: string[] = output.toLowerCase().trim().split("\n");
         if (!branches.includes("refs/heads/" + tag.toLowerCase())) {
             // Create completely empty new branch
             await Bun.$`git switch --orphan '${tag}'`.cwd(mainPath).quiet();
@@ -71,16 +91,17 @@ function versionToGitTag(version: string): string {
             await Bun.$`git branch --delete --force '${tag}'`.cwd(mainPath).quiet();
         }
 
-        done += 0.5;
-        task = "cloning repository";
+        taskInfo.taskDone++;
+        taskInfo.currentTask = "cloning repository";
+        print(versionInfo, taskInfo);
 
-        let outPath = path.join(OUTPUT_DIRECTORY, versionInfo.id);
-        let repoPath = path.join(GIT_DIRECTORY, versionInfo.id);
+        let outPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id);
+        let repoPath: string = path.join(GIT_DIRECTORY, versionInfo.id);
 
         if (fs.existsSync(repoPath)) {
-            let mounted = await Bun.$`mount | grep '${repoPath}' | awk '{ print $3 }'`.text();
+            let mounted: string = await Bun.$`mount | grep '${repoPath}' | awk '{ print $3 }'`.text();
             for (let mount of mounted.trim().split("\n")) {
-                if (mount.trim() == "") {
+                if (mount.trim() === "") {
                     continue;
                 }
                 await Bun.$`fusermount -u '${mount.trim()}'`;
@@ -90,16 +111,17 @@ function versionToGitTag(version: string): string {
         }
         await Bun.$`git clone --origin origin --branch '${tag}' --single-branch '${GIT_URL}' '${repoPath}'`.cwd(GIT_DIRECTORY).quiet();
 
-        done++;
-        task = "copying files";
+        taskInfo.taskDone++;
+        taskInfo.currentTask = "copying files";
+        print(versionInfo, taskInfo);
 
         {
-            async function mount(dir: string) {
-                let files = fs.readdirSync(path.join(outPath, dir));
+            async function mount(dir: string): Promise<void> {
+                let files: string[] = fs.readdirSync(path.join(outPath, dir));
                 for (let file of files) {
-                    let fromPath = path.join(outPath, dir, file);
-                    let fromStat = fs.statSync(fromPath);
-                    let toPath = path.join(repoPath, dir, file);
+                    let fromPath: string = path.join(outPath, dir, file);
+                    let fromStat: fs.Stats = fs.statSync(fromPath);
+                    let toPath: string = path.join(repoPath, dir, file);
                     if (fromStat.isDirectory()) {
                         fs.mkdirSync(toPath, { recursive: true });
                         // await Bun.$`mount --bind '${fromPath}' '${toPath}'`;
@@ -114,8 +136,8 @@ function versionToGitTag(version: string): string {
                 }
             }
 
-            async function unmount(dir: string) {
-                let files = fs.readdirSync(path.join(outPath, dir));
+            async function unmount(dir: string): Promise<void> {
+                let files: string[] = fs.readdirSync(path.join(outPath, dir));
                 for (let file of files) {
                     if (fs.statSync(path.join(outPath, dir, file)).isDirectory()) {
                         // await Bun.$`umount '${path.join(repoPath, dir, file)}'`;
@@ -124,13 +146,13 @@ function versionToGitTag(version: string): string {
                 }
             }
 
-            // function copy(dir: string) {
-            //     let files = fs.readdirSync(path.join(outPath, dir));
+            // function copy(dir: string): void {
+            //     let files: string[] = fs.readdirSync(path.join(outPath, dir));
             //     for (let file of files) {
-            //         let fromPath = path.join(outPath, dir, file);
-            //         let fromStat = fs.statSync(fromPath);
+            //         let fromPath: string = path.join(outPath, dir, file);
+            //         let fromStat: fs.Stats = fs.statSync(fromPath);
             //         if (fromStat.isFile()) {
-            //             let toPath = path.join(repoPath, dir, file);
+            //             let toPath: string = path.join(repoPath, dir, file);
 
             //             fs.mkdirSync(path.dirname(toPath), { recursive: true });
             //             if (fs.existsSync(toPath)) {
@@ -143,34 +165,51 @@ function versionToGitTag(version: string): string {
             //     }
             // }
 
+            function rmdir(dir: string): void {
+                let files: string[] = fs.readdirSync(dir);
+                for (let file of files) {
+                    if (file === '.git') {
+                        continue;
+                    }
+                    let fromPath: string = path.join(dir, file);
+                    fs.rmSync(fromPath, { recursive: true });
+                }
+            }
+
+            rmdir(repoPath);
+
             await mount(".");
 
-            done++;
-            task = "adding files";
+            taskInfo.taskDone++;
+            taskInfo.currentTask = "adding files";
+            print(versionInfo, taskInfo);
 
-            let message = GIT_MESSAGE;
+            let message: string = GIT_MESSAGE;
             message = message.replace("{versionId}", versionInfo.id);
             message = message.replace("{versionSha}", versionInfo.sha1);
             if (message.includes("{assetIndexSha}")) {
                 message = message.replace("{assetIndexSha}", (await main.downloadVersion(versionInfo.id)).value.assetIndex.sha1);
             }
 
-            let amend = (await Bun.$`git log --max-count 1 --pretty='%s'`.cwd(repoPath).text()).trim() == "Init";
+            let amend: boolean = (await Bun.$`git log --max-count 1 --pretty='%s'`.cwd(repoPath).text()).trim() === "Init";
 
             await Bun.$`git add .`.cwd(repoPath).quiet();
 
-            done++;
-            task = "committing files";
+            taskInfo.taskDone++;
+            taskInfo.currentTask = "committing files";
+            print(versionInfo, taskInfo);
 
-            let commit = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
-            if (commit.exitCode == 0 || (await commit.text()).match(/^nothing to commit, working tree clean$/im) != null) {
-                done++;
-                task = "pushing files";
+            let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
+            if (commit.exitCode === 0 || (await commit.text()).match(/^nothing to commit, working tree clean$/im) !== null) {
+                taskInfo.taskDone++;
+                taskInfo.currentTask = "pushing files";
+                print(versionInfo, taskInfo);
 
-                let push = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
-                if (push.exitCode == 0 || (await push.text()).match(/^Everything up-to-date$/im) != null) {
-                    done++;
-                    task = "cleaning up";
+                let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
+                if (push.exitCode === 0 || (await push.text()).match(/^Everything up-to-date$/im) !== null) {
+                    taskInfo.taskDone++;
+                    taskInfo.currentTask = "cleaning up";
+                    print(versionInfo, taskInfo);
                 } else {
                     throw Error(`Failed to push:\n${await push.text()}`);
                 }
@@ -183,13 +222,14 @@ function versionToGitTag(version: string): string {
 
         fs.rmSync(repoPath, { recursive: true });
 
-        done += 0.5;
+        taskInfo.taskDone++;
+        taskInfo.currentTask = "finished";
+        print(versionInfo, taskInfo);
 
         fs.writeFileSync(gitCompletionPath, "100\n", { encoding: "utf8" });
 
         clearInterval(interval);
 
-        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - finished - 100%`);
         process.stdout.write(`\n\n`);
     }
 })();
