@@ -27,12 +27,15 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo)
     }
 }
 
+const argv = Bun.argv.map(arg => arg.toLowerCase().trim());
+const force: boolean = argv.includes("--force") || argv.includes("-f");
+
 (async (): Promise<void> => {
     let versionList: main.VersionList = (await main.downloadVersionList()).value;
 
     for (let versionInfo of versionList.versions) {
         let completionPath: string = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
-        if (fs.existsSync(completionPath) && Date.now() - fs.statSync(completionPath).mtime.getTime() < 1000 * 60 * 30) {
+        if (!force && fs.existsSync(completionPath) && Date.now() - fs.statSync(completionPath).mtime.getTime() < 1000 * 60 * 30) {
             continue;
         }
 
