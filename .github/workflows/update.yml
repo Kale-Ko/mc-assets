@@ -1,0 +1,49 @@
+name: Update Files
+
+on:
+  schedule:
+    - cron: "0 0 * * 3"
+  workflow_dispatch:
+
+jobs:
+  update-files:
+    name: Update Files
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          check-latest: true
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Manage Cache
+        uses: actions/cache@v4
+        with:
+          key: full-cache
+          path: cache/
+          enableCrossOsArchive: true
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Run Test
+        run: bun run test
+
+      - name: Run Output
+        run: bun run output
+
+      - name: Run Git
+        run: bun run git
