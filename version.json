@@ -1,0 +1,10 @@
+{
+    "id": "1.14.3-pre2",
+    "name": "1.14.3 Pre-Release 2",
+    "release_target": "1.14.3",
+    "world_version": 1965,
+    "protocol_version": 487,
+    "pack_version": 4,
+    "build_time": "2019-06-07T09:09:53+00:00",
+    "stable": false
+}
