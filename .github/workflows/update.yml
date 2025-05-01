@@ -35,6 +35,7 @@ jobs:
           key: full-cache
           path: cache/
           enableCrossOsArchive: true
+          save-always: true
 
       - name: Install Dependencies
         run: bun install
