@@ -1,0 +1,15 @@
+{
+    "id": "1.19.4-pre1",
+    "name": "1.19.4 Pre-release 1",
+    "world_version": 3330,
+    "series_id": "main",
+    "protocol_version": 1073741944,
+    "pack_version": {
+        "resource": 13,
+        "data": 12
+    },
+    "build_time": "2023-02-22T15:56:28+00:00",
+    "java_component": "java-runtime-gamma",
+    "java_version": 17,
+    "stable": false
+}
