@@ -349,7 +349,7 @@ interface JarDataEntry {
     data: Uint8Array
 }
 
-async function downloadJar(versionId: string, jarId: string, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry & JarDataEntry>) => void): Promise<void> {
+async function downloadJar(versionId: string, jarId: string, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry?: CachedResponse<JarEntry & JarDataEntry>) => void): Promise<void> {
     let version: Version = (await downloadVersion(versionId)).value;
 
     let jar: Version["downloads"][0] | undefined = version.downloads[jarId];
@@ -387,7 +387,7 @@ async function downloadJar(versionId: string, jarId: string, jarCallback: (entry
     }
 }
 
-async function getJar(versionId: string, jarId: string, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry>) => void): Promise<void> {
+async function getJar(versionId: string, jarId: string, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry?: CachedResponse<JarEntry>) => void): Promise<void> {
     let version: Version = (await downloadVersion(versionId)).value;
 
     let jar: Version["downloads"][0] | undefined = version.downloads[jarId];
@@ -425,13 +425,14 @@ async function getJar(versionId: string, jarId: string, jarCallback: (entry: Cac
     }
 }
 
-function extractJarAndData(data: Uint8Array, response: CachedResponse<Jar>, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry & JarDataEntry>) => void): void {
+function extractJarAndData(data: Uint8Array, response: CachedResponse<Jar>, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry?: CachedResponse<JarEntry & JarDataEntry>) => void): void {
     let zip: AdmZip = new AdmZip(Buffer.from(data));
 
     jarCallback({ ...response, value: { ...response.value, entryCount: zip.getEntries().length } });
 
     zip.forEach((entry: AdmZip.IZipEntry): void => {
         if (!(entry.entryName.startsWith("assets/") || entry.entryName.startsWith("data/") || (!entry.entryName.startsWith("META-INF/") && !entry.entryName.endsWith(".class")))) {
+            entryCallback(undefined);
             return;
         }
 
@@ -449,13 +450,14 @@ function extractJarAndData(data: Uint8Array, response: CachedResponse<Jar>, jarC
     });
 }
 
-function extractJar(data: Uint8Array, response: CachedResponse<Jar>, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry: CachedResponse<JarEntry>) => void): void {
+function extractJar(data: Uint8Array, response: CachedResponse<Jar>, jarCallback: (entry: CachedResponse<Jar>) => void, entryCallback: (entry?: CachedResponse<JarEntry>) => void): void {
     let zip: AdmZip = new AdmZip(Buffer.from(data));
 
     jarCallback({ ...response, value: { ...response.value, entryCount: zip.getEntries().length } });
 
     zip.forEach((entry: AdmZip.IZipEntry): void => {
         if (!(entry.entryName.startsWith("assets/") || entry.entryName.startsWith("data/") || (!entry.entryName.startsWith("META-INF/") && !entry.entryName.endsWith(".class")))) {
+            entryCallback(undefined);
             return;
         }
 
