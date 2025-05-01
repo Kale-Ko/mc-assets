@@ -28,11 +28,25 @@ interface TaskInfo {
     currentTask: string | null
 }
 
-function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo): void {
-    if (taskInfo.subTaskTotal !== -1) {
-        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)`);
+let lastPrint = 0;
+
+function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo, forcePrint?: boolean): void {
+    if (process.stdout.isTTY) {
+        if (taskInfo.subTaskTotal !== -1) {
+            process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)`);
+        } else {
+            process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask}`);
+        }
     } else {
-        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask}`);
+        if (Date.now() - lastPrint >= 1000 || forcePrint) {
+            lastPrint = Date.now();
+
+            if (taskInfo.subTaskTotal !== -1) {
+                process.stdout.write(`${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)\n`);
+            } else {
+                process.stdout.write(`${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask}\n`);
+            }
+        }
     }
 }
 
@@ -75,7 +89,7 @@ function versionToGitTag(version: string): string {
         }, 500);
 
         taskInfo.currentTask = "creating branch";
-        print(versionInfo, taskInfo);
+        print(versionInfo, taskInfo, true);
 
         let tag: string = versionToGitTag(versionInfo.id);
 
@@ -94,7 +108,7 @@ function versionToGitTag(version: string): string {
 
         taskInfo.taskDone++;
         taskInfo.currentTask = "cloning repository";
-        print(versionInfo, taskInfo);
+        print(versionInfo, taskInfo, true);
 
         let outPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id);
         let repoPath: string = path.join(GIT_DIRECTORY, versionInfo.id);
@@ -114,7 +128,7 @@ function versionToGitTag(version: string): string {
 
         taskInfo.taskDone++;
         taskInfo.currentTask = "copying files";
-        print(versionInfo, taskInfo);
+        print(versionInfo, taskInfo, true);
 
         {
             async function mount(dir: string): Promise<void> {
@@ -183,7 +197,7 @@ function versionToGitTag(version: string): string {
 
             taskInfo.taskDone++;
             taskInfo.currentTask = "adding files";
-            print(versionInfo, taskInfo);
+            print(versionInfo, taskInfo, true);
 
             let amend: boolean = (await Bun.$`git log --max-count 1 --pretty='%s'`.cwd(repoPath).text()).trim() === "Init";
 
@@ -198,19 +212,19 @@ function versionToGitTag(version: string): string {
 
             taskInfo.taskDone++;
             taskInfo.currentTask = "committing files";
-            print(versionInfo, taskInfo);
+            print(versionInfo, taskInfo, true);
 
             let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
             if (commit.exitCode === 0 || (await commit.text()).match(/^nothing to commit, working tree clean$/im) !== null) {
                 taskInfo.taskDone++;
                 taskInfo.currentTask = "pushing files";
-                print(versionInfo, taskInfo);
+                print(versionInfo, taskInfo, true);
 
                 let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
                 if (push.exitCode === 0 || (await push.text()).match(/^Everything up-to-date$/im) !== null) {
                     taskInfo.taskDone++;
                     taskInfo.currentTask = "cleaning up";
-                    print(versionInfo, taskInfo);
+                    print(versionInfo, taskInfo, true);
                 } else {
                     throw Error(`Failed to push:\n${await push.text()}`);
                 }
@@ -225,7 +239,7 @@ function versionToGitTag(version: string): string {
 
         taskInfo.taskDone++;
         taskInfo.currentTask = "finished";
-        print(versionInfo, taskInfo);
+        print(versionInfo, taskInfo, true);
 
         fs.writeFileSync(gitCompletionPath, "100\n", { encoding: "utf8" });
 

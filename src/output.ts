@@ -19,11 +19,25 @@ interface TaskInfo {
     currentTask: string | null
 }
 
-function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo): void {
-    if (taskInfo.subTaskTotal !== -1) {
-        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)`);
+let lastPrint = 0;
+
+function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo, forcePrint?: boolean): void {
+    if (process.stdout.isTTY) {
+        if (taskInfo.subTaskTotal !== -1) {
+            process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)`);
+        } else {
+            process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask}`);
+        }
     } else {
-        process.stdout.write(`\x1b[2K\x1b[1G${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask}`);
+        if (Date.now() - lastPrint >= 1000 || forcePrint) {
+            lastPrint = Date.now();
+
+            if (taskInfo.subTaskTotal !== -1) {
+                process.stdout.write(`${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask} - ${taskInfo.subTaskDone}/${taskInfo.subTaskTotal} (${Math.round((taskInfo.subTaskDone / taskInfo.subTaskTotal) * 10000) / 100}%)\n`);
+            } else {
+                process.stdout.write(`${versionInfo.id} - ${taskInfo.taskDone}/${taskInfo.taskTotal} (${Math.round((taskInfo.taskDone / taskInfo.taskTotal) * 10000) / 100}%) - ${taskInfo.currentTask}\n`);
+            }
+        }
     }
 }
 
@@ -54,13 +68,13 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
         }, 500);
 
         taskInfo.currentTask = "downloading client jar";
-        print(versionInfo, taskInfo);
+        print(versionInfo, taskInfo, true);
 
         {
             await main.downloadJar(versionInfo.id, "client", (jar: main.CachedResponse<main.Jar>): void => {
                 taskInfo.taskDone++;
                 taskInfo.currentTask = "extracting client jar";
-                print(versionInfo, taskInfo);
+                print(versionInfo, taskInfo, true);
 
                 taskInfo.subTaskDone = 0;
                 taskInfo.subTaskTotal = jar.value.entryCount;
@@ -89,20 +103,20 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
                 }
             });
 
-            print(versionInfo, taskInfo);
+            print(versionInfo, taskInfo, true);
             taskInfo.subTaskDone = 0;
             taskInfo.subTaskTotal = -1;
         }
 
         taskInfo.taskDone++;
         taskInfo.currentTask = "downloading asset index";
-        print(versionInfo, taskInfo);
+        print(versionInfo, taskInfo, true);
 
         let assetIndex: main.AssetIndex = (await main.downloadAssetIndex(versionInfo.id)).value;
 
         taskInfo.taskDone++;
         taskInfo.currentTask = "downloading assets";
-        print(versionInfo, taskInfo);
+        print(versionInfo, taskInfo, true);
 
         {
             taskInfo.subTaskDone = 0;
@@ -126,14 +140,14 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
                 }
             }
 
-            print(versionInfo, taskInfo);
+            print(versionInfo, taskInfo, true);
             taskInfo.subTaskDone = 0;
             taskInfo.subTaskTotal = -1;
         }
 
         taskInfo.taskDone++;
         taskInfo.currentTask = "finished";
-        print(versionInfo, taskInfo);
+        print(versionInfo, taskInfo, true);
 
         fs.writeFileSync(completionPath, "100\n", { encoding: "utf8" });
 
