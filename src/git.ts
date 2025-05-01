@@ -84,10 +84,6 @@ function versionToGitTag(version: string): string {
             currentTask: null
         };
 
-        let interval = setInterval((): void => {
-            print(versionInfo, taskInfo);
-        }, 500);
-
         taskInfo.currentTask = "creating branch";
         print(versionInfo, taskInfo, true);
 
@@ -242,8 +238,6 @@ function versionToGitTag(version: string): string {
         print(versionInfo, taskInfo, true);
 
         fs.writeFileSync(gitCompletionPath, "100\n", { encoding: "utf8" });
-
-        clearInterval(interval);
 
         process.stdout.write(`\n\n`);
     }

@@ -63,10 +63,6 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
             currentTask: null
         };
 
-        let interval: NodeJS.Timeout = setInterval((): void => {
-            print(versionInfo, taskInfo);
-        }, 500);
-
         taskInfo.currentTask = "downloading client jar";
         print(versionInfo, taskInfo, true);
 
@@ -81,24 +77,22 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
                 print(versionInfo, taskInfo);
             }, (entry: main.CachedResponse<main.JarEntry>): void => {
                 let entryPath: string = entry.value.path;
-                if (!(entryPath.startsWith("assets/") || entryPath.startsWith("data/") || (!entryPath.startsWith("META-INF/") && !entryPath.endsWith(".class")))) {
-                    return;
-                }
+                if (entryPath.startsWith("assets/") || entryPath.startsWith("data/") || (!entryPath.startsWith("META-INF/") && !entryPath.endsWith(".class"))) {
+                    let outputPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id, entryPath);
 
-                let outputPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id, entryPath);
-
-                fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-                if (entry.value.isDirectory) {
-                    fs.mkdirSync(outputPath, { recursive: true });
-                } else {
-                    if (fs.existsSync(outputPath)) {
-                        fs.unlinkSync(outputPath);
+                    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+                    if (entry.value.isDirectory) {
+                        fs.mkdirSync(outputPath, { recursive: true });
+                    } else {
+                        if (fs.existsSync(outputPath)) {
+                            fs.unlinkSync(outputPath);
+                        }
+                        fs.linkSync(entry.cachedPath, outputPath);
                     }
-                    fs.linkSync(entry.cachedPath, outputPath);
                 }
 
                 taskInfo.subTaskDone++;
-                if (taskInfo.subTaskDone % 100 === 0) {
+                if (taskInfo.subTaskDone % 200 === 0) {
                     print(versionInfo, taskInfo);
                 }
             });
@@ -150,8 +144,6 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
         print(versionInfo, taskInfo, true);
 
         fs.writeFileSync(completionPath, "100\n", { encoding: "utf8" });
-
-        clearInterval(interval);
 
         process.stdout.write(`\n\n`);
     }
