@@ -75,9 +75,9 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
                 taskInfo.subTaskDone = 0;
                 taskInfo.subTaskTotal = jar.value.entryCount;
                 print(versionInfo, taskInfo);
-            }, (entry: main.CachedResponse<main.JarEntry>): void => {
-                let entryPath: string = entry.value.path;
-                if (entryPath.startsWith("assets/") || entryPath.startsWith("data/") || (!entryPath.startsWith("META-INF/") && !entryPath.endsWith(".class"))) {
+            }, (entry?: main.CachedResponse<main.JarEntry>): void => {
+                if (entry !== undefined) {
+                    let entryPath: string = entry.value.path;
                     let outputPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id, entryPath);
 
                     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
