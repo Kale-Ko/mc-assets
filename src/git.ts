@@ -3,7 +3,8 @@ import * as fs from "fs";
 import * as path from "path";
 
 const GIT_URL: string = "https://github.com/Kale-Ko/mc-assets.git";
-const GIT_MESSAGE: string = "Initial upload of version: {versionSha}\nAsset index: {assetIndexSha}";
+const INITIAL_GIT_MESSAGE: string = "Initial upload of version: {versionSha}\nAsset index: {assetIndexSha}";
+const GIT_MESSAGE: string = "Upload of version: {versionSha}\nAsset index: {assetIndexSha}";
 
 const CACHE_DIRECTORY: string = path.resolve("cache/");
 const COMPLETION_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "completion/");
@@ -184,14 +185,14 @@ function versionToGitTag(version: string): string {
             taskInfo.currentTask = "adding files";
             print(versionInfo, taskInfo);
 
-            let message: string = GIT_MESSAGE;
+            let amend: boolean = (await Bun.$`git log --max-count 1 --pretty='%s'`.cwd(repoPath).text()).trim() === "Init";
+
+            let message: string = amend ? INITIAL_GIT_MESSAGE : GIT_MESSAGE;
             message = message.replace("{versionId}", versionInfo.id);
             message = message.replace("{versionSha}", versionInfo.sha1);
             if (message.includes("{assetIndexSha}")) {
                 message = message.replace("{assetIndexSha}", (await main.downloadVersion(versionInfo.id)).value.assetIndex.sha1);
             }
-
-            let amend: boolean = (await Bun.$`git log --max-count 1 --pretty='%s'`.cwd(repoPath).text()).trim() === "Init";
 
             await Bun.$`git add .`.cwd(repoPath).quiet();
 
