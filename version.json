@@ -1,0 +1,13 @@
+{
+    "id": "21w03a",
+    "name": "21w03a",
+    "release_target": "1.17",
+    "world_version": 2689,
+    "protocol_version": 1073741835,
+    "pack_version": {
+        "resource": 7,
+        "data": 7
+    },
+    "build_time": "2021-01-20T14:54:35+00:00",
+    "stable": false
+}
