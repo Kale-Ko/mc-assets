@@ -29,13 +29,12 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Manage Cache
-        uses: actions/cache@v4
+      - name: Download Cache
+        uses: actions/cache/restore@v4
         with:
           key: full-cache
           path: cache/
           enableCrossOsArchive: true
-          save-always: true
 
       - name: Install Dependencies
         run: bun install
@@ -48,3 +47,11 @@ jobs:
 
       - name: Run Git
         run: bun run git
+
+      - name: Upload Cache
+        uses: actions/cache/save@v4
+        with:
+          key: full-cache
+          path: cache/
+          enableCrossOsArchive: true
+        if: always()
