@@ -15,6 +15,10 @@ fs.mkdirSync(CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(PISTON_CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(ASSETS_CACHE_DIRECTORY, { recursive: true });
 
+const argv = Bun.argv.map(arg => arg.toLowerCase().trim());
+const force: boolean = argv.includes("--force") || argv.includes("-f");
+const cacheJars: boolean = argv.includes("--cache-jars") || argv.includes("-j");
+
 interface CachedResponse<T> {
     cached: boolean
     cachedTime: number
@@ -377,8 +381,10 @@ async function downloadJar(versionId: string, jarId: string, jarCallback: (entry
                 throw Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
             }
 
-            fs.mkdirSync(path.dirname(filePath), { recursive: true });
-            fs.writeFileSync(filePath, data);
+            if (cacheJars) {
+                fs.mkdirSync(path.dirname(filePath), { recursive: true });
+                fs.writeFileSync(filePath, data);
+            }
 
             extractJarAndData(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
         } else {
@@ -415,8 +421,10 @@ async function getJar(versionId: string, jarId: string, jarCallback: (entry: Cac
                 throw Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
             }
 
-            fs.mkdirSync(path.dirname(filePath), { recursive: true });
-            fs.writeFileSync(filePath, data);
+            if (cacheJars) {
+                fs.mkdirSync(path.dirname(filePath), { recursive: true });
+                fs.writeFileSync(filePath, data);
+            }
 
             extractJar(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
         } else {
