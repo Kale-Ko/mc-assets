@@ -46,6 +46,7 @@ jobs:
           path: |
             cache/piston/
             cache/assets/
+            cache/restore/
           enableCrossOsArchive: true
 
       - name: Install Dependencies
@@ -55,7 +56,7 @@ jobs:
         run: bun run test
 
       - name: Run Output
-        run: bun run output --force
+        run: bun run output --create-restore
 
       - name: Run Git
         run: bun run git
