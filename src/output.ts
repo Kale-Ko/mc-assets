@@ -170,8 +170,10 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
             taskInfo.currentTask = "writing restore file";
             print(versionInfo, taskInfo, true);
 
+            let compressedRestoreList: Uint8Array = Bun.gzipSync(restoreList, { level: 2, library: "zlib" });
+
             fs.mkdirSync(path.dirname(restoreDirectory), { recursive: true });
-            fs.writeFileSync(restoreDirectory, restoreList, { encoding: "utf8" });
+            fs.writeFileSync(restoreDirectory, compressedRestoreList);
         }
 
         taskInfo.taskDone++;
