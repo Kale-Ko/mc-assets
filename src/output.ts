@@ -58,9 +58,9 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
 
         let outputDirectory: string = path.join(OUTPUT_DIRECTORY, versionInfo.id);
 
-        let restoreDirectory: string = path.join(RESTORE_DIRECTORY, versionInfo.id);
-        if (createRestore && fs.existsSync(restoreDirectory)) {
-            fs.rmSync(restoreDirectory);
+        let restorePath: string = path.join(RESTORE_DIRECTORY, versionInfo.id);
+        if (createRestore && fs.existsSync(restorePath)) {
+            fs.rmSync(restorePath);
         }
         let restoreList: string = "";
 
@@ -172,8 +172,8 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
 
             let compressedRestoreList: Uint8Array = Bun.gzipSync(restoreList, { level: 2, library: "zlib" });
 
-            fs.mkdirSync(path.dirname(restoreDirectory), { recursive: true });
-            fs.writeFileSync(restoreDirectory, compressedRestoreList);
+            fs.mkdirSync(path.dirname(restorePath), { recursive: true });
+            fs.writeFileSync(restorePath, compressedRestoreList);
         }
 
         taskInfo.taskDone++;
