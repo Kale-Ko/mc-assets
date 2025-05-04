@@ -2,7 +2,7 @@ import * as main from "./main.ts"
 import * as fs from "fs";
 import * as path from "path";
 
-const GIT_URL: string = "https://github.com/Kale-Ko/mc-assets.git";
+const GIT_URL: string = "https://github.com/Kale-Ko/mc-assets";
 const INITIAL_GIT_MESSAGE: string = "Initial upload of version: {versionSha}\nAsset index: {assetIndexSha}";
 const GIT_MESSAGE: string = "Upload of version: {versionSha}\nAsset index: {assetIndexSha}";
 
