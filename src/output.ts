@@ -74,6 +74,12 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
             currentTask: null
         };
 
+        if (process.stdout.isTTY) {
+            setInterval((): void => {
+                print(versionInfo, taskInfo);
+            }, 500);
+        }
+
         taskInfo.currentTask = "downloading client jar";
         print(versionInfo, taskInfo, true);
 
