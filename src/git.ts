@@ -54,7 +54,7 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
 }
 
 function versionToGitTag(version: string): string {
-    return version.replaceAll(/[^a-zA-Z0-9-_]/g, "_");
+    return version.replaceAll(/[^a-zA-Z0-9-_]/g, "_").toLowerCase();
 }
 
 (async (): Promise<void> => {
