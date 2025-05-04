@@ -32,6 +32,9 @@ interface VersionList {
         snapshot: string
     }
     versions: {
+        /**
+         * Is altered for pre releases for 1.14 - 1.14.2 to conform to the standard format
+         */
         id: string
         type: "release" | "snapshot" | "old_snapshot" | "old_beta" | "old_alpha" | "experiment"
         url: string
@@ -42,7 +45,19 @@ interface VersionList {
     }[]
 }
 
+function processVersionList(versionList: VersionList): VersionList {
+    for (let i: number = 0; i < versionList.versions.length; i++) {
+        let version: VersionList["versions"][0] = versionList.versions[i]!;
+        version.id = version.id.replace(" Pre-Release ", "-pre");
+        versionList.versions[i] = version;
+    }
+    return versionList;
+}
+
 interface Version {
+    /**
+     * Is altered for pre releases for 1.14 - 1.14.2 to conform to the standard format
+     */
     id: string
     type: "release" | "snapshot" | "old_snapshot" | "old_beta" | "old_alpha" | "experiment"
     time: string
@@ -121,6 +136,11 @@ interface Version {
     }
 }
 
+function processVersion(version: Version): Version {
+    version.id = version.id.replace(" Pre-Release ", "-pre");
+    return version;
+}
+
 interface AssetIndex {
     /**
      * Only present on 13w23b and below. I have no idea what this means.
@@ -155,7 +175,7 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
     if (fs.existsSync(filePath) && Date.now() - fs.statSync(filePath).mtime.getTime() < 1000 * 60 * 30) {
         let data: string = fs.readFileSync(filePath, { encoding: "utf8" });
 
-        return versionListCache = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as VersionList };
+        return versionListCache = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: processVersionList(JSON.parse(data) as VersionList) };
     } else {
         let response: Response = await Bun.fetch(HOME_URL, {
             headers: {
@@ -170,7 +190,7 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
 
-            return versionListCache = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as VersionList };
+            return versionListCache = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: processVersionList(JSON.parse(data) as VersionList) };
         } else {
             throw Error(`Response from "${HOME_URL}" was "${response.status} ${response.statusText}"!`);
         }
@@ -193,7 +213,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
     if (fs.existsSync(filePath)) {
         let data: string = fs.readFileSync(filePath, { encoding: "utf8" });
 
-        return versionCache[versionId] = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as Version };
+        return versionCache[versionId] = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: processVersion(JSON.parse(data) as Version) };
     } else {
         let response: Response = await Bun.fetch(versionInfo.url, {
             headers: {
@@ -213,7 +233,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
 
-            return versionCache[versionId] = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as Version };
+            return versionCache[versionId] = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: processVersion(JSON.parse(data) as Version) };
         } else {
             throw Error(`Response from "${versionInfo.url}" was "${response.status} ${response.statusText}"!`);
         }
