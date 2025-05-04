@@ -7,9 +7,15 @@ const COMPLETION_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "completio
 
 const OUTPUT_DIRECTORY: string = path.resolve("out/");
 
+const RESTORE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "restore/");
+
 fs.mkdirSync(CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(COMPLETION_CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
+
+const argv = Bun.argv.map(arg => arg.toLowerCase().trim());
+const force: boolean = argv.includes("--force") || argv.includes("-f");
+const createRestore: boolean = argv.includes("--create-restore") || argv.includes("-r");
 
 interface TaskInfo {
     taskDone: number,
@@ -41,9 +47,6 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
     }
 }
 
-const argv = Bun.argv.map(arg => arg.toLowerCase().trim());
-const force: boolean = argv.includes("--force") || argv.includes("-f");
-
 (async (): Promise<void> => {
     let versionList: main.VersionList = (await main.downloadVersionList()).value;
 
@@ -53,11 +56,19 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
             continue;
         }
 
+        let outputDirectory: string = path.join(OUTPUT_DIRECTORY, versionInfo.id);
+
+        let restoreDirectory: string = path.join(RESTORE_DIRECTORY, versionInfo.id);
+        if (createRestore && fs.existsSync(restoreDirectory)) {
+            fs.rmSync(restoreDirectory);
+        }
+        let restoreList: string = "";
+
         process.stdout.write(`Starting ${versionInfo.id}\n`);
 
         let taskInfo: TaskInfo = {
             taskDone: 0,
-            taskTotal: 4,
+            taskTotal: 4 + (createRestore ? 1 : 0),
             subTaskDone: 0,
             subTaskTotal: -1,
             currentTask: null
@@ -78,7 +89,7 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
             }, (entry?: main.CachedResponse<main.JarEntry>): void => {
                 if (entry !== undefined) {
                     let entryPath: string = entry.value.path;
-                    let outputPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id, entryPath);
+                    let outputPath: string = path.join(outputDirectory, entryPath);
 
                     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
                     if (entry.value.isDirectory) {
@@ -88,6 +99,10 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
                             fs.unlinkSync(outputPath);
                         }
                         fs.linkSync(entry.cachedPath, outputPath);
+
+                        if (createRestore) {
+                            restoreList += `${path.relative(CACHE_DIRECTORY, entry.cachedPath)}\u0000${path.relative(outputDirectory, outputPath)}\n`;
+                        }
                     }
                 }
 
@@ -118,7 +133,7 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
             print(versionInfo, taskInfo);
 
             for (let assetPath in assetIndex.objects) {
-                let outputPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id, "assets", assetPath);
+                let outputPath: string = path.join(outputDirectory, "assets", assetPath);
 
                 let asset: main.CachedResponse<undefined> = (await main.getAsset(versionInfo.id, assetPath));
 
@@ -127,6 +142,10 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
                     fs.unlinkSync(outputPath);
                 }
                 fs.linkSync(asset.cachedPath, outputPath);
+
+                if (createRestore) {
+                    restoreList += `${path.relative(CACHE_DIRECTORY, asset.cachedPath)}\u0000${path.relative(outputDirectory, outputPath)}\n`;
+                }
 
                 taskInfo.subTaskDone++;
                 if (taskInfo.subTaskDone % 100 === 0) {
@@ -137,6 +156,15 @@ const force: boolean = argv.includes("--force") || argv.includes("-f");
             print(versionInfo, taskInfo, true);
             taskInfo.subTaskDone = 0;
             taskInfo.subTaskTotal = -1;
+        }
+
+        if (createRestore) {
+            taskInfo.taskDone++;
+            taskInfo.currentTask = "writing restore file";
+            print(versionInfo, taskInfo, true);
+
+            fs.mkdirSync(path.dirname(restoreDirectory), { recursive: true });
+            fs.writeFileSync(restoreDirectory, restoreList, { encoding: "utf8" });
         }
 
         taskInfo.taskDone++;
