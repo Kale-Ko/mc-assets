@@ -84,6 +84,12 @@ function versionToGitTag(version: string): string {
             currentTask: null
         };
 
+        if (process.stdout.isTTY) {
+            setInterval((): void => {
+                print(versionInfo, taskInfo);
+            }, 500);
+        }
+
         taskInfo.currentTask = "creating branch";
         print(versionInfo, taskInfo, true);
 
