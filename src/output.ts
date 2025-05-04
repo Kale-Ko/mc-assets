@@ -74,8 +74,9 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
             currentTask: null
         };
 
+        let interval: NodeJS.Timeout | undefined = undefined;
         if (process.stdout.isTTY) {
-            setInterval((): void => {
+            interval = setInterval((): void => {
                 print(versionInfo, taskInfo);
             }, 500);
         }
@@ -178,6 +179,10 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
         print(versionInfo, taskInfo, true);
 
         fs.writeFileSync(completionPath, "100\n", { encoding: "utf8" });
+
+        if (interval != undefined) {
+            clearInterval(interval);
+        }
 
         process.stdout.write(`\n\n`);
     }
