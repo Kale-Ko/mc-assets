@@ -43,7 +43,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           key: full-cache
-          path: cache/
+          path: |
+            cache/piston/
+            cache/assets/
           enableCrossOsArchive: true
 
       - name: Install Dependencies
@@ -53,7 +55,7 @@ jobs:
         run: bun run test
 
       - name: Run Output
-        run: bun run output
+        run: bun run output --force
 
       - name: Run Git
         run: bun run git
@@ -62,6 +64,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           key: full-cache
-          path: cache/
-          # enableCrossOsArchive: true
+          path: |
+            cache/
+          enableCrossOsArchive: true
         if: always()
