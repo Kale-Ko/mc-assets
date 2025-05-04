@@ -20,6 +20,9 @@ fs.mkdirSync(GIT_COMPLETION_CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
 fs.mkdirSync(GIT_DIRECTORY, { recursive: true });
 
+const argv = Bun.argv.map(arg => arg.toLowerCase().trim());
+const force: boolean = argv.includes("--force") || argv.includes("-f");
+
 interface TaskInfo {
     taskDone: number,
     taskTotal: number,
@@ -55,11 +58,11 @@ function versionToGitTag(version: string): string {
 }
 
 (async (): Promise<void> => {
-    const mainPath: string = path.join(GIT_DIRECTORY, "main");
-    if (!fs.existsSync(mainPath)) {
-        await Bun.$`git clone --origin origin --branch main --single-branch '${GIT_URL}' '${mainPath}'`.cwd(GIT_DIRECTORY).quiet();
+    const mainDirectory: string = path.join(GIT_DIRECTORY, "main");
+    if (!fs.existsSync(mainDirectory)) {
+        await Bun.$`git clone --origin origin --branch main --single-branch '${GIT_URL}' '${mainDirectory}'`.cwd(GIT_DIRECTORY).quiet();
     } else {
-        await Bun.$`git fetch origin`.cwd(mainPath).quiet();
+        await Bun.$`git fetch origin`.cwd(mainDirectory).quiet();
     }
 
     let versionList: main.VersionList = (await main.downloadVersionList()).value;
@@ -95,17 +98,17 @@ function versionToGitTag(version: string): string {
 
         let tag: string = versionToGitTag(versionInfo.id);
 
-        let output: string = await Bun.$`git ls-remote --branches --quiet | awk '{print $2}'`.cwd(mainPath).text();
-        let branches: string[] = output.toLowerCase().trim().split("\n");
+        let branchesRaw: string = await Bun.$`git ls-remote --branches --quiet | awk '{print $2}'`.cwd(mainDirectory).text();
+        let branches: string[] = branchesRaw.toLowerCase().trim().split("\n");
         if (!branches.includes("refs/heads/" + tag.toLowerCase())) {
             // Create completely empty new branch
-            await Bun.$`git switch --orphan '${tag}'`.cwd(mainPath).quiet();
-            await Bun.$`git commit --allow-empty --message 'Init'`.cwd(mainPath).quiet();
-            await Bun.$`git push --set-upstream origin '${tag}'`.cwd(mainPath).quiet();
+            await Bun.$`git switch --orphan '${tag}'`.cwd(mainDirectory).quiet();
+            await Bun.$`git commit --allow-empty --message 'Init'`.cwd(mainDirectory).quiet();
+            await Bun.$`git push --set-upstream origin '${tag}'`.cwd(mainDirectory).quiet();
 
             // Delete the branch in the local repo
-            await Bun.$`git switch 'main'`.cwd(mainPath).quiet();
-            await Bun.$`git branch --delete --force '${tag}'`.cwd(mainPath).quiet();
+            await Bun.$`git switch 'main'`.cwd(mainDirectory).quiet();
+            await Bun.$`git branch --delete --force '${tag}'`.cwd(mainDirectory).quiet();
         }
 
         taskInfo.taskDone++;
