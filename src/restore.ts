@@ -41,6 +41,9 @@ function print(version: string, taskInfo: TaskInfo, forcePrint?: boolean): void 
 }
 
 (async (): Promise<void> => {
+    if (!fs.existsSync(RESTORE_DIRECTORY)) {
+        return;
+    }
     let restoreFiles = fs.readdirSync(RESTORE_DIRECTORY);
 
     for (let restoreFile of restoreFiles) {
