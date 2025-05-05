@@ -16,6 +16,7 @@
   "module": "src/main.ts",
   "scripts": {
     "output": "bun src/output.ts",
+    "restore": "bun src/restore.ts",
     "git": "bun src/git.ts",
     "test": "bun src/test.ts"
   }
