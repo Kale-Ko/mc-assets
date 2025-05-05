@@ -69,6 +69,8 @@ jobs:
         with:
           key: full-cache
           path: |
-            cache/
+            cache/piston/
+            cache/assets/
+            cache/restore/
           enableCrossOsArchive: true
         if: always()
