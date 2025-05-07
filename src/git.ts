@@ -220,23 +220,41 @@ function versionToGitTag(version: string): string {
             taskInfo.currentTask = "committing files";
             print(versionInfo, taskInfo, true);
 
-            let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
-            if (commit.exitCode === 0 || (await commit.text()).match(/^nothing to commit, working tree clean$/im) !== null) {
-                taskInfo.taskDone++;
-                taskInfo.currentTask = "pushing files";
-                print(versionInfo, taskInfo, true);
+            async function tryCommit(count?: number): Promise<void> {
+                let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
+                let output: string = await commit.text();
+                if (commit.exitCode !== 0 && !output.match(/^nothing to commit, working tree clean$/im) !== null) {
+                    if (count != undefined && count >= 3) {
+                        throw Error(`Failed to commit:\n${output}`);
+                    }
 
-                let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
-                if (push.exitCode === 0 || (await push.text()).match(/^Everything up-to-date$/im) !== null) {
-                    taskInfo.taskDone++;
-                    taskInfo.currentTask = "cleaning up";
-                    print(versionInfo, taskInfo, true);
-                } else {
-                    throw Error(`Failed to push:\n${await push.text()}`);
+                    tryCommit(count != undefined ? count + 1 : 1);
                 }
-            } else {
-                throw Error(`Failed to commit:\n${await commit.text()}`);
             }
+
+            await tryCommit();
+
+            taskInfo.taskDone++;
+            taskInfo.currentTask = "pushing files";
+            print(versionInfo, taskInfo, true);
+
+            async function tryPush(count?: number): Promise<void> {
+                let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
+                let output: string = await push.text();
+                if (push.exitCode !== 0 && !output.match(/^Everything up-to-date$/im) !== null) {
+                    if (count != undefined && count >= 3) {
+                        throw Error(`Failed to push:\n${output}`);
+                    }
+
+                    tryPush(count != undefined ? count + 1 : 1);
+                }
+            }
+
+            await tryPush();
+
+            taskInfo.taskDone++;
+            taskInfo.currentTask = "cleaning up";
+            print(versionInfo, taskInfo, true);
 
             await unmount(".");
         }
