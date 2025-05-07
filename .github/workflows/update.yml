@@ -32,6 +32,10 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Install Fuse
+        run: |
+          sudo apt install fuse bindfs
+
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
