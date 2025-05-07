@@ -86,6 +86,7 @@ function print(version: string, taskInfo: TaskInfo, forcePrint?: boolean): void 
 
             for (let restoreElement of restoreElements) {
                 if (restoreElement === "") {
+                    taskInfo.subTaskDone++;
                     continue;
                 }
 
