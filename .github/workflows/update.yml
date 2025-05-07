@@ -43,10 +43,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           key: full-cache
-          path: |
-            cache/piston/
-            cache/assets/
-            cache/restore/
+          path: cache/
           enableCrossOsArchive: true
 
       - name: Install Dependencies
@@ -68,9 +65,6 @@ jobs:
         uses: actions/cache/save@v4
         with:
           key: full-cache
-          path: |
-            cache/piston/
-            cache/assets/
-            cache/restore/
+          path: cache/
           enableCrossOsArchive: true
         if: always()
