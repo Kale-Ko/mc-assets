@@ -34,7 +34,7 @@ jobs:
 
       - name: Install Fuse
         run: |
-          sudo apt install fuse bindfs
+          sudo apt-get install -y fuse fuse3 bindfs
 
       - name: Configure Git
         run: |
