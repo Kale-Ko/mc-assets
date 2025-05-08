@@ -119,13 +119,31 @@ function versionToGitTag(version: string): string {
         let outPath: string = path.join(OUTPUT_DIRECTORY, versionInfo.id);
         let repoPath: string = path.join(GIT_DIRECTORY, versionInfo.id);
 
+        async function tryUnmount(path: string, count?: number): Promise<void> {
+            let unmount: Bun.$.ShellOutput = await Bun.$`fusermount -u '${path.trim()}'`.quiet().nothrow();
+            let output: string = await unmount.text();
+            if (unmount.exitCode !== 0) {
+                if (count != undefined && count >= 6) {
+                    throw Error(`Failed to unmount ${path}:\n${output}`);
+                }
+
+                if (output.match(/: Device or resource busy[\n\t ]*$/im)) {
+                    await Bun.$`sync`.quiet();
+
+                    await Bun.sleep(500);
+                }
+
+                await tryUnmount(path, count != undefined ? count + 1 : 1);
+            }
+        }
+
         if (fs.existsSync(repoPath)) {
             let mounted: string = await Bun.$`mount | grep '${repoPath}' | awk '{ print $3 }'`.text();
             for (let mount of mounted.trim().split("\n")) {
                 if (mount.trim() === "") {
                     continue;
                 }
-                await Bun.$`fusermount -u '${mount.trim()}'`;
+                await tryUnmount(mount);
             }
 
             fs.rmSync(repoPath, { recursive: true });
@@ -145,8 +163,8 @@ function versionToGitTag(version: string): string {
                     let toPath: string = path.join(repoPath, dir, file);
                     if (fromStat.isDirectory()) {
                         fs.mkdirSync(toPath, { recursive: true });
-                        // await Bun.$`mount --bind '${fromPath}' '${toPath}'`;
-                        await Bun.$`bindfs -o nonempty --no-allow-other '${fromPath}' '${toPath}'`;
+                        // await Bun.$`mount --bind '${fromPath}' '${toPath}'`.quiet();
+                        await Bun.$`bindfs -o nonempty --no-allow-other '${fromPath}' '${toPath}'`.quiet();
                     } else if (fromStat.isFile()) {
                         fs.mkdirSync(path.dirname(toPath), { recursive: true });
                         if (fs.existsSync(toPath)) {
@@ -161,8 +179,7 @@ function versionToGitTag(version: string): string {
                 let files: string[] = fs.readdirSync(path.join(outPath, dir));
                 for (let file of files) {
                     if (fs.statSync(path.join(outPath, dir, file)).isDirectory()) {
-                        // await Bun.$`umount '${path.join(repoPath, dir, file)}'`;
-                        await Bun.$`fusermount -u '${path.join(repoPath, dir, file)}'`;
+                        await tryUnmount(path.join(repoPath, dir, file));
                     }
                 }
             }
