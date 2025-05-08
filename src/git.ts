@@ -240,15 +240,8 @@ function versionToGitTag(version: string): string {
             async function tryCommit(count?: number): Promise<void> {
                 let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
                 let output: string = await commit.text();
-                if (commit.exitCode !== 0 && !output.match(/^[\n\t ]*nothing to commit, working tree clean[\n\t ]*$/im) !== null) {
+                if (commit.exitCode !== 0 && output.match(/^nothing to commit, working tree clean$/im) === null) {
                     if (count != undefined && count >= 3) {
-                        console.log("-\n" + output + "\n-");
-                        console.log(output.match(/^nothing to commit, working tree clean$/im));
-                        console.log(output.match(/^[\n\t ]*nothing to commit, working tree clean[\n\t ]*$/im));
-                        console.log(output.match(/nothing to commit, working tree clean/im));
-                        console.log(output.match(/^nothing to commit, working tree clean$/i));
-                        console.log(output.match(/^[\n\t ]*nothing to commit, working tree clean[\n\t ]*$/i));
-                        console.log(output.match(/nothing to commit, working tree clean/i));
                         throw Error(`Failed to commit:\n${output}`);
                     }
 
@@ -265,15 +258,8 @@ function versionToGitTag(version: string): string {
             async function tryPush(count?: number): Promise<void> {
                 let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
                 let output: string = await push.text();
-                if (push.exitCode !== 0 && !output.match(/^[\n\t ]*Everything up-to-date[\n\t ]*$/im) !== null) {
+                if (push.exitCode !== 0 && output.match(/^Everything up-to-date$/im) === null) {
                     if (count != undefined && count >= 3) {
-                        console.log("-\n" + output + "\n-");
-                        console.log(output.match(/^nothing to commit, working tree clean$/im),
-                            output.match(/^[\n\t ]*nothing to commit, working tree clean[\n\t ]*$/im),
-                            output.match(/nothing to commit, working tree clean/im),
-                            output.match(/^nothing to commit, working tree clean$/i),
-                            output.match(/^[\n\t ]*nothing to commit, working tree clean[\n\t ]*$/i),
-                            output.match(/nothing to commit, working tree clean/i));
                         throw Error(`Failed to push:\n${output}`);
                     }
 
