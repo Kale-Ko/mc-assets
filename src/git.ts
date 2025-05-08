@@ -235,7 +235,7 @@ function versionToGitTag(version: string): string {
                         throw Error(`Failed to commit:\n${output}`);
                     }
 
-                    tryCommit(count != undefined ? count + 1 : 1);
+                    await tryCommit(count != undefined ? count + 1 : 1);
                 }
             }
 
@@ -260,7 +260,7 @@ function versionToGitTag(version: string): string {
                         throw Error(`Failed to push:\n${output}`);
                     }
 
-                    tryPush(count != undefined ? count + 1 : 1);
+                    await tryPush(count != undefined ? count + 1 : 1);
                 }
             }
 
