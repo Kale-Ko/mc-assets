@@ -94,7 +94,6 @@ function versionToGitTag(version: string): string {
             }, 500);
         }
 
-        if (false) {
         taskInfo.currentTask = "creating branch";
         print(versionInfo, taskInfo, true);
 
@@ -278,7 +277,6 @@ function versionToGitTag(version: string): string {
         }
 
         fs.rmSync(repoPath, { recursive: true });
-    }
 
         taskInfo.taskDone++;
         taskInfo.currentTask = "finished";
