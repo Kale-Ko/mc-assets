@@ -79,4 +79,4 @@ jobs:
         with:
           path: cache/
           key: ${{ steps.download-cache.outputs.cache-primary-key }}
-        if: ${{ steps.download-cache.outcome == success() }}
+        if: ${{ steps.download-cache.outcome == 'success' }}
