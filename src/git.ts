@@ -100,8 +100,8 @@ function versionToGitTag(version: string): string {
         let tag: string = versionToGitTag(versionInfo.id);
 
         let branchesRaw: string = await Bun.$`git ls-remote --branches --quiet | awk '{print $2}'`.cwd(mainDirectory).text();
-        let branches: string[] = branchesRaw.toLowerCase().trim().split("\n");
-        if (!branches.includes("refs/heads/" + tag.toLowerCase())) {
+        let branches: string[] = branchesRaw.trim().split("\n");
+        if (!branches.includes("refs/heads/" + tag)) {
             // Create completely empty new branch
             await Bun.$`git switch --orphan '${tag}'`.cwd(mainDirectory).quiet();
             await Bun.$`git commit --allow-empty --message 'Init'`.cwd(mainDirectory).quiet();
