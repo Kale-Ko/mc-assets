@@ -43,12 +43,20 @@ jobs:
           git config --global credential.helper store
           echo "https://Kale-Ko:${{secrets.GITHUB_TOKEN }}@github.com" > ~/.git-credentials
 
+      - name: Get Time
+        id: get-time
+        run: |
+          echo "time=$(date -u '+%s.%N')" >> $GITHUB_OUTPUT
+
       - name: Download Cache
+        id: download-cache
         uses: actions/cache/restore@v4
         with:
-          key: full-cache
           path: cache/
-          enableCrossOsArchive: true
+          key: full-cache-${{ steps.get-time.outputs.time }}
+          restore-keys: |
+            full-cache-
+            full-cache
 
       - name: Install Dependencies
         run: bun install
@@ -66,9 +74,9 @@ jobs:
         run: bun run git
 
       - name: Upload Cache
+        id: upload-cache
         uses: actions/cache/save@v4
         with:
-          key: full-cache
           path: cache/
-          enableCrossOsArchive: true
-        if: always()
+          key: ${{ steps.download-cache.outputs.cache-primary-key }}
+        if: ${{ steps.download-cache.outcome == success() }}
