@@ -67,6 +67,20 @@ jobs:
       - name: Run Output
         run: bun run output --create-restore
 
+      - name: Clear invalid versions
+        run: |
+          rm -f cache/git-completion/75bf72d8e4b38cf5f729637efc116697edec4334 cache/git-completion/4a0126da466f90d6e52eb3e27332f7f7070f4be8 cache/git-completion/dee854f57cac0fc9f1b96b96254a67829dd103ae cache/git-completion/0525ae4750d18d6c3cf9edee1f510333919c6003 cache/git-completion/1d0ccfff5f8d13d3ecaddbc481a9a4815e312e4e cache/git-completion/656e98e9c5a418b4747b0e5892fd301963b0bcc7 cache/git-completion/157959b1daeda81293854032102eef36e76af108 cache/git-completion/93ca7217fa9027019328b1b8f9b2e8f82436622d cache/git-completion/af8a6b1a9d8d44e080451553060a602e1214a7bb cache/git-completion/fcbaaa318bf47cecb0c37da7a37903e4bcf24e90 cache/git-completion/76dd36e6b4fb2db5e474dd3b44cd96f3f498433dgit push -d origin 1_14_2_pre-release_4
+          git push -d origin 1_14_2_pre-release_3
+          git push -d origin 1_14_2_pre-release_2
+          git push -d origin 1_14_2_pre-release_1
+          git push -d origin 1_14_1_pre-release_2
+          git push -d origin 1_14_1_pre-release_1
+          git push -d origin 1_14_pre-release_5
+          git push -d origin 1_14_pre-release_4
+          git push -d origin 1_14_pre-release_3
+          git push -d origin 1_14_pre-release_2
+          git push -d origin 1_14_pre-release_1
+
       - name: Run Git
         run: bun run git
 
