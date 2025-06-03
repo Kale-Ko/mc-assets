@@ -29,10 +29,6 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Install Fuse
-        run: |
-          sudo apt-get install -y fuse3 bindfs
-
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
@@ -45,8 +41,42 @@ jobs:
         run: |
           echo "time=$(date -u '+%s.%N')" >> $GITHUB_OUTPUT
 
-      - name: Download Cache
-        id: download-cache
+      - name: Download Last Hash Cache
+        id: download-last-hash-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: last-hash
+          key: last-hash-cache-${{ steps.get-time.outputs.time }}
+          restore-keys: |
+            last-hash-cache-
+            last-hash-cache
+
+      - name: Check For Updates
+        id: check-for-updates
+        run: |
+          currentHash=$(curl -sSL https://piston-meta.mojang.com/mc/game/version_manifest_v2.json | sha256sum | awk'{ print $1 }')
+          lastHash=$(cat last-hash-cache || echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+          if [[ "$currentHash" != "$lastHash" ]]; then
+            echo "needsUpdate=true" >> $GITHUB_OUTPUT
+          else
+            echo "needsUpdate=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload Last Hash Cache
+        id: upload-last-hash-cache
+        uses: actions/cache/save@v4
+        with:
+          path: last-hash
+          key: ${{ steps.download-last-hash-cache.outputs.cache-primary-key }}
+        if: ${{ steps.download-last-hash-cache.outcome == 'success' }}
+
+      - name: Install Fuse
+        run: |
+          sudo apt-get install -y fuse3 bindfs
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
+
+      - name: Download Full Cache
+        id: download-full-cache
         uses: actions/cache/restore@v4
         with:
           path: cache/
@@ -54,26 +84,32 @@ jobs:
           restore-keys: |
             full-cache-
             full-cache
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Install Dependencies
         run: bun install
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Run Restore
         run: bun run restore
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Run Test
         run: bun run test
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Run Output
         run: bun run output --create-restore
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Run Git
         run: bun run git
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
-      - name: Upload Cache
-        id: upload-cache
+      - name: Upload Full Cache
+        id: upload-full-cache
         uses: actions/cache/save@v4
         with:
           path: cache/
-          key: ${{ steps.download-cache.outputs.cache-primary-key }}
-        if: ${{ steps.download-cache.outcome == 'success' }}
+          key: ${{ steps.download-full-cache.outputs.cache-primary-key }}
+        if: ${{ steps.download-full-cache.outcome == 'success' }} && ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
