@@ -54,7 +54,7 @@ jobs:
       - name: Check For Updates
         id: check-for-updates
         run: |
-          currentHash=$(curl -sSL https://piston-meta.mojang.com/mc/game/version_manifest_v2.json | sha256sum | awk'{ print $1 }')
+          currentHash=$(curl -sSL https://piston-meta.mojang.com/mc/game/version_manifest_v2.json | sha256sum | awk '{ print $1 }')
           lastHash=$(cat last-hash || echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
           if [[ "$currentHash" != "$lastHash" ]]; then
             echo "needsUpdate=true" >> $GITHUB_OUTPUT
