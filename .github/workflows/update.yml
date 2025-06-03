@@ -12,6 +12,10 @@ jobs:
     permissions:
       contents: write
 
+    concurrency:
+      group: update-files-group
+      cancel-in-progress: false
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
