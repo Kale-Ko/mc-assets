@@ -2,7 +2,7 @@ name: Update Files
 
 on:
   schedule:
-    - cron: "0 0 * * 3"
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -113,4 +113,4 @@ jobs:
         with:
           path: cache/
           key: ${{ steps.download-full-cache.outputs.cache-primary-key }}
-        if: ${{ steps.download-full-cache.outcome == 'success' }} && ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' && steps.download-full-cache.outcome == 'success' }}
