@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           check-latest: true
 
       - name: Setup Bun
@@ -109,6 +109,10 @@ jobs:
 
       - name: Run Git
         run: bun run git
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
+
+      - name: Run README
+        run: bun run readme
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Upload Full Cache
