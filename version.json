@@ -1,0 +1,16 @@
+{
+    "id": "1.18_experimental-snapshot-5",
+    "name": "1.18 experimental snapshot 5",
+    "release_target": "1.18",
+    "world_version": 2829,
+    "series_id": "ccpreview",
+    "protocol_version": 1073741869,
+    "pack_version": {
+        "resource": 7,
+        "data": 7
+    },
+    "build_time": "2021-08-25T14:40:08+00:00",
+    "java_component": "java-runtime-alpha",
+    "java_version": 16,
+    "stable": false
+}
