@@ -1,0 +1,10 @@
+{
+    "id": "1.14.3 - Combat Test / 5d5e0be06e714f03bba436c42db4c85b",
+    "name": "1.14.3 - Combat Test",
+    "release_target": "1.14.3",
+    "world_version": 2067,
+    "protocol_version": 500,
+    "pack_version": 4,
+    "build_time": "2019-06-20T13:21:58+00:00",
+    "stable": false
+}
