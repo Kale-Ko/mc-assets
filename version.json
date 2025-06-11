@@ -1,0 +1,10 @@
+{
+    "id": "1.14_combat-3",
+    "name": "Combat Test 3",
+    "release_target": "1.14.4",
+    "world_version": 2069,
+    "protocol_version": 502,
+    "pack_version": 4,
+    "build_time": "2019-10-31T14:29:48+00:00",
+    "stable": false
+}
