@@ -58,6 +58,9 @@ Updates started on May 1, 2025 so the history starts from there.
                 case "old_alpha": {
                     return "Alpha";
                 }
+                case "experiment": {
+                    return "Experiments";
+                }
             }
 
             return undefined;
