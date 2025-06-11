@@ -1,0 +1,157 @@
+{
+    "versions": [
+        {
+            "id": "1.14_combat-212796",
+            "type": "experiment",
+            "url": "patch:///versions/1_14_combat-212796.json",
+            "time": "2019-06-20T13:23:44+00:00",
+            "releaseTime": "2019-06-20T13:23:44+00:00",
+            "sha1": "73afd1ca3ffa36f01403d8c50aa52bcf58b435a3",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.14_combat-0",
+            "type": "experiment",
+            "url": "patch:///versions/1_14_combat-0.json",
+            "time": "2019-08-13T07:33:42+00:00",
+            "releaseTime": "2019-08-13T07:33:42+00:00",
+            "sha1": "423c3666858e0475bbe22bcb408e3c5330d19aa5",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.14_combat-3",
+            "type": "experiment",
+            "url": "patch:///versions/1_14_combat-3.json",
+            "time": "2019-10-31T14:31:38+00:00",
+            "releaseTime": "2019-10-31T14:31:38+00:00",
+            "sha1": "1a7699121dfb3ced629f450e65e6d53314c6b965",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.15_combat-1",
+            "type": "experiment",
+            "url": "patch:///versions/1_15_combat-1.json",
+            "time": "2019-11-29T15:41:39+00:00",
+            "releaseTime": "2019-11-29T15:41:39+00:00",
+            "sha1": "b112e295dae56b84d0ff9a1f7428f0b2a37ba201",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.15_combat-6",
+            "type": "experiment",
+            "url": "patch:///versions/1_15_combat-6.json",
+            "time": "2020-01-15T09:46:35+00:00",
+            "releaseTime": "2020-01-15T09:46:35+00:00",
+            "sha1": "933287c39c799244d79e827f3726e66bd0e8181f",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.16_combat-0",
+            "type": "experiment",
+            "url": "patch:///versions/1_16_combat-0.json",
+            "time": "2020-08-07T10:44:47+00:00",
+            "releaseTime": "2020-08-07T10:44:47+00:00",
+            "sha1": "4fb39a2fcc13b864281ba1cb311af7a5bc5a5b6c",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.16_combat-3",
+            "type": "experiment",
+            "url": "patch:///versions/1_16_combat-3.json",
+            "time": "2020-08-14T09:02:15+00:00",
+            "releaseTime": "2020-08-14T09:02:15+00:00",
+            "sha1": "8f3e2c829699a31f1387648e9a4e03d60fb23da8",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.16_combat-5",
+            "type": "experiment",
+            "url": "patch:///versions/1_16_combat-5.json",
+            "time": "2020-08-21T09:23:13+00:00",
+            "releaseTime": "2020-08-21T09:23:13+00:00",
+            "sha1": "656e4bc8b658b98558dbb5e9fee4fc07a8479283",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.16_combat-6",
+            "type": "experiment",
+            "url": "patch:///versions/1_16_combat-6.json",
+            "time": "2020-08-26T06:24:28+00:00",
+            "releaseTime": "2020-08-26T06:24:28+00:00",
+            "sha1": "12641c43df997004e1a33789582378c414f129b5",
+            "complianceLevel": 0
+        },
+        {
+            "id": "1.18_experimental-snapshot-1",
+            "type": "experiment",
+            "url": "patch:///versions/1_18_experimental-snapshot-1.json",
+            "time": "2021-07-13T12:54:19+00:00",
+            "releaseTime": "2021-07-13T12:54:19+00:00",
+            "sha1": "4039cd3600886e3f1fb380e6b9bd791d0deb18e8",
+            "complianceLevel": 1
+        },
+        {
+            "id": "1.18_experimental-snapshot-2",
+            "type": "experiment",
+            "url": "patch:///versions/1_18_experimental-snapshot-2.json",
+            "time": "2021-07-20T13:35:08+00:00",
+            "releaseTime": "2021-07-20T13:35:08+00:00",
+            "sha1": "c351b737717ab7a4912fa80bea2f440da296c3ce",
+            "complianceLevel": 1
+        },
+        {
+            "id": "1.18_experimental-snapshot-3",
+            "type": "experiment",
+            "url": "patch:///versions/1_18_experimental-snapshot-3.json",
+            "time": "2021-08-10T12:42:45+00:00",
+            "releaseTime": "2021-08-10T12:42:45+00:00",
+            "sha1": "2066fa9d82bdcc0f0ab88f34c2ec1f7a6e75a1b5",
+            "complianceLevel": 1
+        },
+        {
+            "id": "1.18_experimental-snapshot-4",
+            "type": "experiment",
+            "url": "patch:///versions/1_18_experimental-snapshot-4.json",
+            "time": "2021-08-17T16:10:25+00:00",
+            "releaseTime": "2021-08-17T16:10:25+00:00",
+            "sha1": "a489831d8c7b1dde4d97777897839de2a8692d3f",
+            "complianceLevel": 1
+        },
+        {
+            "id": "1.18_experimental-snapshot-5",
+            "type": "experiment",
+            "url": "patch:///versions/1_18_experimental-snapshot-5.json",
+            "time": "2021-08-25T14:41:57+00:00",
+            "releaseTime": "2021-08-25T14:41:57+00:00",
+            "sha1": "814fb31ee5e1b48d5292ff1be5f16447343f102c",
+            "complianceLevel": 1
+        },
+        {
+            "id": "1.18_experimental-snapshot-6",
+            "type": "experiment",
+            "url": "patch:///versions/1_18_experimental-snapshot-6.json",
+            "time": "2021-09-01T12:53:14+00:00",
+            "releaseTime": "2021-09-01T12:53:14+00:00",
+            "sha1": "f7015481eba2c3a4b6f3ae71bd54e13e0c8c22aa",
+            "complianceLevel": 1
+        },
+        {
+            "id": "1.18_experimental-snapshot-7",
+            "type": "experiment",
+            "url": "patch:///versions/1_18_experimental-snapshot-7.json",
+            "time": "2021-09-08T12:33:23+00:00",
+            "releaseTime": "2021-09-08T12:33:23+00:00",
+            "sha1": "4cbd17375c6fba58f24de1a452c12df9581a5cfd",
+            "complianceLevel": 1
+        },
+        {
+            "id": "1.19_deep_dark_experimental_snapshot-1",
+            "type": "experiment",
+            "url": "patch:///versions/1_19_deep_dark_experimental_snapshot-1.json",
+            "time": "2022-02-17T13:55:59+00:00",
+            "releaseTime": "2022-02-17T13:55:59+00:00",
+            "sha1": "a72d2d71fcedff72a62b4e8f418f1adede68bf66",
+            "complianceLevel": 1
+        }
+    ]
+}
