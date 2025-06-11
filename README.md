@@ -1,0 +1,1236 @@
+# mc-assets
+
+A repository containing every single asset from ever version present in the launcher that updates every 30 minutes.
+Updates started on May 1, 2025 so the history starts from there.
+
+## Latest
+
+### Release
+
+[1.21.5](https://github.com/Kale-Ko/mc-assets/tree/1_21_5)
+
+### Snapshot
+
+[1.21.6-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_21_6-pre4)
+
+## Version List
+
+<details>
+  <summary><b id="1_21_5">1.21.5</b></summary>
+
+  [1.21.5](https://github.com/Kale-Ko/mc-assets/tree/1_21_5)\
+  [1.21.5-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_21_5-rc2)\
+  [1.21.5-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_21_5-rc1)\
+  [1.21.5-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_21_5-pre3)\
+  [1.21.5-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_21_5-pre2)\
+  [1.21.5-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_21_5-pre1)\
+  [25w10a](https://github.com/Kale-Ko/mc-assets/tree/25w10a)\
+  [25w09b](https://github.com/Kale-Ko/mc-assets/tree/25w09b)\
+  [25w09a](https://github.com/Kale-Ko/mc-assets/tree/25w09a)\
+  [25w08a](https://github.com/Kale-Ko/mc-assets/tree/25w08a)\
+  [25w07a](https://github.com/Kale-Ko/mc-assets/tree/25w07a)\
+  [25w06a](https://github.com/Kale-Ko/mc-assets/tree/25w06a)\
+  [25w05a](https://github.com/Kale-Ko/mc-assets/tree/25w05a)\
+  [25w04a](https://github.com/Kale-Ko/mc-assets/tree/25w04a)\
+  [25w03a](https://github.com/Kale-Ko/mc-assets/tree/25w03a)\
+  [25w02a](https://github.com/Kale-Ko/mc-assets/tree/25w02a)
+</details>
+<details>
+  <summary><b id="1_21_4">1.21.4</b></summary>
+
+  [1.21.4](https://github.com/Kale-Ko/mc-assets/tree/1_21_4)\
+  [1.21.4-rc3](https://github.com/Kale-Ko/mc-assets/tree/1_21_4-rc3)\
+  [1.21.4-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_21_4-rc2)\
+  [1.21.4-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_21_4-rc1)\
+  [1.21.4-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_21_4-pre3)\
+  [1.21.4-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_21_4-pre2)\
+  [1.21.4-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_21_4-pre1)\
+  [24w46a](https://github.com/Kale-Ko/mc-assets/tree/24w46a)\
+  [24w45a](https://github.com/Kale-Ko/mc-assets/tree/24w45a)\
+  [24w44a](https://github.com/Kale-Ko/mc-assets/tree/24w44a)
+</details>
+<details>
+  <summary><b id="1_21_3">1.21.3</b></summary>
+
+  [1.21.3](https://github.com/Kale-Ko/mc-assets/tree/1_21_3)
+</details>
+<details>
+  <summary><b id="1_21_2">1.21.2</b></summary>
+
+  [1.21.2](https://github.com/Kale-Ko/mc-assets/tree/1_21_2)\
+  [1.21.2-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_21_2-rc2)\
+  [1.21.2-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_21_2-rc1)\
+  [1.21.2-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_21_2-pre5)\
+  [1.21.2-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_21_2-pre4)\
+  [1.21.2-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_21_2-pre3)\
+  [1.21.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_21_2-pre2)\
+  [1.21.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_21_2-pre1)\
+  [24w40a](https://github.com/Kale-Ko/mc-assets/tree/24w40a)\
+  [24w39a](https://github.com/Kale-Ko/mc-assets/tree/24w39a)\
+  [24w38a](https://github.com/Kale-Ko/mc-assets/tree/24w38a)\
+  [24w37a](https://github.com/Kale-Ko/mc-assets/tree/24w37a)\
+  [24w36a](https://github.com/Kale-Ko/mc-assets/tree/24w36a)\
+  [24w35a](https://github.com/Kale-Ko/mc-assets/tree/24w35a)\
+  [24w34a](https://github.com/Kale-Ko/mc-assets/tree/24w34a)\
+  [24w33a](https://github.com/Kale-Ko/mc-assets/tree/24w33a)
+</details>
+<details>
+  <summary><b id="1_21_1">1.21.1</b></summary>
+
+  [1.21.1](https://github.com/Kale-Ko/mc-assets/tree/1_21_1)\
+  [1.21.1-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_21_1-rc1)
+</details>
+<details>
+  <summary><b id="1_21">1.21</b></summary>
+
+  [1.21](https://github.com/Kale-Ko/mc-assets/tree/1_21)\
+  [1.21-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_21-rc1)\
+  [1.21-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_21-pre4)\
+  [1.21-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_21-pre3)\
+  [1.21-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_21-pre2)\
+  [1.21-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_21-pre1)\
+  [24w21b](https://github.com/Kale-Ko/mc-assets/tree/24w21b)\
+  [24w21a](https://github.com/Kale-Ko/mc-assets/tree/24w21a)\
+  [24w20a](https://github.com/Kale-Ko/mc-assets/tree/24w20a)\
+  [24w19b](https://github.com/Kale-Ko/mc-assets/tree/24w19b)\
+  [24w19a](https://github.com/Kale-Ko/mc-assets/tree/24w19a)\
+  [24w18a](https://github.com/Kale-Ko/mc-assets/tree/24w18a)
+</details>
+<details>
+  <summary><b id="1_20_6">1.20.6</b></summary>
+
+  [1.20.6](https://github.com/Kale-Ko/mc-assets/tree/1_20_6)\
+  [1.20.6-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_20_6-rc1)
+</details>
+<details>
+  <summary><b id="1_20_5">1.20.5</b></summary>
+
+  [1.20.5](https://github.com/Kale-Ko/mc-assets/tree/1_20_5)\
+  [1.20.5-rc3](https://github.com/Kale-Ko/mc-assets/tree/1_20_5-rc3)\
+  [1.20.5-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_20_5-rc2)\
+  [1.20.5-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_20_5-rc1)\
+  [1.20.5-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_20_5-pre4)\
+  [1.20.5-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_20_5-pre3)\
+  [1.20.5-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_20_5-pre2)\
+  [1.20.5-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_20_5-pre1)\
+  [24w14a](https://github.com/Kale-Ko/mc-assets/tree/24w14a)\
+  [24w14potato](https://github.com/Kale-Ko/mc-assets/tree/24w14potato)\
+  [24w13a](https://github.com/Kale-Ko/mc-assets/tree/24w13a)\
+  [24w12a](https://github.com/Kale-Ko/mc-assets/tree/24w12a)\
+  [24w11a](https://github.com/Kale-Ko/mc-assets/tree/24w11a)\
+  [24w10a](https://github.com/Kale-Ko/mc-assets/tree/24w10a)\
+  [24w09a](https://github.com/Kale-Ko/mc-assets/tree/24w09a)\
+  [24w07a](https://github.com/Kale-Ko/mc-assets/tree/24w07a)\
+  [24w06a](https://github.com/Kale-Ko/mc-assets/tree/24w06a)\
+  [24w05b](https://github.com/Kale-Ko/mc-assets/tree/24w05b)\
+  [24w05a](https://github.com/Kale-Ko/mc-assets/tree/24w05a)\
+  [24w04a](https://github.com/Kale-Ko/mc-assets/tree/24w04a)\
+  [24w03b](https://github.com/Kale-Ko/mc-assets/tree/24w03b)\
+  [24w03a](https://github.com/Kale-Ko/mc-assets/tree/24w03a)\
+  [23w51b](https://github.com/Kale-Ko/mc-assets/tree/23w51b)\
+  [23w51a](https://github.com/Kale-Ko/mc-assets/tree/23w51a)
+</details>
+<details>
+  <summary><b id="1_20_4">1.20.4</b></summary>
+
+  [1.20.4](https://github.com/Kale-Ko/mc-assets/tree/1_20_4)\
+  [1.20.4-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_20_4-rc1)
+</details>
+<details>
+  <summary><b id="1_20_3">1.20.3</b></summary>
+
+  [1.20.3](https://github.com/Kale-Ko/mc-assets/tree/1_20_3)\
+  [1.20.3-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_20_3-rc1)\
+  [1.20.3-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_20_3-pre4)\
+  [1.20.3-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_20_3-pre3)\
+  [1.20.3-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_20_3-pre2)\
+  [1.20.3-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_20_3-pre1)\
+  [23w46a](https://github.com/Kale-Ko/mc-assets/tree/23w46a)\
+  [23w45a](https://github.com/Kale-Ko/mc-assets/tree/23w45a)\
+  [23w44a](https://github.com/Kale-Ko/mc-assets/tree/23w44a)\
+  [23w43b](https://github.com/Kale-Ko/mc-assets/tree/23w43b)\
+  [23w43a](https://github.com/Kale-Ko/mc-assets/tree/23w43a)\
+  [23w42a](https://github.com/Kale-Ko/mc-assets/tree/23w42a)\
+  [23w41a](https://github.com/Kale-Ko/mc-assets/tree/23w41a)\
+  [23w40a](https://github.com/Kale-Ko/mc-assets/tree/23w40a)
+</details>
+<details>
+  <summary><b id="1_20_2">1.20.2</b></summary>
+
+  [1.20.2](https://github.com/Kale-Ko/mc-assets/tree/1_20_2)\
+  [1.20.2-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_20_2-rc2)\
+  [1.20.2-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_20_2-rc1)\
+  [1.20.2-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_20_2-pre4)\
+  [1.20.2-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_20_2-pre3)\
+  [1.20.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_20_2-pre2)\
+  [1.20.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_20_2-pre1)\
+  [23w35a](https://github.com/Kale-Ko/mc-assets/tree/23w35a)\
+  [23w33a](https://github.com/Kale-Ko/mc-assets/tree/23w33a)\
+  [23w32a](https://github.com/Kale-Ko/mc-assets/tree/23w32a)\
+  [23w31a](https://github.com/Kale-Ko/mc-assets/tree/23w31a)
+</details>
+<details>
+  <summary><b id="1_20_1">1.20.1</b></summary>
+
+  [1.20.1](https://github.com/Kale-Ko/mc-assets/tree/1_20_1)\
+  [1.20.1-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_20_1-rc1)
+</details>
+<details>
+  <summary><b id="1_20">1.20</b></summary>
+
+  [1.20](https://github.com/Kale-Ko/mc-assets/tree/1_20)\
+  [1.20-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_20-rc1)\
+  [1.20-pre7](https://github.com/Kale-Ko/mc-assets/tree/1_20-pre7)\
+  [1.20-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_20-pre6)\
+  [1.20-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_20-pre5)\
+  [1.20-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_20-pre4)\
+  [1.20-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_20-pre3)\
+  [1.20-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_20-pre2)\
+  [1.20-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_20-pre1)\
+  [23w18a](https://github.com/Kale-Ko/mc-assets/tree/23w18a)\
+  [23w17a](https://github.com/Kale-Ko/mc-assets/tree/23w17a)\
+  [23w16a](https://github.com/Kale-Ko/mc-assets/tree/23w16a)\
+  [23w14a](https://github.com/Kale-Ko/mc-assets/tree/23w14a)\
+  [23w13a_or_b](https://github.com/Kale-Ko/mc-assets/tree/23w13a_or_b)\
+  [23w13a](https://github.com/Kale-Ko/mc-assets/tree/23w13a)\
+  [23w12a](https://github.com/Kale-Ko/mc-assets/tree/23w12a)
+</details>
+<details>
+  <summary><b id="1_19_4">1.19.4</b></summary>
+
+  [1.19.4](https://github.com/Kale-Ko/mc-assets/tree/1_19_4)\
+  [1.19.4-rc3](https://github.com/Kale-Ko/mc-assets/tree/1_19_4-rc3)\
+  [1.19.4-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_19_4-rc2)\
+  [1.19.4-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_19_4-rc1)\
+  [1.19.4-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_19_4-pre4)\
+  [1.19.4-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_19_4-pre3)\
+  [1.19.4-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_19_4-pre2)\
+  [1.19.4-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_19_4-pre1)\
+  [23w07a](https://github.com/Kale-Ko/mc-assets/tree/23w07a)\
+  [23w06a](https://github.com/Kale-Ko/mc-assets/tree/23w06a)\
+  [23w05a](https://github.com/Kale-Ko/mc-assets/tree/23w05a)\
+  [23w04a](https://github.com/Kale-Ko/mc-assets/tree/23w04a)\
+  [23w03a](https://github.com/Kale-Ko/mc-assets/tree/23w03a)
+</details>
+<details>
+  <summary><b id="1_19_3">1.19.3</b></summary>
+
+  [1.19.3](https://github.com/Kale-Ko/mc-assets/tree/1_19_3)\
+  [1.19.3-rc3](https://github.com/Kale-Ko/mc-assets/tree/1_19_3-rc3)\
+  [1.19.3-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_19_3-rc2)\
+  [1.19.3-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_19_3-rc1)\
+  [1.19.3-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_19_3-pre3)\
+  [1.19.3-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_19_3-pre2)\
+  [1.19.3-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_19_3-pre1)\
+  [22w46a](https://github.com/Kale-Ko/mc-assets/tree/22w46a)\
+  [22w45a](https://github.com/Kale-Ko/mc-assets/tree/22w45a)\
+  [22w44a](https://github.com/Kale-Ko/mc-assets/tree/22w44a)\
+  [22w43a](https://github.com/Kale-Ko/mc-assets/tree/22w43a)\
+  [22w42a](https://github.com/Kale-Ko/mc-assets/tree/22w42a)
+</details>
+<details>
+  <summary><b id="1_19_2">1.19.2</b></summary>
+
+  [1.19.2](https://github.com/Kale-Ko/mc-assets/tree/1_19_2)\
+  [1.19.2-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_19_2-rc2)\
+  [1.19.2-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_19_2-rc1)
+</details>
+<details>
+  <summary><b id="1_19_1">1.19.1</b></summary>
+
+  [1.19.1](https://github.com/Kale-Ko/mc-assets/tree/1_19_1)\
+  [1.19.1-rc3](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-rc3)\
+  [1.19.1-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-rc2)\
+  [1.19.1-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-pre6)\
+  [1.19.1-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-pre5)\
+  [1.19.1-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-pre4)\
+  [1.19.1-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-pre3)\
+  [1.19.1-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-pre2)\
+  [1.19.1-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-rc1)\
+  [1.19.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_19_1-pre1)\
+  [22w24a](https://github.com/Kale-Ko/mc-assets/tree/22w24a)
+</details>
+<details>
+  <summary><b id="1_19">1.19</b></summary>
+
+  [1.19](https://github.com/Kale-Ko/mc-assets/tree/1_19)\
+  [1.19-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_19-rc2)\
+  [1.19-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_19-rc1)\
+  [1.19-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_19-pre5)\
+  [1.19-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_19-pre4)\
+  [1.19-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_19-pre3)\
+  [1.19-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_19-pre2)\
+  [1.19-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_19-pre1)\
+  [22w19a](https://github.com/Kale-Ko/mc-assets/tree/22w19a)\
+  [22w18a](https://github.com/Kale-Ko/mc-assets/tree/22w18a)\
+  [22w17a](https://github.com/Kale-Ko/mc-assets/tree/22w17a)\
+  [22w16b](https://github.com/Kale-Ko/mc-assets/tree/22w16b)\
+  [22w16a](https://github.com/Kale-Ko/mc-assets/tree/22w16a)\
+  [22w15a](https://github.com/Kale-Ko/mc-assets/tree/22w15a)\
+  [22w14a](https://github.com/Kale-Ko/mc-assets/tree/22w14a)\
+  [22w13oneblockatatime](https://github.com/Kale-Ko/mc-assets/tree/22w13oneblockatatime)\
+  [22w13a](https://github.com/Kale-Ko/mc-assets/tree/22w13a)\
+  [22w12a](https://github.com/Kale-Ko/mc-assets/tree/22w12a)\
+  [22w11a](https://github.com/Kale-Ko/mc-assets/tree/22w11a)
+</details>
+<details>
+  <summary><b id="1_18_2">1.18.2</b></summary>
+
+  [1.18.2](https://github.com/Kale-Ko/mc-assets/tree/1_18_2)\
+  [1.18.2-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_18_2-rc1)\
+  [1.18.2-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_18_2-pre3)\
+  [1.18.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_18_2-pre2)\
+  [1.18.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_18_2-pre1)\
+  [22w07a](https://github.com/Kale-Ko/mc-assets/tree/22w07a)\
+  [22w06a](https://github.com/Kale-Ko/mc-assets/tree/22w06a)\
+  [22w05a](https://github.com/Kale-Ko/mc-assets/tree/22w05a)\
+  [22w03a](https://github.com/Kale-Ko/mc-assets/tree/22w03a)
+</details>
+<details>
+  <summary><b id="1_18_1">1.18.1</b></summary>
+
+  [1.18.1](https://github.com/Kale-Ko/mc-assets/tree/1_18_1)\
+  [1.18.1-rc3](https://github.com/Kale-Ko/mc-assets/tree/1_18_1-rc3)\
+  [1.18.1-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_18_1-rc2)\
+  [1.18.1-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_18_1-rc1)\
+  [1.18.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_18_1-pre1)
+</details>
+<details>
+  <summary><b id="1_18">1.18</b></summary>
+
+  [1.18](https://github.com/Kale-Ko/mc-assets/tree/1_18)\
+  [1.18-rc4](https://github.com/Kale-Ko/mc-assets/tree/1_18-rc4)\
+  [1.18-rc3](https://github.com/Kale-Ko/mc-assets/tree/1_18-rc3)\
+  [1.18-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_18-rc2)\
+  [1.18-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_18-rc1)\
+  [1.18-pre8](https://github.com/Kale-Ko/mc-assets/tree/1_18-pre8)\
+  [1.18-pre7](https://github.com/Kale-Ko/mc-assets/tree/1_18-pre7)\
+  [1.18-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_18-pre6)\
+  [1.18-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_18-pre5)\
+  [1.18-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_18-pre4)\
+  [1.18-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_18-pre3)\
+  [1.18-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_18-pre2)\
+  [1.18-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_18-pre1)\
+  [21w44a](https://github.com/Kale-Ko/mc-assets/tree/21w44a)\
+  [21w43a](https://github.com/Kale-Ko/mc-assets/tree/21w43a)\
+  [21w42a](https://github.com/Kale-Ko/mc-assets/tree/21w42a)\
+  [21w41a](https://github.com/Kale-Ko/mc-assets/tree/21w41a)\
+  [21w40a](https://github.com/Kale-Ko/mc-assets/tree/21w40a)\
+  [21w39a](https://github.com/Kale-Ko/mc-assets/tree/21w39a)\
+  [21w38a](https://github.com/Kale-Ko/mc-assets/tree/21w38a)\
+  [21w37a](https://github.com/Kale-Ko/mc-assets/tree/21w37a)
+</details>
+<details>
+  <summary><b id="1_17_1">1.17.1</b></summary>
+
+  [1.17.1](https://github.com/Kale-Ko/mc-assets/tree/1_17_1)\
+  [1.17.1-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_17_1-rc2)\
+  [1.17.1-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_17_1-rc1)\
+  [1.17.1-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_17_1-pre3)\
+  [1.17.1-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_17_1-pre2)\
+  [1.17.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_17_1-pre1)
+</details>
+<details>
+  <summary><b id="1_17">1.17</b></summary>
+
+  [1.17](https://github.com/Kale-Ko/mc-assets/tree/1_17)\
+  [1.17-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_17-rc2)\
+  [1.17-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_17-rc1)\
+  [1.17-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_17-pre5)\
+  [1.17-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_17-pre4)\
+  [1.17-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_17-pre3)\
+  [1.17-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_17-pre2)\
+  [1.17-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_17-pre1)\
+  [21w20a](https://github.com/Kale-Ko/mc-assets/tree/21w20a)\
+  [21w19a](https://github.com/Kale-Ko/mc-assets/tree/21w19a)\
+  [21w18a](https://github.com/Kale-Ko/mc-assets/tree/21w18a)\
+  [21w17a](https://github.com/Kale-Ko/mc-assets/tree/21w17a)\
+  [21w16a](https://github.com/Kale-Ko/mc-assets/tree/21w16a)\
+  [21w15a](https://github.com/Kale-Ko/mc-assets/tree/21w15a)\
+  [21w14a](https://github.com/Kale-Ko/mc-assets/tree/21w14a)\
+  [21w13a](https://github.com/Kale-Ko/mc-assets/tree/21w13a)\
+  [21w11a](https://github.com/Kale-Ko/mc-assets/tree/21w11a)\
+  [21w10a](https://github.com/Kale-Ko/mc-assets/tree/21w10a)\
+  [21w08b](https://github.com/Kale-Ko/mc-assets/tree/21w08b)\
+  [21w08a](https://github.com/Kale-Ko/mc-assets/tree/21w08a)\
+  [21w07a](https://github.com/Kale-Ko/mc-assets/tree/21w07a)\
+  [21w06a](https://github.com/Kale-Ko/mc-assets/tree/21w06a)\
+  [21w05b](https://github.com/Kale-Ko/mc-assets/tree/21w05b)\
+  [21w05a](https://github.com/Kale-Ko/mc-assets/tree/21w05a)\
+  [21w03a](https://github.com/Kale-Ko/mc-assets/tree/21w03a)
+</details>
+<details>
+  <summary><b id="1_16_5">1.16.5</b></summary>
+
+  [1.16.5](https://github.com/Kale-Ko/mc-assets/tree/1_16_5)\
+  [1.16.5-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_16_5-rc1)\
+  [20w51a](https://github.com/Kale-Ko/mc-assets/tree/20w51a)\
+  [20w49a](https://github.com/Kale-Ko/mc-assets/tree/20w49a)\
+  [20w48a](https://github.com/Kale-Ko/mc-assets/tree/20w48a)\
+  [20w46a](https://github.com/Kale-Ko/mc-assets/tree/20w46a)\
+  [20w45a](https://github.com/Kale-Ko/mc-assets/tree/20w45a)
+</details>
+<details>
+  <summary><b id="1_16_4">1.16.4</b></summary>
+
+  [1.16.4](https://github.com/Kale-Ko/mc-assets/tree/1_16_4)\
+  [1.16.4-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_16_4-rc1)\
+  [1.16.4-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_16_4-pre2)\
+  [1.16.4-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_16_4-pre1)
+</details>
+<details>
+  <summary><b id="1_16_3">1.16.3</b></summary>
+
+  [1.16.3](https://github.com/Kale-Ko/mc-assets/tree/1_16_3)\
+  [1.16.3-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_16_3-rc1)
+</details>
+<details>
+  <summary><b id="1_16_2">1.16.2</b></summary>
+
+  [1.16.2](https://github.com/Kale-Ko/mc-assets/tree/1_16_2)\
+  [1.16.2-rc2](https://github.com/Kale-Ko/mc-assets/tree/1_16_2-rc2)\
+  [1.16.2-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_16_2-rc1)\
+  [1.16.2-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_16_2-pre3)\
+  [1.16.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_16_2-pre2)\
+  [1.16.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_16_2-pre1)\
+  [20w30a](https://github.com/Kale-Ko/mc-assets/tree/20w30a)\
+  [20w29a](https://github.com/Kale-Ko/mc-assets/tree/20w29a)\
+  [20w28a](https://github.com/Kale-Ko/mc-assets/tree/20w28a)\
+  [20w27a](https://github.com/Kale-Ko/mc-assets/tree/20w27a)
+</details>
+<details>
+  <summary><b id="1_16_1">1.16.1</b></summary>
+
+  [1.16.1](https://github.com/Kale-Ko/mc-assets/tree/1_16_1)
+</details>
+<details>
+  <summary><b id="1_16">1.16</b></summary>
+
+  [1.16](https://github.com/Kale-Ko/mc-assets/tree/1_16)\
+  [1.16-rc1](https://github.com/Kale-Ko/mc-assets/tree/1_16-rc1)\
+  [1.16-pre8](https://github.com/Kale-Ko/mc-assets/tree/1_16-pre8)\
+  [1.16-pre7](https://github.com/Kale-Ko/mc-assets/tree/1_16-pre7)\
+  [1.16-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_16-pre6)\
+  [1.16-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_16-pre5)\
+  [1.16-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_16-pre4)\
+  [1.16-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_16-pre3)\
+  [1.16-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_16-pre2)\
+  [1.16-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_16-pre1)\
+  [20w22a](https://github.com/Kale-Ko/mc-assets/tree/20w22a)\
+  [20w21a](https://github.com/Kale-Ko/mc-assets/tree/20w21a)\
+  [20w20b](https://github.com/Kale-Ko/mc-assets/tree/20w20b)\
+  [20w20a](https://github.com/Kale-Ko/mc-assets/tree/20w20a)\
+  [20w19a](https://github.com/Kale-Ko/mc-assets/tree/20w19a)\
+  [20w18a](https://github.com/Kale-Ko/mc-assets/tree/20w18a)\
+  [20w17a](https://github.com/Kale-Ko/mc-assets/tree/20w17a)\
+  [20w16a](https://github.com/Kale-Ko/mc-assets/tree/20w16a)\
+  [20w15a](https://github.com/Kale-Ko/mc-assets/tree/20w15a)\
+  [20w14a](https://github.com/Kale-Ko/mc-assets/tree/20w14a)\
+  [20w14infinite](https://github.com/Kale-Ko/mc-assets/tree/20w14infinite)\
+  [20w13b](https://github.com/Kale-Ko/mc-assets/tree/20w13b)\
+  [20w13a](https://github.com/Kale-Ko/mc-assets/tree/20w13a)\
+  [20w12a](https://github.com/Kale-Ko/mc-assets/tree/20w12a)\
+  [20w11a](https://github.com/Kale-Ko/mc-assets/tree/20w11a)\
+  [20w10a](https://github.com/Kale-Ko/mc-assets/tree/20w10a)\
+  [20w09a](https://github.com/Kale-Ko/mc-assets/tree/20w09a)\
+  [20w08a](https://github.com/Kale-Ko/mc-assets/tree/20w08a)\
+  [20w07a](https://github.com/Kale-Ko/mc-assets/tree/20w07a)\
+  [20w06a](https://github.com/Kale-Ko/mc-assets/tree/20w06a)
+</details>
+<details>
+  <summary><b id="1_15_2">1.15.2</b></summary>
+
+  [1.15.2](https://github.com/Kale-Ko/mc-assets/tree/1_15_2)\
+  [1.15.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_15_2-pre2)\
+  [1.15.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_15_2-pre1)
+</details>
+<details>
+  <summary><b id="1_15_1">1.15.1</b></summary>
+
+  [1.15.1](https://github.com/Kale-Ko/mc-assets/tree/1_15_1)\
+  [1.15.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_15_1-pre1)
+</details>
+<details>
+  <summary><b id="1_15">1.15</b></summary>
+
+  [1.15](https://github.com/Kale-Ko/mc-assets/tree/1_15)\
+  [1.15-pre7](https://github.com/Kale-Ko/mc-assets/tree/1_15-pre7)\
+  [1.15-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_15-pre6)\
+  [1.15-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_15-pre5)\
+  [1.15-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_15-pre4)\
+  [1.15-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_15-pre3)\
+  [1.15-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_15-pre2)\
+  [1.15-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_15-pre1)\
+  [19w46b](https://github.com/Kale-Ko/mc-assets/tree/19w46b)\
+  [19w46a](https://github.com/Kale-Ko/mc-assets/tree/19w46a)\
+  [19w45b](https://github.com/Kale-Ko/mc-assets/tree/19w45b)\
+  [19w45a](https://github.com/Kale-Ko/mc-assets/tree/19w45a)\
+  [19w44a](https://github.com/Kale-Ko/mc-assets/tree/19w44a)\
+  [19w42a](https://github.com/Kale-Ko/mc-assets/tree/19w42a)\
+  [19w41a](https://github.com/Kale-Ko/mc-assets/tree/19w41a)\
+  [19w40a](https://github.com/Kale-Ko/mc-assets/tree/19w40a)\
+  [19w39a](https://github.com/Kale-Ko/mc-assets/tree/19w39a)\
+  [19w38b](https://github.com/Kale-Ko/mc-assets/tree/19w38b)\
+  [19w38a](https://github.com/Kale-Ko/mc-assets/tree/19w38a)\
+  [19w37a](https://github.com/Kale-Ko/mc-assets/tree/19w37a)\
+  [19w36a](https://github.com/Kale-Ko/mc-assets/tree/19w36a)\
+  [19w35a](https://github.com/Kale-Ko/mc-assets/tree/19w35a)\
+  [19w34a](https://github.com/Kale-Ko/mc-assets/tree/19w34a)
+</details>
+<details>
+  <summary><b id="1_14_4">1.14.4</b></summary>
+
+  [1.14.4](https://github.com/Kale-Ko/mc-assets/tree/1_14_4)\
+  [1.14.4-pre7](https://github.com/Kale-Ko/mc-assets/tree/1_14_4-pre7)\
+  [1.14.4-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_14_4-pre6)\
+  [1.14.4-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_14_4-pre5)\
+  [1.14.4-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_14_4-pre4)\
+  [1.14.4-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_14_4-pre3)\
+  [1.14.4-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_14_4-pre2)\
+  [1.14.4-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_14_4-pre1)
+</details>
+<details>
+  <summary><b id="1_14_3">1.14.3</b></summary>
+
+  [1.14.3](https://github.com/Kale-Ko/mc-assets/tree/1_14_3)\
+  [1.14.3-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_14_3-pre4)\
+  [1.14.3-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_14_3-pre3)\
+  [1.14.3-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_14_3-pre2)\
+  [1.14.3-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_14_3-pre1)
+</details>
+<details>
+  <summary><b id="1_14_2">1.14.2</b></summary>
+
+  [1.14.2](https://github.com/Kale-Ko/mc-assets/tree/1_14_2)\
+  [1.14.2-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_14_2-pre4)\
+  [1.14.2-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_14_2-pre3)\
+  [1.14.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_14_2-pre2)\
+  [1.14.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_14_2-pre1)
+</details>
+<details>
+  <summary><b id="1_14_1">1.14.1</b></summary>
+
+  [1.14.1](https://github.com/Kale-Ko/mc-assets/tree/1_14_1)\
+  [1.14.1-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_14_1-pre2)\
+  [1.14.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_14_1-pre1)
+</details>
+<details>
+  <summary><b id="1_14">1.14</b></summary>
+
+  [1.14](https://github.com/Kale-Ko/mc-assets/tree/1_14)\
+  [1.14-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_14-pre5)\
+  [1.14-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_14-pre4)\
+  [1.14-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_14-pre3)\
+  [1.14-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_14-pre2)\
+  [1.14-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_14-pre1)\
+  [19w14b](https://github.com/Kale-Ko/mc-assets/tree/19w14b)\
+  [19w14a](https://github.com/Kale-Ko/mc-assets/tree/19w14a)\
+  [3D Shareware v1.34](https://github.com/Kale-Ko/mc-assets/tree/3d_shareware_v1_34)\
+  [19w13b](https://github.com/Kale-Ko/mc-assets/tree/19w13b)\
+  [19w13a](https://github.com/Kale-Ko/mc-assets/tree/19w13a)\
+  [19w12b](https://github.com/Kale-Ko/mc-assets/tree/19w12b)\
+  [19w12a](https://github.com/Kale-Ko/mc-assets/tree/19w12a)\
+  [19w11b](https://github.com/Kale-Ko/mc-assets/tree/19w11b)\
+  [19w11a](https://github.com/Kale-Ko/mc-assets/tree/19w11a)\
+  [19w09a](https://github.com/Kale-Ko/mc-assets/tree/19w09a)\
+  [19w08b](https://github.com/Kale-Ko/mc-assets/tree/19w08b)\
+  [19w08a](https://github.com/Kale-Ko/mc-assets/tree/19w08a)\
+  [19w07a](https://github.com/Kale-Ko/mc-assets/tree/19w07a)\
+  [19w06a](https://github.com/Kale-Ko/mc-assets/tree/19w06a)\
+  [19w05a](https://github.com/Kale-Ko/mc-assets/tree/19w05a)\
+  [19w04b](https://github.com/Kale-Ko/mc-assets/tree/19w04b)\
+  [19w04a](https://github.com/Kale-Ko/mc-assets/tree/19w04a)\
+  [19w03c](https://github.com/Kale-Ko/mc-assets/tree/19w03c)\
+  [19w03b](https://github.com/Kale-Ko/mc-assets/tree/19w03b)\
+  [19w03a](https://github.com/Kale-Ko/mc-assets/tree/19w03a)\
+  [19w02a](https://github.com/Kale-Ko/mc-assets/tree/19w02a)\
+  [18w50a](https://github.com/Kale-Ko/mc-assets/tree/18w50a)\
+  [18w49a](https://github.com/Kale-Ko/mc-assets/tree/18w49a)\
+  [18w48b](https://github.com/Kale-Ko/mc-assets/tree/18w48b)\
+  [18w48a](https://github.com/Kale-Ko/mc-assets/tree/18w48a)\
+  [18w47b](https://github.com/Kale-Ko/mc-assets/tree/18w47b)\
+  [18w47a](https://github.com/Kale-Ko/mc-assets/tree/18w47a)\
+  [18w46a](https://github.com/Kale-Ko/mc-assets/tree/18w46a)\
+  [18w45a](https://github.com/Kale-Ko/mc-assets/tree/18w45a)\
+  [18w44a](https://github.com/Kale-Ko/mc-assets/tree/18w44a)\
+  [18w43c](https://github.com/Kale-Ko/mc-assets/tree/18w43c)\
+  [18w43b](https://github.com/Kale-Ko/mc-assets/tree/18w43b)\
+  [18w43a](https://github.com/Kale-Ko/mc-assets/tree/18w43a)
+</details>
+<details>
+  <summary><b id="1_13_2">1.13.2</b></summary>
+
+  [1.13.2](https://github.com/Kale-Ko/mc-assets/tree/1_13_2)\
+  [1.13.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_13_2-pre2)\
+  [1.13.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_13_2-pre1)
+</details>
+<details>
+  <summary><b id="1_13_1">1.13.1</b></summary>
+
+  [1.13.1](https://github.com/Kale-Ko/mc-assets/tree/1_13_1)\
+  [1.13.1-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_13_1-pre2)\
+  [1.13.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_13_1-pre1)\
+  [18w33a](https://github.com/Kale-Ko/mc-assets/tree/18w33a)\
+  [18w32a](https://github.com/Kale-Ko/mc-assets/tree/18w32a)\
+  [18w31a](https://github.com/Kale-Ko/mc-assets/tree/18w31a)\
+  [18w30b](https://github.com/Kale-Ko/mc-assets/tree/18w30b)\
+  [18w30a](https://github.com/Kale-Ko/mc-assets/tree/18w30a)
+</details>
+<details>
+  <summary><b id="1_13">1.13</b></summary>
+
+  [1.13](https://github.com/Kale-Ko/mc-assets/tree/1_13)\
+  [1.13-pre10](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre10)\
+  [1.13-pre9](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre9)\
+  [1.13-pre8](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre8)\
+  [1.13-pre7](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre7)\
+  [1.13-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre6)\
+  [1.13-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre5)\
+  [1.13-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre4)\
+  [1.13-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre3)\
+  [1.13-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre2)\
+  [1.13-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_13-pre1)\
+  [18w22c](https://github.com/Kale-Ko/mc-assets/tree/18w22c)\
+  [18w22b](https://github.com/Kale-Ko/mc-assets/tree/18w22b)\
+  [18w22a](https://github.com/Kale-Ko/mc-assets/tree/18w22a)\
+  [18w21b](https://github.com/Kale-Ko/mc-assets/tree/18w21b)\
+  [18w21a](https://github.com/Kale-Ko/mc-assets/tree/18w21a)\
+  [18w20c](https://github.com/Kale-Ko/mc-assets/tree/18w20c)\
+  [18w20b](https://github.com/Kale-Ko/mc-assets/tree/18w20b)\
+  [18w20a](https://github.com/Kale-Ko/mc-assets/tree/18w20a)\
+  [18w19b](https://github.com/Kale-Ko/mc-assets/tree/18w19b)\
+  [18w19a](https://github.com/Kale-Ko/mc-assets/tree/18w19a)\
+  [18w16a](https://github.com/Kale-Ko/mc-assets/tree/18w16a)\
+  [18w15a](https://github.com/Kale-Ko/mc-assets/tree/18w15a)\
+  [18w14b](https://github.com/Kale-Ko/mc-assets/tree/18w14b)\
+  [18w14a](https://github.com/Kale-Ko/mc-assets/tree/18w14a)\
+  [18w11a](https://github.com/Kale-Ko/mc-assets/tree/18w11a)\
+  [18w10d](https://github.com/Kale-Ko/mc-assets/tree/18w10d)\
+  [18w10c](https://github.com/Kale-Ko/mc-assets/tree/18w10c)\
+  [18w10b](https://github.com/Kale-Ko/mc-assets/tree/18w10b)\
+  [18w10a](https://github.com/Kale-Ko/mc-assets/tree/18w10a)\
+  [18w09a](https://github.com/Kale-Ko/mc-assets/tree/18w09a)\
+  [18w08b](https://github.com/Kale-Ko/mc-assets/tree/18w08b)\
+  [18w08a](https://github.com/Kale-Ko/mc-assets/tree/18w08a)\
+  [18w07c](https://github.com/Kale-Ko/mc-assets/tree/18w07c)\
+  [18w07b](https://github.com/Kale-Ko/mc-assets/tree/18w07b)\
+  [18w07a](https://github.com/Kale-Ko/mc-assets/tree/18w07a)\
+  [18w06a](https://github.com/Kale-Ko/mc-assets/tree/18w06a)\
+  [18w05a](https://github.com/Kale-Ko/mc-assets/tree/18w05a)\
+  [18w03b](https://github.com/Kale-Ko/mc-assets/tree/18w03b)\
+  [18w03a](https://github.com/Kale-Ko/mc-assets/tree/18w03a)\
+  [18w02a](https://github.com/Kale-Ko/mc-assets/tree/18w02a)\
+  [18w01a](https://github.com/Kale-Ko/mc-assets/tree/18w01a)\
+  [17w50a](https://github.com/Kale-Ko/mc-assets/tree/17w50a)\
+  [17w49b](https://github.com/Kale-Ko/mc-assets/tree/17w49b)\
+  [17w49a](https://github.com/Kale-Ko/mc-assets/tree/17w49a)\
+  [17w48a](https://github.com/Kale-Ko/mc-assets/tree/17w48a)\
+  [17w47b](https://github.com/Kale-Ko/mc-assets/tree/17w47b)\
+  [17w47a](https://github.com/Kale-Ko/mc-assets/tree/17w47a)\
+  [17w46a](https://github.com/Kale-Ko/mc-assets/tree/17w46a)\
+  [17w45b](https://github.com/Kale-Ko/mc-assets/tree/17w45b)\
+  [17w45a](https://github.com/Kale-Ko/mc-assets/tree/17w45a)\
+  [17w43b](https://github.com/Kale-Ko/mc-assets/tree/17w43b)\
+  [17w43a](https://github.com/Kale-Ko/mc-assets/tree/17w43a)
+</details>
+<details>
+  <summary><b id="1_12_2">1.12.2</b></summary>
+
+  [1.12.2](https://github.com/Kale-Ko/mc-assets/tree/1_12_2)\
+  [1.12.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_12_2-pre2)\
+  [1.12.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_12_2-pre1)
+</details>
+<details>
+  <summary><b id="1_12_1">1.12.1</b></summary>
+
+  [1.12.1](https://github.com/Kale-Ko/mc-assets/tree/1_12_1)\
+  [1.12.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_12_1-pre1)\
+  [17w31a](https://github.com/Kale-Ko/mc-assets/tree/17w31a)
+</details>
+<details>
+  <summary><b id="1_12">1.12</b></summary>
+
+  [1.12](https://github.com/Kale-Ko/mc-assets/tree/1_12)\
+  [1.12-pre7](https://github.com/Kale-Ko/mc-assets/tree/1_12-pre7)\
+  [1.12-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_12-pre6)\
+  [1.12-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_12-pre5)\
+  [1.12-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_12-pre4)\
+  [1.12-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_12-pre3)\
+  [1.12-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_12-pre2)\
+  [1.12-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_12-pre1)\
+  [17w18b](https://github.com/Kale-Ko/mc-assets/tree/17w18b)\
+  [17w18a](https://github.com/Kale-Ko/mc-assets/tree/17w18a)\
+  [17w17b](https://github.com/Kale-Ko/mc-assets/tree/17w17b)\
+  [17w17a](https://github.com/Kale-Ko/mc-assets/tree/17w17a)\
+  [17w16b](https://github.com/Kale-Ko/mc-assets/tree/17w16b)\
+  [17w16a](https://github.com/Kale-Ko/mc-assets/tree/17w16a)\
+  [17w15a](https://github.com/Kale-Ko/mc-assets/tree/17w15a)\
+  [17w14a](https://github.com/Kale-Ko/mc-assets/tree/17w14a)\
+  [17w13b](https://github.com/Kale-Ko/mc-assets/tree/17w13b)\
+  [17w13a](https://github.com/Kale-Ko/mc-assets/tree/17w13a)\
+  [17w06a](https://github.com/Kale-Ko/mc-assets/tree/17w06a)
+</details>
+<details>
+  <summary><b id="1_11_2">1.11.2</b></summary>
+
+  [1.11.2](https://github.com/Kale-Ko/mc-assets/tree/1_11_2)
+</details>
+<details>
+  <summary><b id="1_11_1">1.11.1</b></summary>
+
+  [1.11.1](https://github.com/Kale-Ko/mc-assets/tree/1_11_1)\
+  [16w50a](https://github.com/Kale-Ko/mc-assets/tree/16w50a)
+</details>
+<details>
+  <summary><b id="1_11">1.11</b></summary>
+
+  [1.11](https://github.com/Kale-Ko/mc-assets/tree/1_11)\
+  [1.11-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_11-pre1)\
+  [16w44a](https://github.com/Kale-Ko/mc-assets/tree/16w44a)\
+  [16w43a](https://github.com/Kale-Ko/mc-assets/tree/16w43a)\
+  [16w42a](https://github.com/Kale-Ko/mc-assets/tree/16w42a)\
+  [16w41a](https://github.com/Kale-Ko/mc-assets/tree/16w41a)\
+  [16w40a](https://github.com/Kale-Ko/mc-assets/tree/16w40a)\
+  [16w39c](https://github.com/Kale-Ko/mc-assets/tree/16w39c)\
+  [16w39b](https://github.com/Kale-Ko/mc-assets/tree/16w39b)\
+  [16w39a](https://github.com/Kale-Ko/mc-assets/tree/16w39a)\
+  [16w38a](https://github.com/Kale-Ko/mc-assets/tree/16w38a)\
+  [16w36a](https://github.com/Kale-Ko/mc-assets/tree/16w36a)\
+  [16w35a](https://github.com/Kale-Ko/mc-assets/tree/16w35a)\
+  [16w33a](https://github.com/Kale-Ko/mc-assets/tree/16w33a)\
+  [16w32b](https://github.com/Kale-Ko/mc-assets/tree/16w32b)\
+  [16w32a](https://github.com/Kale-Ko/mc-assets/tree/16w32a)
+</details>
+<details>
+  <summary><b id="1_10_2">1.10.2</b></summary>
+
+  [1.10.2](https://github.com/Kale-Ko/mc-assets/tree/1_10_2)
+</details>
+<details>
+  <summary><b id="1_10_1">1.10.1</b></summary>
+
+  [1.10.1](https://github.com/Kale-Ko/mc-assets/tree/1_10_1)
+</details>
+<details>
+  <summary><b id="1_10">1.10</b></summary>
+
+  [1.10](https://github.com/Kale-Ko/mc-assets/tree/1_10)\
+  [1.10-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_10-pre2)\
+  [1.10-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_10-pre1)\
+  [16w21b](https://github.com/Kale-Ko/mc-assets/tree/16w21b)\
+  [16w21a](https://github.com/Kale-Ko/mc-assets/tree/16w21a)\
+  [16w20a](https://github.com/Kale-Ko/mc-assets/tree/16w20a)
+</details>
+<details>
+  <summary><b id="1_9_4">1.9.4</b></summary>
+
+  [1.9.4](https://github.com/Kale-Ko/mc-assets/tree/1_9_4)
+</details>
+<details>
+  <summary><b id="1_9_3">1.9.3</b></summary>
+
+  [1.9.3](https://github.com/Kale-Ko/mc-assets/tree/1_9_3)\
+  [1.9.3-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_9_3-pre3)\
+  [1.9.3-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_9_3-pre2)\
+  [1.9.3-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_9_3-pre1)\
+  [16w15b](https://github.com/Kale-Ko/mc-assets/tree/16w15b)\
+  [16w15a](https://github.com/Kale-Ko/mc-assets/tree/16w15a)\
+  [16w14a](https://github.com/Kale-Ko/mc-assets/tree/16w14a)\
+  [1.RV-Pre1](https://github.com/Kale-Ko/mc-assets/tree/1_rv-pre1)
+</details>
+<details>
+  <summary><b id="1_9_2">1.9.2</b></summary>
+
+  [1.9.2](https://github.com/Kale-Ko/mc-assets/tree/1_9_2)
+</details>
+<details>
+  <summary><b id="1_9_1">1.9.1</b></summary>
+
+  [1.9.1](https://github.com/Kale-Ko/mc-assets/tree/1_9_1)\
+  [1.9.1-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_9_1-pre3)\
+  [1.9.1-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_9_1-pre2)\
+  [1.9.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_9_1-pre1)
+</details>
+<details>
+  <summary><b id="1_9">1.9</b></summary>
+
+  [1.9](https://github.com/Kale-Ko/mc-assets/tree/1_9)\
+  [1.9-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_9-pre4)\
+  [1.9-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_9-pre3)\
+  [1.9-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_9-pre2)\
+  [1.9-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_9-pre1)\
+  [16w07b](https://github.com/Kale-Ko/mc-assets/tree/16w07b)\
+  [16w07a](https://github.com/Kale-Ko/mc-assets/tree/16w07a)\
+  [16w06a](https://github.com/Kale-Ko/mc-assets/tree/16w06a)\
+  [16w05b](https://github.com/Kale-Ko/mc-assets/tree/16w05b)\
+  [16w05a](https://github.com/Kale-Ko/mc-assets/tree/16w05a)\
+  [16w04a](https://github.com/Kale-Ko/mc-assets/tree/16w04a)\
+  [16w03a](https://github.com/Kale-Ko/mc-assets/tree/16w03a)\
+  [16w02a](https://github.com/Kale-Ko/mc-assets/tree/16w02a)\
+  [15w51b](https://github.com/Kale-Ko/mc-assets/tree/15w51b)\
+  [15w51a](https://github.com/Kale-Ko/mc-assets/tree/15w51a)\
+  [15w50a](https://github.com/Kale-Ko/mc-assets/tree/15w50a)\
+  [15w49b](https://github.com/Kale-Ko/mc-assets/tree/15w49b)
+</details>
+<details>
+  <summary><b id="1_8_9">1.8.9</b></summary>
+
+  [1.8.9](https://github.com/Kale-Ko/mc-assets/tree/1_8_9)\
+  [15w49a](https://github.com/Kale-Ko/mc-assets/tree/15w49a)\
+  [15w47c](https://github.com/Kale-Ko/mc-assets/tree/15w47c)\
+  [15w47b](https://github.com/Kale-Ko/mc-assets/tree/15w47b)\
+  [15w47a](https://github.com/Kale-Ko/mc-assets/tree/15w47a)\
+  [15w46a](https://github.com/Kale-Ko/mc-assets/tree/15w46a)\
+  [15w45a](https://github.com/Kale-Ko/mc-assets/tree/15w45a)\
+  [15w44b](https://github.com/Kale-Ko/mc-assets/tree/15w44b)\
+  [15w44a](https://github.com/Kale-Ko/mc-assets/tree/15w44a)\
+  [15w43c](https://github.com/Kale-Ko/mc-assets/tree/15w43c)\
+  [15w43b](https://github.com/Kale-Ko/mc-assets/tree/15w43b)\
+  [15w43a](https://github.com/Kale-Ko/mc-assets/tree/15w43a)\
+  [15w42a](https://github.com/Kale-Ko/mc-assets/tree/15w42a)\
+  [15w41b](https://github.com/Kale-Ko/mc-assets/tree/15w41b)\
+  [15w41a](https://github.com/Kale-Ko/mc-assets/tree/15w41a)\
+  [15w40b](https://github.com/Kale-Ko/mc-assets/tree/15w40b)\
+  [15w40a](https://github.com/Kale-Ko/mc-assets/tree/15w40a)\
+  [15w39c](https://github.com/Kale-Ko/mc-assets/tree/15w39c)\
+  [15w39b](https://github.com/Kale-Ko/mc-assets/tree/15w39b)\
+  [15w39a](https://github.com/Kale-Ko/mc-assets/tree/15w39a)\
+  [15w38b](https://github.com/Kale-Ko/mc-assets/tree/15w38b)\
+  [15w38a](https://github.com/Kale-Ko/mc-assets/tree/15w38a)\
+  [15w37a](https://github.com/Kale-Ko/mc-assets/tree/15w37a)\
+  [15w36d](https://github.com/Kale-Ko/mc-assets/tree/15w36d)\
+  [15w36c](https://github.com/Kale-Ko/mc-assets/tree/15w36c)\
+  [15w36b](https://github.com/Kale-Ko/mc-assets/tree/15w36b)\
+  [15w36a](https://github.com/Kale-Ko/mc-assets/tree/15w36a)\
+  [15w35e](https://github.com/Kale-Ko/mc-assets/tree/15w35e)\
+  [15w35d](https://github.com/Kale-Ko/mc-assets/tree/15w35d)\
+  [15w35c](https://github.com/Kale-Ko/mc-assets/tree/15w35c)\
+  [15w35b](https://github.com/Kale-Ko/mc-assets/tree/15w35b)\
+  [15w35a](https://github.com/Kale-Ko/mc-assets/tree/15w35a)\
+  [15w34d](https://github.com/Kale-Ko/mc-assets/tree/15w34d)\
+  [15w34c](https://github.com/Kale-Ko/mc-assets/tree/15w34c)\
+  [15w34b](https://github.com/Kale-Ko/mc-assets/tree/15w34b)\
+  [15w34a](https://github.com/Kale-Ko/mc-assets/tree/15w34a)\
+  [15w33c](https://github.com/Kale-Ko/mc-assets/tree/15w33c)\
+  [15w33b](https://github.com/Kale-Ko/mc-assets/tree/15w33b)\
+  [15w33a](https://github.com/Kale-Ko/mc-assets/tree/15w33a)\
+  [15w32c](https://github.com/Kale-Ko/mc-assets/tree/15w32c)\
+  [15w32b](https://github.com/Kale-Ko/mc-assets/tree/15w32b)\
+  [15w32a](https://github.com/Kale-Ko/mc-assets/tree/15w32a)\
+  [15w31c](https://github.com/Kale-Ko/mc-assets/tree/15w31c)\
+  [15w31b](https://github.com/Kale-Ko/mc-assets/tree/15w31b)\
+  [15w31a](https://github.com/Kale-Ko/mc-assets/tree/15w31a)
+</details>
+<details>
+  <summary><b id="1_8_8">1.8.8</b></summary>
+
+  [1.8.8](https://github.com/Kale-Ko/mc-assets/tree/1_8_8)
+</details>
+<details>
+  <summary><b id="1_8_7">1.8.7</b></summary>
+
+  [1.8.7](https://github.com/Kale-Ko/mc-assets/tree/1_8_7)
+</details>
+<details>
+  <summary><b id="1_8_6">1.8.6</b></summary>
+
+  [1.8.6](https://github.com/Kale-Ko/mc-assets/tree/1_8_6)
+</details>
+<details>
+  <summary><b id="1_8_5">1.8.5</b></summary>
+
+  [1.8.5](https://github.com/Kale-Ko/mc-assets/tree/1_8_5)
+</details>
+<details>
+  <summary><b id="1_8_4">1.8.4</b></summary>
+
+  [1.8.4](https://github.com/Kale-Ko/mc-assets/tree/1_8_4)\
+  [15w14a](https://github.com/Kale-Ko/mc-assets/tree/15w14a)
+</details>
+<details>
+  <summary><b id="1_8_3">1.8.3</b></summary>
+
+  [1.8.3](https://github.com/Kale-Ko/mc-assets/tree/1_8_3)
+</details>
+<details>
+  <summary><b id="1_8_2">1.8.2</b></summary>
+
+  [1.8.2](https://github.com/Kale-Ko/mc-assets/tree/1_8_2)\
+  [1.8.2-pre7](https://github.com/Kale-Ko/mc-assets/tree/1_8_2-pre7)\
+  [1.8.2-pre6](https://github.com/Kale-Ko/mc-assets/tree/1_8_2-pre6)\
+  [1.8.2-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_8_2-pre5)\
+  [1.8.2-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_8_2-pre4)\
+  [1.8.2-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_8_2-pre3)\
+  [1.8.2-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_8_2-pre2)\
+  [1.8.2-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_8_2-pre1)
+</details>
+<details>
+  <summary><b id="1_8_1">1.8.1</b></summary>
+
+  [1.8.1](https://github.com/Kale-Ko/mc-assets/tree/1_8_1)\
+  [1.8.1-pre5](https://github.com/Kale-Ko/mc-assets/tree/1_8_1-pre5)\
+  [1.8.1-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_8_1-pre4)\
+  [1.8.1-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_8_1-pre3)\
+  [1.8.1-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_8_1-pre2)\
+  [1.8.1-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_8_1-pre1)
+</details>
+<details>
+  <summary><b id="1_8">1.8</b></summary>
+
+  [1.8](https://github.com/Kale-Ko/mc-assets/tree/1_8)\
+  [1.8-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_8-pre3)\
+  [1.8-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_8-pre2)\
+  [1.8-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_8-pre1)\
+  [14w34d](https://github.com/Kale-Ko/mc-assets/tree/14w34d)\
+  [14w34c](https://github.com/Kale-Ko/mc-assets/tree/14w34c)\
+  [14w34b](https://github.com/Kale-Ko/mc-assets/tree/14w34b)\
+  [14w34a](https://github.com/Kale-Ko/mc-assets/tree/14w34a)\
+  [14w33c](https://github.com/Kale-Ko/mc-assets/tree/14w33c)\
+  [14w33b](https://github.com/Kale-Ko/mc-assets/tree/14w33b)\
+  [14w33a](https://github.com/Kale-Ko/mc-assets/tree/14w33a)\
+  [14w32d](https://github.com/Kale-Ko/mc-assets/tree/14w32d)\
+  [14w32c](https://github.com/Kale-Ko/mc-assets/tree/14w32c)\
+  [14w32b](https://github.com/Kale-Ko/mc-assets/tree/14w32b)\
+  [14w32a](https://github.com/Kale-Ko/mc-assets/tree/14w32a)\
+  [14w31a](https://github.com/Kale-Ko/mc-assets/tree/14w31a)\
+  [14w30c](https://github.com/Kale-Ko/mc-assets/tree/14w30c)\
+  [14w30b](https://github.com/Kale-Ko/mc-assets/tree/14w30b)\
+  [14w30a](https://github.com/Kale-Ko/mc-assets/tree/14w30a)\
+  [14w29b](https://github.com/Kale-Ko/mc-assets/tree/14w29b)\
+  [14w29a](https://github.com/Kale-Ko/mc-assets/tree/14w29a)\
+  [14w28b](https://github.com/Kale-Ko/mc-assets/tree/14w28b)\
+  [14w28a](https://github.com/Kale-Ko/mc-assets/tree/14w28a)\
+  [14w27b](https://github.com/Kale-Ko/mc-assets/tree/14w27b)\
+  [14w27a](https://github.com/Kale-Ko/mc-assets/tree/14w27a)\
+  [14w26c](https://github.com/Kale-Ko/mc-assets/tree/14w26c)\
+  [14w26b](https://github.com/Kale-Ko/mc-assets/tree/14w26b)\
+  [14w26a](https://github.com/Kale-Ko/mc-assets/tree/14w26a)\
+  [14w25b](https://github.com/Kale-Ko/mc-assets/tree/14w25b)\
+  [14w25a](https://github.com/Kale-Ko/mc-assets/tree/14w25a)\
+  [14w21b](https://github.com/Kale-Ko/mc-assets/tree/14w21b)\
+  [14w21a](https://github.com/Kale-Ko/mc-assets/tree/14w21a)\
+  [14w20b](https://github.com/Kale-Ko/mc-assets/tree/14w20b)\
+  [14w20a](https://github.com/Kale-Ko/mc-assets/tree/14w20a)
+</details>
+<details>
+  <summary><b id="1_7_10">1.7.10</b></summary>
+
+  [1.7.10](https://github.com/Kale-Ko/mc-assets/tree/1_7_10)\
+  [1.7.10-pre4](https://github.com/Kale-Ko/mc-assets/tree/1_7_10-pre4)\
+  [1.7.10-pre3](https://github.com/Kale-Ko/mc-assets/tree/1_7_10-pre3)\
+  [1.7.10-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_7_10-pre2)\
+  [1.7.10-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_7_10-pre1)\
+  [14w19a](https://github.com/Kale-Ko/mc-assets/tree/14w19a)\
+  [14w18b](https://github.com/Kale-Ko/mc-assets/tree/14w18b)\
+  [14w18a](https://github.com/Kale-Ko/mc-assets/tree/14w18a)\
+  [14w17a](https://github.com/Kale-Ko/mc-assets/tree/14w17a)\
+  [14w11b](https://github.com/Kale-Ko/mc-assets/tree/14w11b)
+</details>
+<details>
+  <summary><b id="1_7_9">1.7.9</b></summary>
+
+  [1.7.9](https://github.com/Kale-Ko/mc-assets/tree/1_7_9)
+</details>
+<details>
+  <summary><b id="1_7_8">1.7.8</b></summary>
+
+  [1.7.8](https://github.com/Kale-Ko/mc-assets/tree/1_7_8)
+</details>
+<details>
+  <summary><b id="1_7_7">1.7.7</b></summary>
+
+  [1.7.7](https://github.com/Kale-Ko/mc-assets/tree/1_7_7)
+</details>
+<details>
+  <summary><b id="1_7_6">1.7.6</b></summary>
+
+  [1.7.6](https://github.com/Kale-Ko/mc-assets/tree/1_7_6)\
+  [14w11a](https://github.com/Kale-Ko/mc-assets/tree/14w11a)\
+  [1.7.6-pre2](https://github.com/Kale-Ko/mc-assets/tree/1_7_6-pre2)\
+  [1.7.6-pre1](https://github.com/Kale-Ko/mc-assets/tree/1_7_6-pre1)\
+  [14w10c](https://github.com/Kale-Ko/mc-assets/tree/14w10c)\
+  [14w10b](https://github.com/Kale-Ko/mc-assets/tree/14w10b)\
+  [14w10a](https://github.com/Kale-Ko/mc-assets/tree/14w10a)\
+  [14w08a](https://github.com/Kale-Ko/mc-assets/tree/14w08a)
+</details>
+<details>
+  <summary><b id="1_7_5">1.7.5</b></summary>
+
+  [1.7.5](https://github.com/Kale-Ko/mc-assets/tree/1_7_5)\
+  [14w07a](https://github.com/Kale-Ko/mc-assets/tree/14w07a)\
+  [14w06b](https://github.com/Kale-Ko/mc-assets/tree/14w06b)\
+  [14w06a](https://github.com/Kale-Ko/mc-assets/tree/14w06a)\
+  [14w05b](https://github.com/Kale-Ko/mc-assets/tree/14w05b)\
+  [14w05a](https://github.com/Kale-Ko/mc-assets/tree/14w05a)\
+  [14w04b](https://github.com/Kale-Ko/mc-assets/tree/14w04b)\
+  [14w04a](https://github.com/Kale-Ko/mc-assets/tree/14w04a)\
+  [14w03b](https://github.com/Kale-Ko/mc-assets/tree/14w03b)\
+  [14w03a](https://github.com/Kale-Ko/mc-assets/tree/14w03a)\
+  [14w02c](https://github.com/Kale-Ko/mc-assets/tree/14w02c)\
+  [14w02b](https://github.com/Kale-Ko/mc-assets/tree/14w02b)\
+  [14w02a](https://github.com/Kale-Ko/mc-assets/tree/14w02a)
+</details>
+<details>
+  <summary><b id="1_7_4">1.7.4</b></summary>
+
+  [1.7.4](https://github.com/Kale-Ko/mc-assets/tree/1_7_4)
+</details>
+<details>
+  <summary><b id="1_7_3">1.7.3</b></summary>
+
+  [1.7.3](https://github.com/Kale-Ko/mc-assets/tree/1_7_3)\
+  [13w49a](https://github.com/Kale-Ko/mc-assets/tree/13w49a)\
+  [13w48b](https://github.com/Kale-Ko/mc-assets/tree/13w48b)\
+  [13w48a](https://github.com/Kale-Ko/mc-assets/tree/13w48a)\
+  [13w47e](https://github.com/Kale-Ko/mc-assets/tree/13w47e)\
+  [13w47d](https://github.com/Kale-Ko/mc-assets/tree/13w47d)\
+  [13w47c](https://github.com/Kale-Ko/mc-assets/tree/13w47c)\
+  [13w47b](https://github.com/Kale-Ko/mc-assets/tree/13w47b)\
+  [13w47a](https://github.com/Kale-Ko/mc-assets/tree/13w47a)
+</details>
+<details>
+  <summary><b id="1_7_2">1.7.2</b></summary>
+
+  [1.7.2](https://github.com/Kale-Ko/mc-assets/tree/1_7_2)
+</details>
+<details>
+  <summary><b id="1_7_1">1.7.1</b></summary>
+
+  [1.7.1](https://github.com/Kale-Ko/mc-assets/tree/1_7_1)
+</details>
+<details>
+  <summary><b id="1_7">1.7</b></summary>
+
+  [1.7](https://github.com/Kale-Ko/mc-assets/tree/1_7)\
+  [13w43a](https://github.com/Kale-Ko/mc-assets/tree/13w43a)\
+  [13w42b](https://github.com/Kale-Ko/mc-assets/tree/13w42b)\
+  [13w42a](https://github.com/Kale-Ko/mc-assets/tree/13w42a)\
+  [13w41b](https://github.com/Kale-Ko/mc-assets/tree/13w41b)\
+  [13w41a](https://github.com/Kale-Ko/mc-assets/tree/13w41a)\
+  [13w39b](https://github.com/Kale-Ko/mc-assets/tree/13w39b)\
+  [13w39a](https://github.com/Kale-Ko/mc-assets/tree/13w39a)\
+  [13w38c](https://github.com/Kale-Ko/mc-assets/tree/13w38c)\
+  [13w38b](https://github.com/Kale-Ko/mc-assets/tree/13w38b)\
+  [13w38a](https://github.com/Kale-Ko/mc-assets/tree/13w38a)
+</details>
+<details>
+  <summary><b id="1_6_4">1.6.4</b></summary>
+
+  [1.6.4](https://github.com/Kale-Ko/mc-assets/tree/1_6_4)
+</details>
+<details>
+  <summary><b id="1_6_3">1.6.3</b></summary>
+
+  [1.6.3](https://github.com/Kale-Ko/mc-assets/tree/1_6_3)\
+  [13w37b](https://github.com/Kale-Ko/mc-assets/tree/13w37b)\
+  [13w37a](https://github.com/Kale-Ko/mc-assets/tree/13w37a)\
+  [13w36b](https://github.com/Kale-Ko/mc-assets/tree/13w36b)\
+  [13w36a](https://github.com/Kale-Ko/mc-assets/tree/13w36a)
+</details>
+<details>
+  <summary><b id="1_6_2">1.6.2</b></summary>
+
+  [1.6.2](https://github.com/Kale-Ko/mc-assets/tree/1_6_2)
+</details>
+<details>
+  <summary><b id="1_6_1">1.6.1</b></summary>
+
+  [1.6.1](https://github.com/Kale-Ko/mc-assets/tree/1_6_1)
+</details>
+<details>
+  <summary><b id="1_6">1.6</b></summary>
+
+  [1.6](https://github.com/Kale-Ko/mc-assets/tree/1_6)\
+  [13w26a](https://github.com/Kale-Ko/mc-assets/tree/13w26a)\
+  [13w25c](https://github.com/Kale-Ko/mc-assets/tree/13w25c)\
+  [13w25b](https://github.com/Kale-Ko/mc-assets/tree/13w25b)\
+  [13w25a](https://github.com/Kale-Ko/mc-assets/tree/13w25a)\
+  [13w24b](https://github.com/Kale-Ko/mc-assets/tree/13w24b)\
+  [13w24a](https://github.com/Kale-Ko/mc-assets/tree/13w24a)\
+  [13w23b](https://github.com/Kale-Ko/mc-assets/tree/13w23b)\
+  [13w23a](https://github.com/Kale-Ko/mc-assets/tree/13w23a)\
+  [13w22a](https://github.com/Kale-Ko/mc-assets/tree/13w22a)\
+  [13w21b](https://github.com/Kale-Ko/mc-assets/tree/13w21b)\
+  [13w21a](https://github.com/Kale-Ko/mc-assets/tree/13w21a)\
+  [13w19a](https://github.com/Kale-Ko/mc-assets/tree/13w19a)\
+  [13w18c](https://github.com/Kale-Ko/mc-assets/tree/13w18c)\
+  [13w18b](https://github.com/Kale-Ko/mc-assets/tree/13w18b)\
+  [13w18a](https://github.com/Kale-Ko/mc-assets/tree/13w18a)\
+  [13w17a](https://github.com/Kale-Ko/mc-assets/tree/13w17a)
+</details>
+<details>
+  <summary><b id="1_5_2">1.5.2</b></summary>
+
+  [1.5.2](https://github.com/Kale-Ko/mc-assets/tree/1_5_2)\
+  [13w16b](https://github.com/Kale-Ko/mc-assets/tree/13w16b)\
+  [13w16a](https://github.com/Kale-Ko/mc-assets/tree/13w16a)
+</details>
+<details>
+  <summary><b id="1_5_1">1.5.1</b></summary>
+
+  [1.5.1](https://github.com/Kale-Ko/mc-assets/tree/1_5_1)
+</details>
+<details>
+  <summary><b id="1_5">1.5</b></summary>
+
+  [1.5](https://github.com/Kale-Ko/mc-assets/tree/1_5)
+</details>
+<details>
+  <summary><b id="1_4_7">1.4.7</b></summary>
+
+  [1.4.7](https://github.com/Kale-Ko/mc-assets/tree/1_4_7)
+</details>
+<details>
+  <summary><b id="1_4_5">1.4.5</b></summary>
+
+  [1.4.5](https://github.com/Kale-Ko/mc-assets/tree/1_4_5)
+</details>
+<details>
+  <summary><b id="1_4_6">1.4.6</b></summary>
+
+  [1.4.6](https://github.com/Kale-Ko/mc-assets/tree/1_4_6)
+</details>
+<details>
+  <summary><b id="1_4_4">1.4.4</b></summary>
+
+  [1.4.4](https://github.com/Kale-Ko/mc-assets/tree/1_4_4)
+</details>
+<details>
+  <summary><b id="1_4_3">1.4.3</b></summary>
+
+  [1.4.3](https://github.com/Kale-Ko/mc-assets/tree/1_4_3)
+</details>
+<details>
+  <summary><b id="1_4_2">1.4.2</b></summary>
+
+  [1.4.2](https://github.com/Kale-Ko/mc-assets/tree/1_4_2)
+</details>
+<details>
+  <summary><b id="1_4_1">1.4.1</b></summary>
+
+  [1.4.1](https://github.com/Kale-Ko/mc-assets/tree/1_4_1)
+</details>
+<details>
+  <summary><b id="1_4">1.4</b></summary>
+
+  [1.4](https://github.com/Kale-Ko/mc-assets/tree/1_4)
+</details>
+<details>
+  <summary><b id="1_3_2">1.3.2</b></summary>
+
+  [1.3.2](https://github.com/Kale-Ko/mc-assets/tree/1_3_2)
+</details>
+<details>
+  <summary><b id="1_3_1">1.3.1</b></summary>
+
+  [1.3.1](https://github.com/Kale-Ko/mc-assets/tree/1_3_1)
+</details>
+<details>
+  <summary><b id="1_3">1.3</b></summary>
+
+  [1.3](https://github.com/Kale-Ko/mc-assets/tree/1_3)
+</details>
+<details>
+  <summary><b id="1_2_5">1.2.5</b></summary>
+
+  [1.2.5](https://github.com/Kale-Ko/mc-assets/tree/1_2_5)
+</details>
+<details>
+  <summary><b id="1_2_4">1.2.4</b></summary>
+
+  [1.2.4](https://github.com/Kale-Ko/mc-assets/tree/1_2_4)
+</details>
+<details>
+  <summary><b id="1_2_3">1.2.3</b></summary>
+
+  [1.2.3](https://github.com/Kale-Ko/mc-assets/tree/1_2_3)
+</details>
+<details>
+  <summary><b id="1_2_2">1.2.2</b></summary>
+
+  [1.2.2](https://github.com/Kale-Ko/mc-assets/tree/1_2_2)
+</details>
+<details>
+  <summary><b id="1_2_1">1.2.1</b></summary>
+
+  [1.2.1](https://github.com/Kale-Ko/mc-assets/tree/1_2_1)
+</details>
+<details>
+  <summary><b id="1_1">1.1</b></summary>
+
+  [1.1](https://github.com/Kale-Ko/mc-assets/tree/1_1)
+</details>
+<details>
+  <summary><b id="1_0">1.0</b></summary>
+
+  [1.0](https://github.com/Kale-Ko/mc-assets/tree/1_0)
+</details>
+<details>
+  <summary><b id="beta">Beta</b></summary>
+
+  [b1.8.1](https://github.com/Kale-Ko/mc-assets/tree/b1_8_1)\
+  [b1.8](https://github.com/Kale-Ko/mc-assets/tree/b1_8)\
+  [b1.7.3](https://github.com/Kale-Ko/mc-assets/tree/b1_7_3)\
+  [b1.7.2](https://github.com/Kale-Ko/mc-assets/tree/b1_7_2)\
+  [b1.7](https://github.com/Kale-Ko/mc-assets/tree/b1_7)\
+  [b1.6.6](https://github.com/Kale-Ko/mc-assets/tree/b1_6_6)\
+  [b1.6.5](https://github.com/Kale-Ko/mc-assets/tree/b1_6_5)\
+  [b1.6.4](https://github.com/Kale-Ko/mc-assets/tree/b1_6_4)\
+  [b1.6.3](https://github.com/Kale-Ko/mc-assets/tree/b1_6_3)\
+  [b1.6.2](https://github.com/Kale-Ko/mc-assets/tree/b1_6_2)\
+  [b1.6.1](https://github.com/Kale-Ko/mc-assets/tree/b1_6_1)\
+  [b1.6](https://github.com/Kale-Ko/mc-assets/tree/b1_6)\
+  [b1.5_01](https://github.com/Kale-Ko/mc-assets/tree/b1_5_01)\
+  [b1.5](https://github.com/Kale-Ko/mc-assets/tree/b1_5)\
+  [b1.4_01](https://github.com/Kale-Ko/mc-assets/tree/b1_4_01)\
+  [b1.4](https://github.com/Kale-Ko/mc-assets/tree/b1_4)\
+  [b1.3_01](https://github.com/Kale-Ko/mc-assets/tree/b1_3_01)\
+  [b1.3b](https://github.com/Kale-Ko/mc-assets/tree/b1_3b)\
+  [b1.2_02](https://github.com/Kale-Ko/mc-assets/tree/b1_2_02)\
+  [b1.2_01](https://github.com/Kale-Ko/mc-assets/tree/b1_2_01)\
+  [b1.2](https://github.com/Kale-Ko/mc-assets/tree/b1_2)\
+  [b1.1_02](https://github.com/Kale-Ko/mc-assets/tree/b1_1_02)\
+  [b1.1_01](https://github.com/Kale-Ko/mc-assets/tree/b1_1_01)\
+  [b1.0.2](https://github.com/Kale-Ko/mc-assets/tree/b1_0_2)\
+  [b1.0_01](https://github.com/Kale-Ko/mc-assets/tree/b1_0_01)\
+  [b1.0](https://github.com/Kale-Ko/mc-assets/tree/b1_0)
+</details>
+<details>
+  <summary><b id="alpha">Alpha</b></summary>
+
+  [a1.2.6](https://github.com/Kale-Ko/mc-assets/tree/a1_2_6)\
+  [a1.2.5](https://github.com/Kale-Ko/mc-assets/tree/a1_2_5)\
+  [a1.2.4_01](https://github.com/Kale-Ko/mc-assets/tree/a1_2_4_01)\
+  [a1.2.3_04](https://github.com/Kale-Ko/mc-assets/tree/a1_2_3_04)\
+  [a1.2.3_02](https://github.com/Kale-Ko/mc-assets/tree/a1_2_3_02)\
+  [a1.2.3_01](https://github.com/Kale-Ko/mc-assets/tree/a1_2_3_01)\
+  [a1.2.3](https://github.com/Kale-Ko/mc-assets/tree/a1_2_3)\
+  [a1.2.2b](https://github.com/Kale-Ko/mc-assets/tree/a1_2_2b)\
+  [a1.2.2a](https://github.com/Kale-Ko/mc-assets/tree/a1_2_2a)\
+  [a1.2.1_01](https://github.com/Kale-Ko/mc-assets/tree/a1_2_1_01)\
+  [a1.2.1](https://github.com/Kale-Ko/mc-assets/tree/a1_2_1)\
+  [a1.2.0_02](https://github.com/Kale-Ko/mc-assets/tree/a1_2_0_02)\
+  [a1.2.0_01](https://github.com/Kale-Ko/mc-assets/tree/a1_2_0_01)\
+  [a1.2.0](https://github.com/Kale-Ko/mc-assets/tree/a1_2_0)\
+  [a1.1.2_01](https://github.com/Kale-Ko/mc-assets/tree/a1_1_2_01)\
+  [a1.1.2](https://github.com/Kale-Ko/mc-assets/tree/a1_1_2)\
+  [a1.1.0](https://github.com/Kale-Ko/mc-assets/tree/a1_1_0)\
+  [a1.0.17_04](https://github.com/Kale-Ko/mc-assets/tree/a1_0_17_04)\
+  [a1.0.17_02](https://github.com/Kale-Ko/mc-assets/tree/a1_0_17_02)\
+  [a1.0.16](https://github.com/Kale-Ko/mc-assets/tree/a1_0_16)\
+  [a1.0.15](https://github.com/Kale-Ko/mc-assets/tree/a1_0_15)\
+  [a1.0.14](https://github.com/Kale-Ko/mc-assets/tree/a1_0_14)\
+  [a1.0.11](https://github.com/Kale-Ko/mc-assets/tree/a1_0_11)\
+  [a1.0.5_01](https://github.com/Kale-Ko/mc-assets/tree/a1_0_5_01)\
+  [a1.0.4](https://github.com/Kale-Ko/mc-assets/tree/a1_0_4)\
+  [inf-20100618](https://github.com/Kale-Ko/mc-assets/tree/inf-20100618)\
+  [c0.30_01c](https://github.com/Kale-Ko/mc-assets/tree/c0_30_01c)\
+  [c0.0.13a](https://github.com/Kale-Ko/mc-assets/tree/c0_0_13a)\
+  [c0.0.13a_03](https://github.com/Kale-Ko/mc-assets/tree/c0_0_13a_03)\
+  [c0.0.11a](https://github.com/Kale-Ko/mc-assets/tree/c0_0_11a)\
+  [rd-161348](https://github.com/Kale-Ko/mc-assets/tree/rd-161348)\
+  [rd-160052](https://github.com/Kale-Ko/mc-assets/tree/rd-160052)\
+  [rd-20090515](https://github.com/Kale-Ko/mc-assets/tree/rd-20090515)\
+  [rd-132328](https://github.com/Kale-Ko/mc-assets/tree/rd-132328)\
+  [rd-132211](https://github.com/Kale-Ko/mc-assets/tree/rd-132211)
+</details>
