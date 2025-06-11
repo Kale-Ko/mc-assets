@@ -1,0 +1,10 @@
+{
+    "id": "1.16_combat-0",
+    "name": "Combat Test 6",
+    "release_target": "1.16.2",
+    "world_version": 2701,
+    "protocol_version": 801,
+    "pack_version": 5,
+    "build_time": "2020-08-07T10:42:45+00:00",
+    "stable": true
+}
