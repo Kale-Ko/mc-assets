@@ -22,6 +22,28 @@ const argv = Bun.argv.map(arg => arg.toLowerCase().trim());
 const force: boolean = argv.includes("--force") || argv.includes("-f");
 const cacheJars: boolean = argv.includes("--cache-jars") || argv.includes("-j");
 
+function patch(data: any, patchData: any): any {
+    for (let key in patchData) {
+        if (key in data) {
+            if (typeof data[key] === "object") {
+                if (Array.isArray(data[key])) {
+                    for (let element of patchData[key]) {
+                        data[key].push(element);
+                    }
+                } else {
+                    data[key] = patch(data[key], patchData[key]);
+                }
+            } else {
+                data[key] = patchData[key];
+            }
+        } else {
+            data[key] = patchData[key];
+        }
+    }
+
+    return data;
+}
+
 interface CachedResponse<T> {
     cached: boolean
     cachedTime: number
