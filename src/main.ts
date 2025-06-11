@@ -7,10 +7,13 @@ const USER_AGENT: string = `Bun/${Bun.version} ms-asset-downloader/${VERSION}`;
 const HOME_URL: string = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
 const ASSET_URL: string = "https://resources.download.minecraft.net";
 
+const PATCHES_DIRECTORY: string = path.resolve("patches/");
+
 const CACHE_DIRECTORY: string = path.resolve("cache/");
 const PISTON_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "piston/");
 const ASSETS_CACHE_DIRECTORY: string = path.join(CACHE_DIRECTORY, "assets/");
 
+fs.mkdirSync(PATCHES_DIRECTORY, { recursive: true });
 fs.mkdirSync(CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(PISTON_CACHE_DIRECTORY, { recursive: true });
 fs.mkdirSync(ASSETS_CACHE_DIRECTORY, { recursive: true });
@@ -45,12 +48,24 @@ interface VersionList {
     }[]
 }
 
-function processVersionList(versionList: VersionList): VersionList {
+function processVersionList(versionList: VersionList, patchVersionList?: VersionList): VersionList {
+    if (patchVersionList != undefined) {
+        versionList = patch(versionList, patchVersionList) as VersionList;
+    }
+
     for (let i: number = 0; i < versionList.versions.length; i++) {
         let version: VersionList["versions"][0] = versionList.versions[i]!;
         version.id = version.id.replace(" Pre-Release ", "-pre");
+        if (/^[0-9]+\.[0-9]+(?:\.[0-9]+)?$/g.test(version.id)) {
+            version.type = "release";
+        }
+        else if (/^[0-9]+w[0-9]+[a-z]$/g.test(version.id)
+            || /^[0-9]+\.[0-9]+(?:\.[0-9]+)?-(?:pre|rc)[0-9]+$/g.test(version.id)) {
+            version.type = "snapshot";
+        }
         versionList.versions[i] = version;
     }
+
     return versionList;
 }
 
@@ -138,6 +153,13 @@ interface Version {
 
 function processVersion(version: Version): Version {
     version.id = version.id.replace(" Pre-Release ", "-pre");
+    if (/^[0-9]+\.[0-9]+(?:\.[0-9]+)?$/g.test(version.id)) {
+        version.type = "release";
+    }
+    else if (/^[0-9]+w[0-9]+[a-z]$/g.test(version.id)
+        || /^[0-9]+\.[0-9]+(?:\.[0-9]+)?-(?:pre|rc)[0-9]+$/g.test(version.id)) {
+        version.type = "snapshot";
+    }
     return version;
 }
 
@@ -175,7 +197,14 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
     if (fs.existsSync(filePath) && Date.now() - fs.statSync(filePath).mtime.getTime() < 1000 * 60 * 30) {
         let data: string = fs.readFileSync(filePath, { encoding: "utf8" });
 
-        return versionListCache = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: processVersionList(JSON.parse(data) as VersionList) };
+        let patchPath = path.join(PATCHES_DIRECTORY, "version_manifest_v2.json");
+        let patches: VersionList | undefined = undefined;
+        if (fs.existsSync(patchPath)) {
+            let patchData: string = fs.readFileSync(patchPath, { encoding: "utf8" });
+            patches = JSON.parse(patchData) as VersionList;
+        }
+
+        return versionListCache = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: processVersionList(JSON.parse(data) as VersionList, patches) };
     } else {
         let response: Response = await Bun.fetch(HOME_URL, {
             headers: {
@@ -190,7 +219,14 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
             fs.writeFileSync(filePath, data, { encoding: "utf8" });
 
-            return versionListCache = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: processVersionList(JSON.parse(data) as VersionList) };
+            let patchPath = path.join(PATCHES_DIRECTORY, "version_manifest_v2.json");
+            let patches: VersionList | undefined = undefined;
+            if (fs.existsSync(patchPath)) {
+                let patchData: string = fs.readFileSync(patchPath, { encoding: "utf8" });
+                patches = JSON.parse(patchData) as VersionList;
+            }
+
+            return versionListCache = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: processVersionList(JSON.parse(data) as VersionList, patches) };
         } else {
             throw Error(`Response from "${HOME_URL}" was "${response.status} ${response.statusText}"!`);
         }
