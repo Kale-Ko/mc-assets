@@ -112,7 +112,12 @@ jobs:
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Run README
-        run: bun run readme
+        run: |
+          bun run readme
+
+          git add README.md
+          git commit -m "Update README"
+          git push
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Upload Full Cache
