@@ -22,6 +22,30 @@ const argv = Bun.argv.map(arg => arg.toLowerCase().trim());
 const force: boolean = argv.includes("--force") || argv.includes("-f");
 const cacheJars: boolean = argv.includes("--cache-jars") || argv.includes("-j");
 
+async function fetchWrapper(_url: string | URL, request: RequestInit): Promise<Response> {
+    let url: URL = new URL(_url);
+
+    if (url.protocol === "http:" || url.protocol === "https:") {
+        return Bun.fetch(_url, request);
+    } else if (url.protocol === "patch:") {
+        let pathname: string = url.pathname;
+        while (pathname.startsWith("/")) {
+            pathname = pathname.substring(1);
+        }
+        let patchPath: string = path.resolve(PATCHES_DIRECTORY, pathname);
+
+        if (patchPath.startsWith(PATCHES_DIRECTORY)) {
+            let data = fs.readFileSync(patchPath);
+
+            return new Response(data, { status: 200, statusText: "Ok" });
+        } else {
+            throw new Error("Invalid patch url.");
+        }
+    } else {
+        throw new Error("Invalid fetch protocol.");
+    }
+}
+
 function patch(data: any, patchData: any): any {
     for (let key in patchData) {
         if (key in data) {
@@ -228,7 +252,7 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
 
         return versionListCache = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: processVersionList(JSON.parse(data) as VersionList, patches) };
     } else {
-        let response: Response = await Bun.fetch(HOME_URL, {
+        let response: Response = await fetchWrapper(HOME_URL, {
             headers: {
                 "Accept": "application/json",
                 "User-Agent": USER_AGENT
@@ -273,7 +297,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
 
         return versionCache[versionId] = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: processVersion(JSON.parse(data) as Version) };
     } else {
-        let response: Response = await Bun.fetch(versionInfo.url, {
+        let response: Response = await fetchWrapper(versionInfo.url, {
             headers: {
                 "Accept": "application/json",
                 "User-Agent": USER_AGENT
@@ -313,7 +337,7 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
 
         return assetIndexCache[versionId] = { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as AssetIndex };
     } else {
-        let response: Response = await Bun.fetch(assetIndex.url, {
+        let response: Response = await fetchWrapper(assetIndex.url, {
             headers: {
                 "Accept": "application/json",
                 "User-Agent": USER_AGENT
@@ -353,7 +377,7 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
 
         return { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: data };
     } else {
-        let response: Response = await Bun.fetch(assetUrl, {
+        let response: Response = await fetchWrapper(assetUrl, {
             headers: {
                 "User-Agent": USER_AGENT
             }
@@ -390,7 +414,7 @@ async function getAsset(versionId: string, assetPath: string): Promise<CachedRes
     if (fs.existsSync(filePath)) {
         return { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: undefined };
     } else {
-        let response: Response = await Bun.fetch(assetUrl, {
+        let response: Response = await fetchWrapper(assetUrl, {
             headers: {
                 "User-Agent": USER_AGENT
             }
@@ -445,7 +469,7 @@ async function downloadJar(versionId: string, jarId: string, jarCallback: (entry
 
         extractJarAndData(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
     } else {
-        let response: Response = await Bun.fetch(jar.url, {
+        let response: Response = await fetchWrapper(jar.url, {
             headers: {
                 "User-Agent": USER_AGENT
             }
@@ -485,7 +509,7 @@ async function getJar(versionId: string, jarId: string, jarCallback: (entry: Cac
 
         extractJar(data, { cached: true, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
     } else {
-        let response: Response = await Bun.fetch(jar.url, {
+        let response: Response = await fetchWrapper(jar.url, {
             headers: {
                 "User-Agent": USER_AGENT
             }
