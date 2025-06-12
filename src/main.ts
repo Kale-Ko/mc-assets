@@ -95,7 +95,7 @@ interface VersionList {
 }
 
 function processVersionList(versionList: VersionList, patchVersionList?: VersionList): VersionList {
-    if (patchVersionList != undefined) {
+    if (patchVersionList !== undefined) {
         versionList = patch(versionList, patchVersionList) as VersionList;
     }
 
