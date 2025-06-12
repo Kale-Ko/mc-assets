@@ -89,11 +89,13 @@ Updates started on May 1, 2025 so the history starts from there.
 `;
 
             for (let j in versionGroup) {
-                let version: main.VersionList["versions"][0] = versionGroup[j]!;
+                let k: number = typeof j === "string" ? parseInt(j) : j;
+
+                let version: main.VersionList["versions"][0] = versionGroup[k]!;
 
                 README += `  [${version.id}](${GIT_URL}/tree/${versionToGitTag(version.id)})`
 
-                if (j !== versionGroup.length - 1) {
+                if (k !== versionGroup.length - 1) {
                     README += `\\
 `;
                 } else {
