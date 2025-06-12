@@ -123,7 +123,7 @@ function versionToGitTag(version: string): string {
             let unmount: Bun.$.ShellOutput = await Bun.$`fusermount -u '${path.trim()}'`.quiet().nothrow();
             let output: string = await unmount.text();
             if (unmount.exitCode !== 0) {
-                if (count != undefined && count >= 6) {
+                if (count !== undefined && count >= 6) {
                     throw Error(`Failed to unmount ${path}:\n${output}`);
                 }
 
@@ -133,7 +133,7 @@ function versionToGitTag(version: string): string {
                     await Bun.sleep(500);
                 }
 
-                await tryUnmount(path, count != undefined ? count + 1 : 1);
+                await tryUnmount(path, count !== undefined ? count + 1 : 1);
             }
         }
 
@@ -241,11 +241,11 @@ function versionToGitTag(version: string): string {
                 let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
                 let output: string = await commit.text();
                 if (commit.exitCode !== 0 && output.match(/^nothing to commit, working tree clean$/im) === null) {
-                    if (count != undefined && count >= 3) {
+                    if (count !== undefined && count >= 3) {
                         throw Error(`Failed to commit:\n${output}`);
                     }
 
-                    await tryCommit(count != undefined ? count + 1 : 1);
+                    await tryCommit(count !== undefined ? count + 1 : 1);
                 }
             }
 
@@ -259,11 +259,11 @@ function versionToGitTag(version: string): string {
                 let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
                 let output: string = await push.text();
                 if (push.exitCode !== 0 && output.match(/^Everything up-to-date$/im) === null) {
-                    if (count != undefined && count >= 3) {
+                    if (count !== undefined && count >= 3) {
                         throw Error(`Failed to push:\n${output}`);
                     }
 
-                    await tryPush(count != undefined ? count + 1 : 1);
+                    await tryPush(count !== undefined ? count + 1 : 1);
                 }
             }
 
@@ -284,7 +284,7 @@ function versionToGitTag(version: string): string {
 
         fs.writeFileSync(gitCompletionPath, "100\n", { encoding: "utf8" });
 
-        if (interval != undefined) {
+        if (interval !== undefined) {
             clearInterval(interval);
         }
 
