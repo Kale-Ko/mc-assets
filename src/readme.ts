@@ -64,13 +64,13 @@ Updates started on May 1, 2025 so the history starts from there.
             versionGroups[group]?.push(version);
         }
 
-        README += `## Latest {#latest-versions}
+        README += `## Latest
 
-### Release {#latest-release}
+### Release
 
 [${versionList.latest.release}](${GIT_URL}/tree/${versionToGitTag(versionList.latest.release)})
 
-### Snapshot {#latest-snapshot}
+### Snapshot
 
 [${versionList.latest.snapshot}](${GIT_URL}/tree/${versionToGitTag(versionList.latest.snapshot)})
 
