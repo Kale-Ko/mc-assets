@@ -50,7 +50,10 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: last-hash
-          key: last-hash-cache
+          key: last-hash-cache-${{ steps.get-time.outputs.time }}
+          restore-keys: |
+            last-hash-cache-
+            last-hash-cache
 
       - name: Check For Updates
         id: check-for-updates
@@ -71,6 +74,14 @@ jobs:
           path: last-hash
           key: ${{ steps.download-last-hash-cache.outputs.cache-primary-key }}
         if: ${{ steps.download-last-hash-cache.outcome == 'success' }}
+
+      - name: Clear Old Last Hash Caches
+        run: |
+          # Feast your eyes on this absolute beauty curtesy of sheer will power and lack of sleep
+          gh cache list --ref ${{ github.ref }} --key last-hash-cache --limit 100 --sort created_at --order desc --json id,key,createdAt | jq --argjson now "$(date -u +%s)" '. | map(select((.createdAt | sub("\\..*"; "") | strptime("%Y-%m-%dT%H:%M:%S") | mktime) < ($now - 43200))) | .[1:][].id' | xargs -i gh cache delete '{}'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        if: ${{ steps.download-last-hash-cache.outcome == 'success' && steps.upload-last-hash-cache.outcome == 'success' }}
 
       - name: Install Fuse
         run: |
