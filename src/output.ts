@@ -183,7 +183,7 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
 
         fs.writeFileSync(completionPath, "100\n", { encoding: "utf8" });
 
-        if (interval != undefined) {
+        if (interval !== undefined) {
             clearInterval(interval);
         }
 

@@ -115,7 +115,7 @@ function print(version: string, taskInfo: TaskInfo, forcePrint?: boolean): void 
         taskInfo.currentTask = "finished";
         print(restoreFile, taskInfo, true);
 
-        if (interval != undefined) {
+        if (interval !== undefined) {
             clearInterval(interval);
         }
 
