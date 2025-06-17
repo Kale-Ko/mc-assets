@@ -112,19 +112,19 @@ jobs:
         run: bun run test
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
+      - name: Run README
+        run: |
+          bun run readme
+
+          (git add README.md && git commit -m "Update README" && git push) || true
+        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
+
       - name: Run Output
         run: bun run output --create-restore
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Run Git
         run: bun run git
-        if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
-
-      - name: Run README
-        run: |
-          bun run readme
-
-          (git add README.md && git commit -m "Update README" && git push) || true
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Upload Full Cache
