@@ -116,6 +116,7 @@ jobs:
         run: |
           bun run readme
 
+          git rebase dev
           (git add README.md && git commit -m "Update README" && git push) || true
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
