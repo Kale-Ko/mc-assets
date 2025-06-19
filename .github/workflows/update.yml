@@ -80,7 +80,7 @@ jobs:
         run: |
           # Feast your eyes on this absolute beauty curtesy of sheer will power and lack of sleep
           gh config clear-cache
-          gh cache list --key last-hash-cache --limit 100 --sort created_at --order desc --json id,key,createdAt | jq --argjson now "$(date -u +%s)" '. | map(select((.createdAt | sub("\\..*"; "") | strptime("%Y-%m-%dT%H:%M:%S") | mktime) < ($now - 43200))) | .[1:][].id' | xargs -i gh cache delete '{}'
+          (gh cache list --key last-hash-cache --limit 100 --sort created_at --order desc --json id,key,createdAt | jq --argjson now "$(date -u +%s)" '. | map(select((.createdAt | sub("\\..*"; "") | strptime("%Y-%m-%dT%H:%M:%S") | mktime) < ($now - 43200))) | .[1:][].id' | xargs -i gh cache delete '{}') || true
         env:
           GH_TOKEN: ${{ github.token }}
         if: ${{ steps.download-last-hash-cache.outcome == 'success' && steps.upload-last-hash-cache.outcome == 'success' }}
