@@ -69,23 +69,6 @@ jobs:
           fi
           echo "$currentHash" > last-hash
 
-      - name: Upload Last Hash Cache
-        id: upload-last-hash-cache
-        uses: actions/cache/save@v4
-        with:
-          path: last-hash
-          key: ${{ steps.download-last-hash-cache.outputs.cache-primary-key }}
-        if: ${{ steps.download-last-hash-cache.outcome == 'success' }}
-
-      - name: Clear Old Last Hash Caches
-        run: |
-          # Feast your eyes on this absolute beauty curtesy of sheer will power and lack of sleep
-          gh config clear-cache
-          (gh cache list --key last-hash-cache --limit 100 --sort created_at --order desc --json id,key,createdAt | jq --argjson now "$(date -u +%s)" '. | map(select((.createdAt | sub("\\..*"; "") | strptime("%Y-%m-%dT%H:%M:%S") | mktime) < ($now - 43200))) | .[1:][].id' | xargs -i gh cache delete '{}') || true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        if: ${{ steps.download-last-hash-cache.outcome == 'success' && steps.upload-last-hash-cache.outcome == 'success' }}
-
       - name: Install Fuse
         run: |
           sudo apt-get install -y fuse3 bindfs
@@ -138,3 +121,20 @@ jobs:
           path: cache/
           key: ${{ steps.download-full-cache.outputs.cache-primary-key }}
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' && steps.download-full-cache.outcome == 'success' }}
+
+      - name: Upload Last Hash Cache
+        id: upload-last-hash-cache
+        uses: actions/cache/save@v4
+        with:
+          path: last-hash
+          key: ${{ steps.download-last-hash-cache.outputs.cache-primary-key }}
+        if: ${{ steps.download-last-hash-cache.outcome == 'success' }}
+
+      - name: Clear Old Last Hash Caches
+        run: |
+          # Feast your eyes on this absolute beauty curtesy of sheer will power and lack of sleep
+          gh config clear-cache
+          (gh cache list --key last-hash-cache --limit 100 --sort created_at --order desc --json id,key,createdAt | jq --argjson now "$(date -u +%s)" '. | map(select((.createdAt | sub("\\..*"; "") | strptime("%Y-%m-%dT%H:%M:%S") | mktime) < ($now - 43200))) | .[1:][].id' | xargs -i gh cache delete '{}') || true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        if: ${{ steps.download-last-hash-cache.outcome == 'success' && steps.upload-last-hash-cache.outcome == 'success' }}
