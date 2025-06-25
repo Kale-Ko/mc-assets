@@ -6,5 +6,6 @@ bun.lockb
 cache/
 out/
 git/
+last-hash
 
 .vscode/
