@@ -117,10 +117,10 @@ jobs:
       - name: Run README
         run: |
           bun run readme
+          (git add README.md && git commit -m "Update README" && git push) || true
 
           git fetch origin dev:dev
           git rebase origin dev
-          (git add README.md && git commit -m "Update README" && git push) || true
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Run Output
