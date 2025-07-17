@@ -102,8 +102,9 @@ jobs:
           bun run readme
           (git add README.md && git commit -m "Update README" && git push) || true
 
-          git fetch origin dev:dev
-          git rebase origin dev
+          git fetch --no-tags --prune --no-recurse-submodules --depth=2147483647 origin +refs/heads/dev*:refs/remotes/origin/dev* +refs/tags/dev*:refs/tags/dev*
+          git checkout --progress --force -B dev refs/remotes/origin/dev
+          git rebase dev
         if: ${{ steps.check-for-updates.outputs.needsUpdate == 'true' }}
 
       - name: Run Output
