@@ -5267,7 +5267,6 @@
     "mco.worldSlot.minigame": "Minixogo",
     "menu.custom_options": "Opcións personalizadas...",
     "menu.custom_options.title": "Opcións personalizadas",
-    "menu.custom_options.tooltip": "Note: Custom options are provided by third-party servers and/or content.\nHandle with care!",
     "menu.custom_screen_info.button_narration": "This is a custom screen. Learn more.",
     "menu.custom_screen_info.contents": "The contents of this screen are controlled by third-party servers and maps that are not owned, operated, or supervised by Mojang Studios or Microsoft.\n\nHandle with care! Always be careful when following links and never give away your personal information, including login details.\n\nIf this screen prevents you from playing, you can also disconnect from the current server by using the button below.",
     "menu.custom_screen_info.disconnect": "Custom screen rejected",
