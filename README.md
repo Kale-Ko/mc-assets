@@ -13,13 +13,14 @@ Updates started on May 1, 2025 so the history starts from there.
 
 ### Snapshot
 
-[25w31a](https://github.com/Kale-Ko/mc-assets/tree/25w31a)
+[25w32a](https://github.com/Kale-Ko/mc-assets/tree/25w32a)
 
 ## Version List
 
 <details>
   <summary><b id="latest">Latest</b></summary>
 
+  [25w32a](https://github.com/Kale-Ko/mc-assets/tree/25w32a)\
   [25w31a](https://github.com/Kale-Ko/mc-assets/tree/25w31a)
 </details>
 <details>
