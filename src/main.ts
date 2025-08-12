@@ -82,7 +82,7 @@ interface VersionList {
     }
     versions: {
         /**
-         * Is altered for pre releases for 1.14 - 1.14.2 to conform to the standard format
+         * Is altered for pre releases from 1.14 - 1.14.2 to conform to the standard format
          */
         id: string
         type: "release" | "snapshot" | "old_snapshot" | "old_beta" | "old_alpha" | "experiment"
@@ -117,7 +117,7 @@ function processVersionList(versionList: VersionList, patchVersionList?: Version
 
 interface Version {
     /**
-     * Is altered for pre releases for 1.14 - 1.14.2 to conform to the standard format
+     * Is altered for pre releases from 1.14 - 1.14.2 to conform to the standard format
      */
     id: string
     type: "release" | "snapshot" | "old_snapshot" | "old_beta" | "old_alpha" | "experiment"

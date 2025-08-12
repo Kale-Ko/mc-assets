@@ -69,8 +69,8 @@ function print(version: string, taskInfo: TaskInfo, forcePrint?: boolean): void 
         taskInfo.currentTask = "reading restore file";
         print(restoreFile, taskInfo, true);
 
-        let compressedRestoreList: Uint8Array = fs.readFileSync(restorePath);
-        let decompressedRestoreList: Uint8Array = Bun.gunzipSync(compressedRestoreList, { library: "zlib" });
+        let compressedRestoreList: Uint8Array<ArrayBuffer> = fs.readFileSync(restorePath);
+        let decompressedRestoreList: Uint8Array<ArrayBuffer> = Bun.gunzipSync(compressedRestoreList, { library: "zlib" });
         let restoreList: string = new TextDecoder().decode(decompressedRestoreList);
 
         let restoreElements = restoreList.split("\n");
