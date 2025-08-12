@@ -16,6 +16,7 @@ fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
 const argv = Bun.argv.map(arg => arg.toLowerCase().trim());
 const force: boolean = argv.includes("--force") || argv.includes("-f");
 const createRestore: boolean = argv.includes("--create-restore") || argv.includes("-r");
+const includeLang: boolean = argv.includes("--include-lang") || argv.includes("-l");
 
 interface TaskInfo {
     taskDone: number,
@@ -140,6 +141,10 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
             print(versionInfo, taskInfo);
 
             for (let assetPath in assetIndex.objects) {
+                if (!includeLang && /^[a-zA-Z-_]+\/lang\//.test(assetPath)) {
+                    continue;
+                }
+
                 let outputPath: string = path.join(outputDirectory, "assets", assetPath);
 
                 let asset: main.CachedResponse<undefined> = (await main.getAsset(versionInfo.id, assetPath));
