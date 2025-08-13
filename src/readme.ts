@@ -18,7 +18,7 @@ function versionToGitTag(version: string): string {
 # mc-assets
 
 A repository containing every single asset from every version present in the launcher (plus experimental snapshots) that updates every 30 minutes.\\
-Updates started on May 1, 2025 so the history starts from there.
+Updates started on May 1, 2025 so the history starts from there. This repository doesn't track language files because I felt they cluttered up the history and are not important in the grand scheme of things.
 
 `
 
