@@ -97,6 +97,10 @@ function print(versionInfo: main.VersionList["versions"][0], taskInfo: TaskInfo,
             }, (entry?: main.CachedResponse<main.JarEntry>): void => {
                 if (entry !== undefined) {
                     let entryPath: string = entry.value.path;
+                    if (!includeLang && /^[a-zA-Z-_]+\/lang\//.test(entryPath)) {
+                        return;
+                    }
+
                     let outputPath: string = path.join(outputDirectory, entryPath);
 
                     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
