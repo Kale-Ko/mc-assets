@@ -3,7 +3,7 @@
 # mc-assets
 
 A repository containing every single asset from every version present in the launcher (plus experimental snapshots) that updates every 30 minutes.\
-Updates started on May 1, 2025 so the history starts from there.
+Updates started on May 1, 2025 so the history starts from there. This repository doesn't track language files because I felt they cluttered up the history and are not important in the grand scheme of things.
 
 ## Latest
 
@@ -13,13 +13,14 @@ Updates started on May 1, 2025 so the history starts from there.
 
 ### Snapshot
 
-[25w33a](https://github.com/Kale-Ko/mc-assets/tree/25w33a)
+[25w34a](https://github.com/Kale-Ko/mc-assets/tree/25w34a)
 
 ## Version List
 
 <details>
   <summary><b id="latest">Latest</b></summary>
 
+  [25w34a](https://github.com/Kale-Ko/mc-assets/tree/25w34a)\
   [25w33a](https://github.com/Kale-Ko/mc-assets/tree/25w33a)\
   [25w32a](https://github.com/Kale-Ko/mc-assets/tree/25w32a)\
   [25w31a](https://github.com/Kale-Ko/mc-assets/tree/25w31a)
