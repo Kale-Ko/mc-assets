@@ -13,13 +13,14 @@ Updates started on May 1, 2025 so the history starts from there. This repository
 
 ### Snapshot
 
-[25w35a](https://github.com/Kale-Ko/mc-assets/tree/25w35a)
+[25w36a](https://github.com/Kale-Ko/mc-assets/tree/25w36a)
 
 ## Version List
 
 <details>
   <summary><b id="latest">Latest</b></summary>
 
+  [25w36a](https://github.com/Kale-Ko/mc-assets/tree/25w36a)\
   [25w35a](https://github.com/Kale-Ko/mc-assets/tree/25w35a)\
   [25w34b](https://github.com/Kale-Ko/mc-assets/tree/25w34b)\
   [25w34a](https://github.com/Kale-Ko/mc-assets/tree/25w34a)\
@@ -1059,13 +1060,13 @@ Updates started on May 1, 2025 so the history starts from there. This repository
 <details>
   <summary><b id="1_6_4">1.6.4</b></summary>
 
-  [1.6.4](https://github.com/Kale-Ko/mc-assets/tree/1_6_4)
+  [1.6.4](https://github.com/Kale-Ko/mc-assets/tree/1_6_4)\
+  [13w37b](https://github.com/Kale-Ko/mc-assets/tree/13w37b)
 </details>
 <details>
   <summary><b id="1_6_3">1.6.3</b></summary>
 
   [1.6.3](https://github.com/Kale-Ko/mc-assets/tree/1_6_3)\
-  [13w37b](https://github.com/Kale-Ko/mc-assets/tree/13w37b)\
   [13w37a](https://github.com/Kale-Ko/mc-assets/tree/13w37a)\
   [13w36b](https://github.com/Kale-Ko/mc-assets/tree/13w36b)\
   [13w36a](https://github.com/Kale-Ko/mc-assets/tree/13w36a)
