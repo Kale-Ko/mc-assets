@@ -13,10 +13,15 @@ Updates started on May 1, 2025 so the history starts from there. This repository
 
 ### Snapshot
 
-[1.21.10](https://github.com/Kale-Ko/mc-assets/tree/1_21_10)
+[25w41a](https://github.com/Kale-Ko/mc-assets/tree/25w41a)
 
 ## Version List
 
+<details>
+  <summary><b id="latest">Latest</b></summary>
+
+  [25w41a](https://github.com/Kale-Ko/mc-assets/tree/25w41a)
+</details>
 <details>
   <summary><b id="1_21_10">1.21.10</b></summary>
 
