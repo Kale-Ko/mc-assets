@@ -2,7 +2,7 @@ name: Update Files
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/60 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,13 +19,13 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: main
           fetch-depth: 2147483647
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "24"
           check-latest: true
@@ -49,7 +49,7 @@ jobs:
 
       - name: Download Last Hash Cache
         id: download-last-hash-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: last-hash
           key: last-hash-cache-${{ steps.get-time.outputs.time }}
@@ -76,7 +76,7 @@ jobs:
 
       - name: Download Full Cache
         id: download-full-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: cache/
           key: full-cache-${{ steps.get-time.outputs.time }}
@@ -117,7 +117,7 @@ jobs:
 
       - name: Upload Full Cache
         id: upload-full-cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: cache/
           key: ${{ steps.download-full-cache.outputs.cache-primary-key }}
@@ -125,7 +125,7 @@ jobs:
 
       - name: Upload Last Hash Cache
         id: upload-last-hash-cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: last-hash
           key: ${{ steps.download-last-hash-cache.outputs.cache-primary-key }}
@@ -133,7 +133,6 @@ jobs:
 
       - name: Clear Old Last Hash Caches
         run: |
-          # Feast your eyes on this absolute beauty curtesy of sheer will power and lack of sleep
           gh config clear-cache
           (gh cache list --key last-hash-cache --limit 100 --sort created_at --order desc --json id,key,createdAt | jq --argjson now "$(date -u +%s)" '. | map(select((.createdAt | sub("\\..*"; "") | strptime("%Y-%m-%dT%H:%M:%S") | mktime) < ($now - 43200))) | .[1:][].id' | xargs -i gh cache delete '{}') || true
         env:
