@@ -120,10 +120,10 @@ function versionToGitTag(version: string): string {
         let repoPath: string = path.join(GIT_DIRECTORY, versionInfo.id);
 
         async function tryUnmount(path: string, count?: number): Promise<void> {
-            let unmount: Bun.$.ShellOutput = await Bun.$`fusermount -u '${path.trim()}'`.quiet().nothrow();
+            let unmount: Bun.$.ShellOutput = await Bun.$`fusermount -u '${path.trim()}'`.quiet(count === undefined || count < 5).nothrow();
             let output: string = await unmount.text();
             if (unmount.exitCode !== 0) {
-                if (count !== undefined && count >= 6) {
+                if (count !== undefined && count >= 5) {
                     throw new Error(`Failed to unmount ${path}:\n${output}`);
                 }
 
@@ -238,7 +238,7 @@ function versionToGitTag(version: string): string {
             print(versionInfo, taskInfo, true);
 
             async function tryCommit(count?: number): Promise<void> {
-                let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
+                let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet(count === undefined || count < 3).nothrow();
                 let output: string = await commit.text();
                 if (commit.exitCode !== 0 && !(/^nothing to commit, working tree clean$/im).test(output)) {
                     if (count !== undefined && count >= 3) {
@@ -256,7 +256,7 @@ function versionToGitTag(version: string): string {
             print(versionInfo, taskInfo, true);
 
             async function tryPush(count?: number): Promise<void> {
-                let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
+                let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet(count === undefined || count < 3).nothrow();
                 let output: string = await push.text();
                 if (push.exitCode !== 0 && !(/^Everything up-to-date$/im).test(output)) {
                     if (count !== undefined && count >= 3) {
