@@ -274,7 +274,7 @@ async function downloadVersionList(): Promise<CachedResponse<VersionList>> {
 
             return versionListCache = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: processVersionList(JSON.parse(data) as VersionList, patches) };
         } else {
-            throw Error(`Response from "${HOME_URL}" was "${response.status} ${response.statusText}"!`);
+            throw new Error(`Response from "${HOME_URL}" was "${response.status} ${response.statusText}"!`);
         }
     }
 }
@@ -288,7 +288,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
 
     let versionInfo: VersionList["versions"][0] | undefined = versionList.versions.find((version: VersionList["versions"][0]): boolean => version.id === versionId);
     if (versionInfo === undefined) {
-        throw Error(`Could not find version "${versionId}"!`);
+        throw new Error(`Could not find version "${versionId}"!`);
     }
 
     let filePath: string = path.join(PISTON_CACHE_DIRECTORY, versionInfo.sha1.substring(0, 2), versionInfo.sha1.substring(2));
@@ -309,7 +309,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
 
             let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== versionInfo.sha1) {
-                throw Error(`Hash of version "${versionInfo.url}" does not match! Expected "${versionInfo.sha1}" but got "${hash}".`);
+                throw new Error(`Hash of version "${versionInfo.url}" does not match! Expected "${versionInfo.sha1}" but got "${hash}".`);
             }
 
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -317,7 +317,7 @@ async function downloadVersion(versionId: string): Promise<CachedResponse<Versio
 
             return versionCache[versionId] = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: processVersion(JSON.parse(data) as Version) };
         } else {
-            throw Error(`Response from "${versionInfo.url}" was "${response.status} ${response.statusText}"!`);
+            throw new Error(`Response from "${versionInfo.url}" was "${response.status} ${response.statusText}"!`);
         }
     }
 }
@@ -349,7 +349,7 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
 
             let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== assetIndex.sha1) {
-                throw Error(`Hash of asset index "${assetIndex.url}" does not match! Expected "${assetIndex.sha1}" but got "${hash}".`);
+                throw new Error(`Hash of asset index "${assetIndex.url}" does not match! Expected "${assetIndex.sha1}" but got "${hash}".`);
             }
 
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -357,7 +357,7 @@ async function downloadAssetIndex(versionId: string): Promise<CachedResponse<Ass
 
             return assetIndexCache[versionId] = { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: JSON.parse(data) as AssetIndex };
         } else {
-            throw Error(`Response from "${assetIndex.url}" was "${response.status} ${response.statusText}"!`);
+            throw new Error(`Response from "${assetIndex.url}" was "${response.status} ${response.statusText}"!`);
         }
     }
 }
@@ -366,7 +366,7 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
     let assetIndex: AssetIndex = (await downloadAssetIndex(versionId)).value;
     let asset: AssetIndex["objects"][0] | undefined = assetIndex.objects[assetPath];
     if (asset === undefined) {
-        throw Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
+        throw new Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
     }
 
     let assetUrl: string = `${ASSET_URL}/${asset.hash.substring(0, 2)}/${asset.hash}`
@@ -388,7 +388,7 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
 
             let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== asset.hash) {
-                throw Error(`Hash of asset "${assetPath}" does not match! Expected "${asset.hash}" but got "${hash}".`);
+                throw new Error(`Hash of asset "${assetPath}" does not match! Expected "${asset.hash}" but got "${hash}".`);
             }
 
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -396,7 +396,7 @@ async function downloadAsset(versionId: string, assetPath: string): Promise<Cach
 
             return { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: data };
         } else {
-            throw Error(`Response from "${assetUrl}" was "${response.status} ${response.statusText}"!`);
+            throw new Error(`Response from "${assetUrl}" was "${response.status} ${response.statusText}"!`);
         }
     }
 }
@@ -405,7 +405,7 @@ async function getAsset(versionId: string, assetPath: string): Promise<CachedRes
     let assetIndex: AssetIndex = (await downloadAssetIndex(versionId)).value;
     let asset: AssetIndex["objects"][0] | undefined = assetIndex.objects[assetPath];
     if (asset === undefined) {
-        throw Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
+        throw new Error(`Asset "${assetPath}" does not exist on version ${versionId}!`)
     }
 
     let assetUrl: string = `${ASSET_URL}/${asset.hash.substring(0, 2)}/${asset.hash}`
@@ -425,7 +425,7 @@ async function getAsset(versionId: string, assetPath: string): Promise<CachedRes
 
             let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== asset.hash) {
-                throw Error(`Hash of asset "${assetPath}" does not match! Expected "${asset.hash}" but got "${hash}".`);
+                throw new Error(`Hash of asset "${assetPath}" does not match! Expected "${asset.hash}" but got "${hash}".`);
             }
 
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -433,7 +433,7 @@ async function getAsset(versionId: string, assetPath: string): Promise<CachedRes
 
             return { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: undefined };
         } else {
-            throw Error(`Response from "${assetUrl}" was "${response.status} ${response.statusText}"!`);
+            throw new Error(`Response from "${assetUrl}" was "${response.status} ${response.statusText}"!`);
         }
     }
 }
@@ -460,7 +460,7 @@ async function downloadJar(versionId: string, jarId: string, jarCallback: (entry
 
     let jar: Version["downloads"][0] | undefined = version.downloads[jarId];
     if (jar === undefined) {
-        throw Error(`Jar "${jarId}" does not exist on version ${versionId}!`)
+        throw new Error(`Jar "${jarId}" does not exist on version ${versionId}!`)
     }
 
     let filePath: string = path.join(PISTON_CACHE_DIRECTORY, jar.sha1.substring(0, 2), jar.sha1.substring(2));
@@ -480,7 +480,7 @@ async function downloadJar(versionId: string, jarId: string, jarCallback: (entry
 
             let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== jar.sha1) {
-                throw Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
+                throw new Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
             }
 
             if (cacheJars) {
@@ -490,7 +490,7 @@ async function downloadJar(versionId: string, jarId: string, jarCallback: (entry
 
             extractJarAndData(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
         } else {
-            throw Error(`Response from "${jar.url}" was "${response.status} ${response.statusText}"!`);
+            throw new Error(`Response from "${jar.url}" was "${response.status} ${response.statusText}"!`);
         }
     }
 }
@@ -500,7 +500,7 @@ async function getJar(versionId: string, jarId: string, jarCallback: (entry: Cac
 
     let jar: Version["downloads"][0] | undefined = version.downloads[jarId];
     if (jar === undefined) {
-        throw Error(`Jar "${jarId}" does not exist on version ${versionId}!`)
+        throw new Error(`Jar "${jarId}" does not exist on version ${versionId}!`)
     }
 
     let filePath: string = path.join(PISTON_CACHE_DIRECTORY, jar.sha1.substring(0, 2), jar.sha1.substring(2));
@@ -520,7 +520,7 @@ async function getJar(versionId: string, jarId: string, jarCallback: (entry: Cac
 
             let hash: string = new Bun.CryptoHasher("sha1").update(data).digest("hex");
             if (hash !== jar.sha1) {
-                throw Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
+                throw new Error(`Hash of jar "${jar.url}" does not match! Expected "${jar.sha1}" but got "${hash}".`);
             }
 
             if (cacheJars) {
@@ -530,7 +530,7 @@ async function getJar(versionId: string, jarId: string, jarCallback: (entry: Cac
 
             extractJar(data, { cached: false, cachedTime: Date.now(), cachedPath: filePath, value: { size: data.length, sha1: jar.sha1, entryCount: -1 } }, jarCallback, entryCallback);
         } else {
-            throw Error(`Response from "${jar.url}" was "${response.status} ${response.statusText}"!`);
+            throw new Error(`Response from "${jar.url}" was "${response.status} ${response.statusText}"!`);
         }
     }
 }

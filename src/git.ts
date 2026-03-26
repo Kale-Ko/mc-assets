@@ -71,7 +71,7 @@ function versionToGitTag(version: string): string {
         let completionPath: string = path.join(COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
         let gitCompletionPath: string = path.join(GIT_COMPLETION_CACHE_DIRECTORY, versionInfo.sha1);
         if (!fs.existsSync(completionPath)) {
-            throw Error(`${versionInfo.id} has not been output!`);
+            throw new Error(`${versionInfo.id} has not been output!`);
         }
         if (fs.existsSync(gitCompletionPath) && fs.statSync(completionPath).mtime.getTime() <= fs.statSync(gitCompletionPath).mtime.getTime()) {
             continue;
@@ -124,10 +124,10 @@ function versionToGitTag(version: string): string {
             let output: string = await unmount.text();
             if (unmount.exitCode !== 0) {
                 if (count !== undefined && count >= 6) {
-                    throw Error(`Failed to unmount ${path}:\n${output}`);
+                    throw new Error(`Failed to unmount ${path}:\n${output}`);
                 }
 
-                if (output.match(/: Device or resource busy[\n\t ]*$/im)) {
+                if (!(/: Device or resource busy[\n\t ]*$/im).test(output)) {
                     await Bun.$`sync`.quiet();
 
                     await Bun.sleep(500);
@@ -240,9 +240,9 @@ function versionToGitTag(version: string): string {
             async function tryCommit(count?: number): Promise<void> {
                 let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet().nothrow();
                 let output: string = await commit.text();
-                if (commit.exitCode !== 0 && output.match(/^nothing to commit, working tree clean$/im) === null) {
+                if (commit.exitCode !== 0 && !(/^nothing to commit, working tree clean$/im).test(output)) {
                     if (count !== undefined && count >= 3) {
-                        throw Error(`Failed to commit:\n${output}`);
+                        throw new Error(`Failed to commit:${commit}\n${output}`);
                     }
 
                     await tryCommit(count !== undefined ? count + 1 : 1);
@@ -258,9 +258,9 @@ function versionToGitTag(version: string): string {
             async function tryPush(count?: number): Promise<void> {
                 let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet().nothrow();
                 let output: string = await push.text();
-                if (push.exitCode !== 0 && output.match(/^Everything up-to-date$/im) === null) {
+                if (push.exitCode !== 0 && !(/^Everything up-to-date$/im).test(output)) {
                     if (count !== undefined && count >= 3) {
-                        throw Error(`Failed to push:\n${output}`);
+                        throw new Error(`Failed to push:\n${output}`);
                     }
 
                     await tryPush(count !== undefined ? count + 1 : 1);

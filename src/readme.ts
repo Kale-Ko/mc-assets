@@ -89,7 +89,7 @@ Updates started on May 1, 2025 so the history starts from there. This repository
 `;
 
             for (let j in versionGroup) {
-                let k: number = typeof j === "string" ? parseInt(j) : j;
+                let k: number = typeof j === "string" ? Number.parseInt(j) : j;
 
                 let version: main.VersionList["versions"][0] = versionGroup[k]!;
 
