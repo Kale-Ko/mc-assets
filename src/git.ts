@@ -164,7 +164,7 @@ function versionToGitTag(version: string): string {
                     if (fromStat.isDirectory()) {
                         fs.mkdirSync(toPath, { recursive: true });
                         // await Bun.$`mount --bind '${fromPath}' '${toPath}'`.quiet();
-                        await Bun.$`bindfs -o nonempty --no-allow-other '${fromPath}' '${toPath}'`.quiet();
+                        await Bun.$`bindfs --multithreaded --enable-lock-forwarding --no-allow-other '${fromPath}' '${toPath}'`.quiet();
                     } else if (fromStat.isFile()) {
                         fs.mkdirSync(path.dirname(toPath), { recursive: true });
                         if (fs.existsSync(toPath)) {
@@ -238,7 +238,7 @@ function versionToGitTag(version: string): string {
             print(versionInfo, taskInfo, true);
 
             async function tryCommit(count?: number): Promise<void> {
-                let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --message '${message}'`.cwd(repoPath).quiet(count === undefined || count < 3).nothrow();
+                let commit: Bun.$.ShellOutput = await Bun.$`git commit${amend ? " --amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet(count === undefined || count < 3).nothrow();
                 let output: string = await commit.text();
                 if (commit.exitCode !== 0 && !(/^nothing to commit, working tree clean$/im).test(output)) {
                     if (count !== undefined && count >= 3) {
@@ -256,7 +256,7 @@ function versionToGitTag(version: string): string {
             print(versionInfo, taskInfo, true);
 
             async function tryPush(count?: number): Promise<void> {
-                let push: Bun.$.ShellOutput = await Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet(count === undefined || count < 3).nothrow();
+                let push: Bun.$.ShellOutput = await Bun.$`git push${amend ? " --force-with-lease" : ""} origin ${tag}`.cwd(repoPath).quiet(count === undefined || count < 3).nothrow();
                 let output: string = await push.text();
                 if (push.exitCode !== 0 && !(/^Everything up-to-date$/im).test(output)) {
                     if (count !== undefined && count >= 3) {
