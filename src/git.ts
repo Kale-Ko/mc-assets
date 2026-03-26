@@ -238,7 +238,7 @@ function versionToGitTag(version: string): string {
             print(versionInfo, taskInfo, true);
 
             async function tryCommit(count?: number): Promise<void> {
-                let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`.cwd(repoPath).quiet(count === undefined || count < 3).nothrow();
+                let commit: Bun.$.ShellOutput = await Bun.$`git commit ${amend ? "--amend" : ""} --message '${message}'`.cwd(repoPath).quiet(count === undefined || count < 3).nothrow();
                 let output: string = await commit.text();
                 if (commit.exitCode !== 0 && !(/^nothing to commit, working tree clean$/im).test(output)) {
                     if (count !== undefined && count >= 3) {
