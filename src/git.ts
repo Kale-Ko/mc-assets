@@ -238,7 +238,7 @@ function versionToGitTag(version: string): string {
             print(versionInfo, taskInfo, true);
 
             async function tryCommit(count?: number): Promise<void> {
-                let commit: Bun.$.ShellOutput = await Bun.$((count !== undefined && count > 3) ? `git commit${amend ? " --amend" : ""} --all --message '${message}'` : `git commit ${amend ? "--amend" : ""} --all --message '${message}'`).cwd(repoPath).quiet(count !== 3 && count !== 6).nothrow();
+                let commit: Bun.$.ShellOutput = await ((count !== undefined && count > 3) ? Bun.$`git commit${amend ? " --amend" : ""} --all --message '${message}'` : Bun.$`git commit ${amend ? "--amend" : ""} --all --message '${message}'`).cwd(repoPath).quiet(count !== 3 && count !== 6).nothrow();
                 let output: string = await commit.text();
                 if (commit.exitCode !== 0 && !(/^nothing to commit, working tree clean$/im).test(output)) {
                     if (count !== undefined && count >= 6) {
@@ -256,7 +256,7 @@ function versionToGitTag(version: string): string {
             print(versionInfo, taskInfo, true);
 
             async function tryPush(count?: number): Promise<void> {
-                let push: Bun.$.ShellOutput = await Bun.$((count !== undefined && count > 3) ? `git push${amend ? " --force-with-lease" : ""} origin ${tag}` : `git push ${amend ? "--force-with-lease" : ""} origin ${tag}`).cwd(repoPath).quiet(count !== 3 && count !== 6).nothrow();
+                let push: Bun.$.ShellOutput = await ((count !== undefined && count > 3) ? Bun.$`git push${amend ? " --force-with-lease" : ""} origin ${tag}` : Bun.$`git push ${amend ? "--force-with-lease" : ""} origin ${tag}`).cwd(repoPath).quiet(count !== 3 && count !== 6).nothrow();
                 let output: string = await push.text();
                 if (push.exitCode !== 0 && !(/^Everything up-to-date$/im).test(output)) {
                     if (count !== undefined && count >= 6) {
