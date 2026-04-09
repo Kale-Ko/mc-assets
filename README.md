@@ -9,17 +9,18 @@ Updates started on May 1, 2025 so the history starts from there. This repository
 
 ### Release
 
-[26.1.1](https://github.com/Kale-Ko/mc-assets/tree/26_1_1)
+[26.1.2](https://github.com/Kale-Ko/mc-assets/tree/26_1_2)
 
 ### Snapshot
 
-[26.1.2-rc-1](https://github.com/Kale-Ko/mc-assets/tree/26_1_2-rc-1)
+[26.1.2](https://github.com/Kale-Ko/mc-assets/tree/26_1_2)
 
 ## Version List
 
 <details>
-  <summary><b id="latest">Latest</b></summary>
+  <summary><b id="26_1_2">26.1.2</b></summary>
 
+  [26.1.2](https://github.com/Kale-Ko/mc-assets/tree/26_1_2)\
   [26.1.2-rc-1](https://github.com/Kale-Ko/mc-assets/tree/26_1_2-rc-1)\
   [26.2-snapshot-1](https://github.com/Kale-Ko/mc-assets/tree/26_2-snapshot-1)\
   [26w14a](https://github.com/Kale-Ko/mc-assets/tree/26w14a)
