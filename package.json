@@ -2,16 +2,16 @@
   "name": "minecraft-asset-downloader",
   "version": "1.0.0",
   "dependencies": {
-    "adm-zip": "^0.5.16",
-    "zod": "^3.25.57"
+    "adm-zip": "^0.6.0",
+    "zod": "^4.4.3"
   },
   "peerDependencies": {
-    "typescript": "^5.8.3"
+    "typescript": "^7.0.2"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/node": "^24.0.0",
-    "@types/adm-zip": "^0.5.7"
+    "@types/node": "^26.1.1",
+    "@types/adm-zip": "^0.5.8"
   },
   "module": "src/main.ts",
   "scripts": {
