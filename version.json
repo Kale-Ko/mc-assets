@@ -1,0 +1,18 @@
+{
+    "id": "26.3-pre-2",
+    "name": "26.3 Pre-Release 2",
+    "world_version": 5018,
+    "series_id": "main",
+    "protocol_version": 1073742158,
+    "pack_version": {
+        "resource_major": 97,
+        "resource_minor": 1,
+        "data_major": 120,
+        "data_minor": 0
+    },
+    "build_time": "2026-09-04T11:52:33+00:00",
+    "java_component": "java-runtime-epsilon",
+    "java_version": 25,
+    "stable": false,
+    "use_editor": false
+}
